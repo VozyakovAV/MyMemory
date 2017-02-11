@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyMemory.Domain;
 
-namespace MeMemory.Tests
+namespace MyMemory.Tests
 {
     [TestClass]
     public class UnitTest1
