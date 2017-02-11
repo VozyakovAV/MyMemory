@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMemory.Domain", "MyMemory
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMemory.BLL", "MyMemory.BLL\MyMemory.BLL.csproj", "{C3169326-D64D-4C53-BD07-E15A19216B0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeMemory.Tests", "MeMemory.Tests\MeMemory.Tests.csproj", "{F3585DB7-580B-4224-9F0B-9F5370049DDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C3169326-D64D-4C53-BD07-E15A19216B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3169326-D64D-4C53-BD07-E15A19216B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3169326-D64D-4C53-BD07-E15A19216B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
