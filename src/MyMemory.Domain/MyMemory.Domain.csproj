@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\MemoryItem.cs" />
     <Compile Include="MemoryDbContext.cs" />
-    <Compile Include="MemoryGroup.cs" />
+    <Compile Include="Entities\MemoryGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

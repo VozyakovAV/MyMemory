@@ -11,5 +11,6 @@ namespace MyMemory.Domain
         public MemoryDbContext() : base("MemoryDbContext") { }
 
         public DbSet<MemoryGroup> Groups { get; set; }
+        public DbSet<MemoryItem> Items { get; set; }
     }
 }
