@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace MyMemory.Domain
 {
     public class UnitOfWork : IDisposable
     {
-        internal MemoryDbContext _context; // TODO: сделать по другому
+        private MemoryDbContext _context;
 
         public UnitOfWork()
         {
@@ -33,6 +34,11 @@ namespace MyMemory.Domain
         public void Commit()
         {
              _context.SaveChanges();
+        }
+
+        public DbEntityEntry Entry(object entity)
+        {
+            return _context.Entry(entity);
         }
 
         private bool _disposed;

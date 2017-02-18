@@ -9,26 +9,28 @@ namespace MyMemory.Domain
     public class GroupRepository : IRepository<MemoryGroup>
     {
         private readonly UnitOfWork _uow;
+        private IDbSet<MemoryGroup> _list;
 
         public GroupRepository(UnitOfWork uow)
         {
             this._uow = uow;
+            this._list = _uow.GetGroups();
         }
 
         public IQueryable<MemoryGroup> GetItems()
         {
-            return _uow.GetGroups();
+            return _list;
         }
 
         public int Save(MemoryGroup item)
         {
             if (item.Id == 0)
             {
-                _uow.GetGroups().Add(item);
+                _list.Add(item);
             }
             else
             {
-                _uow._context.Entry(item).State = EntityState.Modified;
+                _uow.Entry(item).State = EntityState.Modified;
             }
 
             return item.Id;
@@ -36,10 +38,10 @@ namespace MyMemory.Domain
 
         public bool Delete(MemoryGroup item)
         {
-            var t = _uow.GetGroups().SingleOrDefault(x => x.Id == item.Id);
+            var t = _list.SingleOrDefault(x => x.Id == item.Id);
             if (t != null)
             {
-                _uow.GetGroups().Remove(item);
+                _list.Remove(item);
                 return true;
             }
             return false;
