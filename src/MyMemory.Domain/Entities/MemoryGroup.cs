@@ -9,10 +9,20 @@ namespace MyMemory.Domain
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        //public int? ParentId { get; set; }
         public MemoryGroup Parent { get; set; }
-
         public ICollection<MemoryGroup> Childs { get; set; }
+        public ICollection<MemoryItem> Items { get; set; }
+
+        public MemoryGroup() { }
+
+        public MemoryGroup(string name)
+        {
+            this.Name = name;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

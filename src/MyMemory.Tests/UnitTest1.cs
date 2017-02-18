@@ -9,11 +9,21 @@ namespace MyMemory.Tests
     public class UnitTest1
     {
         [TestMethod]
+        public void TestMethodList()
+        {
+            using (var db = new MemoryDbContext())
+            {
+                var groups = db.Groups.ToList();
+                var items = db.Items.ToList();
+            }
+        }
+
+        [TestMethod]
         public void TestMethod1()
         {
             using (var db = new MemoryDbContext())
             {
-                var group = new MemoryGroup() { Name = "First" };
+                var group = new MemoryGroup("First");
                 db.Groups.Add(group);
                 db.SaveChanges();
 
@@ -26,12 +36,12 @@ namespace MyMemory.Tests
         {
             using (var db = new MemoryDbContext())
             {
-                var group = new MemoryGroup() { Name = "Group 1" };
+                var group = new MemoryGroup("Group 1");
                 db.Groups.Add(group);
 
-                var group1 = new MemoryGroup() { Name = "Group 2" };
+                var group1 = new MemoryGroup("Group 2");
                 db.Groups.Add(group1);
-                var group2 = new MemoryGroup() { Name = "Group 3" };
+                var group2 = new MemoryGroup("Group 3");
                 db.Groups.Add(group2);
 
                 group1.Parent = group;
@@ -48,12 +58,12 @@ namespace MyMemory.Tests
         {
             using (var db = new MemoryDbContext())
             {
-                var group = new MemoryGroup() { Name = "Group 1" };
+                var group = new MemoryGroup("Group 1");
                 db.Groups.Add(group);
 
-                var group1 = new MemoryGroup() { Name = "Group 2" };
+                var group1 = new MemoryGroup("Group 2");
                 db.Groups.Add(group1);
-                var group2 = new MemoryGroup() { Name = "Group 3" };
+                var group2 = new MemoryGroup("Group 3");
                 db.Groups.Add(group2);
 
                 group1.Parent = group;

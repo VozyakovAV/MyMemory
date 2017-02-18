@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\MemoryItem.cs" />
-    <Compile Include="MemoryDbContext.cs" />
+    <Compile Include="DB\MemoryDbContext.cs" />
     <Compile Include="Entities\MemoryGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
