@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\MemoryManager\MemoryManager_Tasks.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Users.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Items.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Groups.cs" />

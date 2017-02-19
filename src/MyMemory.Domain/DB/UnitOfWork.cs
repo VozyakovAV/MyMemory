@@ -36,6 +36,11 @@ namespace MyMemory.Domain
             return _context.Users;
         }
 
+        public IDbSet<MemoryTask> GetTasks()
+        {
+            return _context.Tasks;
+        }
+
         public void Commit()
         {
              _context.SaveChanges();

@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="TestTasks.cs" />
     <Compile Include="TestUsers.cs" />
     <Compile Include="TestItems.cs" />
     <Compile Include="TestGroups.cs" />

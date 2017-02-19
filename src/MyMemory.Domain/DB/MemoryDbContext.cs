@@ -13,6 +13,7 @@ namespace MyMemory.Domain
         public DbSet<MemoryGroup> Groups { get; set; }
         public DbSet<MemoryItem> Items { get; set; }
         public DbSet<MemoryUser> Users { get; set; }
+        public DbSet<MemoryTask> Tasks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -21,6 +22,7 @@ namespace MyMemory.Domain
             var entityMemoryGroup = modelBuilder.Entity<MemoryGroup>();
             var entityMemoryItem = modelBuilder.Entity<MemoryItem>();
             var entityMemoryUser = modelBuilder.Entity<MemoryUser>();
+            var entityMemoryTask = modelBuilder.Entity<MemoryTask>();
 
             entityMemoryGroup.ToTable("mem_groups");
             entityMemoryGroup.HasKey(x => x.Id);
@@ -46,6 +48,21 @@ namespace MyMemory.Domain
             entityMemoryUser.Property(x => x.Id).HasColumnName("id");
             entityMemoryUser.Property(x => x.Name).HasColumnName("name").HasMaxLength(20).IsRequired();
             entityMemoryUser.Property(x => x.Password).HasColumnName("password").HasMaxLength(20).IsRequired();
+
+            entityMemoryTask.ToTable("mem_tasks");
+            entityMemoryTask.HasKey(x => x.Id);
+            entityMemoryTask.Property(x => x.Id).HasColumnName("id");
+            entityMemoryTask.Property(x => x.Number).HasColumnName("number").IsRequired();
+            entityMemoryTask.Property(x => x.Deadline).HasColumnName("deadline").IsRequired();
+            entityMemoryTask.Property(x => x.Status).HasColumnName("status").IsRequired();
+            entityMemoryTask.HasRequired(x => x.Item)
+                .WithOptional()
+                .Map(x => x.MapKey("itemID"))
+                .WillCascadeOnDelete(false);
+            entityMemoryTask.HasRequired(x => x.User)
+                .WithOptional()
+                .Map(x => x.MapKey("userID"))
+                .WillCascadeOnDelete(false);
         }
     }
 }

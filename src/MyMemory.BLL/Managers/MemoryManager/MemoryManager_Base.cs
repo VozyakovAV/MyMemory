@@ -12,6 +12,7 @@ namespace MyMemory.BLL
         private readonly GroupRepository _groupRepository;
         private readonly ItemRepository _itemRepository;
         private readonly UserRepository _userRepository;
+        private readonly TaskRepository _taskRepository;
 
         public MemoryManager()
         {
@@ -19,6 +20,7 @@ namespace MyMemory.BLL
             this._groupRepository = new GroupRepository(_uow);
             this._itemRepository = new ItemRepository(_uow);
             this._userRepository = new UserRepository(_uow);
+            this._taskRepository = new TaskRepository(_uow);
         }
     }
 }
