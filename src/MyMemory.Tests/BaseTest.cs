@@ -26,23 +26,22 @@ namespace MyMemory.Tests
                     var sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
                     var list = db.Database.SqlQuery<string>(sql).ToList();
 
-                    if (list.Contains("mem_items"))
-                    {
-                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_items]");
-                    }
-
-                    if (list.Contains("mem_groups"))
-                    {
-                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_groups]");
-                    }
-
-                    if (list.Contains("mem_users"))
-                    {
-                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_users]");
-                    }
+                    DeleteTableIfExist("mem_tasks", list, db);
+                    DeleteTableIfExist("mem_items", list, db);
+                    DeleteTableIfExist("mem_groups", list, db);
+                    DeleteTableIfExist("mem_users", list, db);
                 }
             }
             
+        }
+
+        private void DeleteTableIfExist(string tableName, List<string> tables, MemoryDbContext db)
+        {
+            if (tables.Contains(tableName))
+            {
+                var sql = string.Format("DELETE FROM [dbo].[{0}]", tableName);
+                db.Database.ExecuteSqlCommand(sql);
+            }
         }
     }
 }

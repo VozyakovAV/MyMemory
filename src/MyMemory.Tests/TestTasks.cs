@@ -12,10 +12,7 @@ namespace MyMemory.Tests
         [TestMethod]
         public void CRUD()
         {
-            DeleteDB();
-
-            var mng = new MemoryManager();
-            var users = mng.GetUsers();
+            DeleteItemsInDB();
         }
     }
 }
