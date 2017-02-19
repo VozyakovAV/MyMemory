@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\UnitOfWork.cs" />
+    <Compile Include="Entities\BaseObject.cs" />
     <Compile Include="Entities\MemoryItem.cs" />
     <Compile Include="DB\MemoryDbContext.cs" />
     <Compile Include="Entities\MemoryGroup.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\ItemRepository.cs" />
+    <Compile Include="Repositories\SimpleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

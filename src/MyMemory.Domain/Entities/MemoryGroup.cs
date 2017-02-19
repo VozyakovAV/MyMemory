@@ -5,9 +5,8 @@ using System.Text;
 
 namespace MyMemory.Domain
 {
-    public class MemoryGroup
+    public class MemoryGroup : BaseObject
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public MemoryGroup Parent { get; set; }
         public ICollection<MemoryGroup> Childs { get; set; }

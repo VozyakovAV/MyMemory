@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyMemory.Domain
 {
-    public class MemoryItem
+    public class MemoryItem : BaseObject
     {
         public int Id { get; set; }
         public string Question { get; set; }
