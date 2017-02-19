@@ -7,11 +7,13 @@ using MyMemory.BLL;
 namespace MyMemory.Tests
 {
     [TestClass]
-    public class TestGroups
+    public class TestGroups : BaseTest
     {
         [TestMethod]
-        public void CRUD_Group()
+        public void CRUD()
         {
+            DeleteItemsInDB();
+
             var mng = new GroupManager();
             var groups = mng.GetGroups();
             Assert.AreEqual(0, groups.Length);
