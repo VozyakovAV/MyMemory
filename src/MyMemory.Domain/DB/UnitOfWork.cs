@@ -31,6 +31,11 @@ namespace MyMemory.Domain
             return _context.Items;
         }
 
+        public IDbSet<MemoryUser> GetUsers()
+        {
+            return _context.Users;
+        }
+
         public void Commit()
         {
              _context.SaveChanges();

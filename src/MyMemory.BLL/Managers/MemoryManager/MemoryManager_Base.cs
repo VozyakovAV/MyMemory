@@ -8,15 +8,17 @@ namespace MyMemory.BLL
 {
     public partial class MemoryManager
     {
+        private readonly UnitOfWork _uow;
         private readonly GroupRepository _groupRepository;
         private readonly ItemRepository _itemRepository;
-        private readonly UnitOfWork _uow;
+        private readonly UserRepository _userRepository;
 
         public MemoryManager()
         {
             this._uow = new UnitOfWork();
             this._groupRepository = new GroupRepository(_uow);
             this._itemRepository = new ItemRepository(_uow);
+            this._userRepository = new UserRepository(_uow);
         }
     }
 }

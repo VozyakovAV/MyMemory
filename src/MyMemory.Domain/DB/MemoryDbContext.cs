@@ -12,6 +12,7 @@ namespace MyMemory.Domain
 
         public DbSet<MemoryGroup> Groups { get; set; }
         public DbSet<MemoryItem> Items { get; set; }
+        public DbSet<MemoryUser> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -19,6 +20,7 @@ namespace MyMemory.Domain
 
             var entityMemoryGroup = modelBuilder.Entity<MemoryGroup>();
             var entityMemoryItem = modelBuilder.Entity<MemoryItem>();
+            var entityMemoryUser = modelBuilder.Entity<MemoryUser>();
 
             entityMemoryGroup.ToTable("mem_groups");
             entityMemoryGroup.HasKey(x => x.Id);
@@ -38,6 +40,12 @@ namespace MyMemory.Domain
                 .WithMany(x => x.Items)
                 .Map(x => x.MapKey("groupID"))
                 .WillCascadeOnDelete(false); // если поставить каскадность, то будет ошибка при создании базы ?? TODO: надо проверить
+
+            entityMemoryUser.ToTable("mem_users");
+            entityMemoryUser.HasKey(x => x.Id);
+            entityMemoryUser.Property(x => x.Id).HasColumnName("id");
+            entityMemoryUser.Property(x => x.Name).HasColumnName("name").HasMaxLength(20).IsRequired();
+            entityMemoryUser.Property(x => x.Password).HasColumnName("password").HasMaxLength(20).IsRequired();
         }
     }
 }

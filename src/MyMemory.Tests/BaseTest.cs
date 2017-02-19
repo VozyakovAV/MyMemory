@@ -35,6 +35,11 @@ namespace MyMemory.Tests
                     {
                         db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_groups]");
                     }
+
+                    if (list.Contains("mem_users"))
+                    {
+                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_users]");
+                    }
                 }
             }
             

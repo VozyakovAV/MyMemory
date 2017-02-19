@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\MemoryManager\MemoryManager_Item.cs" />
-    <Compile Include="Managers\MemoryManager\MemoryManager_Group.cs" />
+    <Compile Include="Managers\MemoryManager\MemoryManager_Users.cs" />
+    <Compile Include="Managers\MemoryManager\MemoryManager_Items.cs" />
+    <Compile Include="Managers\MemoryManager\MemoryManager_Groups.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
