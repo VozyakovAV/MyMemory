@@ -14,7 +14,7 @@ namespace MyMemory.Tests
         {
             DeleteItemsInDB();
 
-            var mng = new GroupManager();
+            var mng = new MemoryManager();
             var groups = mng.GetGroups();
             Assert.AreEqual(0, groups.Length);
 

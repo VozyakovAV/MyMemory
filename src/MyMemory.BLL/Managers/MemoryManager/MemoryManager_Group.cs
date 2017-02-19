@@ -6,16 +6,8 @@ using MyMemory.Domain;
 
 namespace MyMemory.BLL
 {
-    public class GroupManager
+    public partial class MemoryManager
     {
-        private readonly GroupRepository _groupRepository;
-        private readonly UnitOfWork _uow;
-        public GroupManager()
-        {
-            this._uow = new UnitOfWork();
-            this._groupRepository = new GroupRepository(_uow);
-        }
-
         public MemoryGroup[] GetGroups()
         {
             return _groupRepository.GetItems().ToArray();

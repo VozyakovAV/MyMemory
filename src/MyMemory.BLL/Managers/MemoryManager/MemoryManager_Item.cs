@@ -6,16 +6,8 @@ using MyMemory.Domain;
 
 namespace MyMemory.BLL
 {
-    public class ItemManager
+    public partial class MemoryManager
     {
-        private readonly ItemRepository _itemRepository;
-        private readonly UnitOfWork _uow;
-        public ItemManager()
-        {
-            this._uow = new UnitOfWork();
-            this._itemRepository = new ItemRepository(_uow);
-        }
-
         public MemoryItem[] GetItems(MemoryGroup group)
         {
             return _itemRepository.GetItems()

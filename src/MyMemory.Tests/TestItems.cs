@@ -14,13 +14,12 @@ namespace MyMemory.Tests
         {
             DeleteItemsInDB();
 
-            var mng = new GroupManager();
-            var mngItem = new ItemManager();
+            var mng = new MemoryManager();
 
             var group = new MemoryGroup("Группа");
             mng.SaveGroup(group);
 
-            var items = mngItem.GetItems(group);
+            var items = mng.GetItems(group);
             Assert.AreEqual(0, items.Length);
 
             var newItem = new MemoryItem()
@@ -30,21 +29,21 @@ namespace MyMemory.Tests
                 Group = group
             };
 
-            mngItem.SaveItem(newItem);
-            items = mngItem.GetItems(group);
+            mng.SaveItem(newItem);
+            items = mng.GetItems(group);
             Assert.AreEqual(1, items.Length);
             Assert.AreEqual(newItem, items.First());
 
             var item = items.First();
             item.Question = "Вопрос 2";
             item.Answer = "Вопрос 2";
-            mngItem.SaveItem(item);
-            items = mngItem.GetItems(group);
+            mng.SaveItem(item);
+            items = mng.GetItems(group);
             Assert.AreEqual(1, items.Length);
             Assert.AreEqual(newItem, items.First());
 
-            mngItem.DeleteItem(items.First());
-            items = mngItem.GetItems(group);
+            mng.DeleteItem(items.First());
+            items = mng.GetItems(group);
             Assert.AreEqual(0, items.Length);
         }
     }
