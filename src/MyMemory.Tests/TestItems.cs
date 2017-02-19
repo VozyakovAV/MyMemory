@@ -14,27 +14,38 @@ namespace MyMemory.Tests
         {
             DeleteItemsInDB();
 
-            /*var mng = new GroupManager();
-            var groups = mng.GetGroups();
-            Assert.AreEqual(0, groups.Length);
+            var mng = new GroupManager();
+            var mngItem = new ItemManager();
 
-            var newGroup = new MemoryGroup("Группа");
-            mng.SaveGroup(newGroup);
+            var group = new MemoryGroup("Группа");
+            mng.SaveGroup(group);
 
-            groups = mng.GetGroups();
-            Assert.AreEqual(1, groups.Length);
-            Assert.AreEqual(newGroup, groups.First());
+            var items = mngItem.GetItems(group);
+            Assert.AreEqual(0, items.Length);
 
-            newGroup.Name = "Группа 2";
-            mng.SaveGroup(newGroup);
+            var newItem = new MemoryItem()
+            {
+                Question = "Вопрос",
+                Answer = "Ответ",
+                Group = group
+            };
 
-            groups = mng.GetGroups();
-            Assert.AreEqual(1, groups.Length);
-            Assert.AreEqual(newGroup, groups.First());
+            mngItem.SaveItem(newItem);
+            items = mngItem.GetItems(group);
+            Assert.AreEqual(1, items.Length);
+            Assert.AreEqual(newItem, items.First());
 
-            mng.DeleteGroup(newGroup);
-            groups = mng.GetGroups();
-            Assert.AreEqual(0, groups.Length);*/
+            var item = items.First();
+            item.Question = "Вопрос 2";
+            item.Answer = "Вопрос 2";
+            mngItem.SaveItem(item);
+            items = mngItem.GetItems(group);
+            Assert.AreEqual(1, items.Length);
+            Assert.AreEqual(newItem, items.First());
+
+            mngItem.DeleteItem(items.First());
+            items = mngItem.GetItems(group);
+            Assert.AreEqual(0, items.Length);
         }
     }
 }

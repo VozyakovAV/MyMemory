@@ -25,13 +25,15 @@ namespace MyMemory.Tests
                 {
                     var sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
                     var list = db.Database.SqlQuery<string>(sql).ToList();
-                    foreach (var tableName in list)
+
+                    if (list.Contains("mem_items"))
                     {
-                        if (tableName.StartsWith("mem_"))
-                        {
-                            sql = string.Format("DELETE FROM [dbo].[{0}]", tableName);
-                            db.Database.ExecuteSqlCommand(sql);
-                        }
+                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_items]");
+                    }
+
+                    if (list.Contains("mem_groups"))
+                    {
+                        db.Database.ExecuteSqlCommand("DELETE FROM [dbo].[mem_groups]");
                     }
                 }
             }

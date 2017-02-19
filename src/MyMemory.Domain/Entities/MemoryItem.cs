@@ -7,7 +7,6 @@ namespace MyMemory.Domain
 {
     public class MemoryItem : BaseObject
     {
-        public int Id { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
         public MemoryGroup Group { get; set; }
