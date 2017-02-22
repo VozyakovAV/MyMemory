@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMemory.BLL", "MyMemory.BL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMemory.Tests", "MyMemory.Tests\MyMemory.Tests.csproj", "{F3585DB7-580B-4224-9F0B-9F5370049DDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMemory.MVC", "MyMemory.MVC\MyMemory.MVC.csproj", "{89E0C5AF-75C6-47C6-AE45-D6FD41D460CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3585DB7-580B-4224-9F0B-9F5370049DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E0C5AF-75C6-47C6-AE45-D6FD41D460CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E0C5AF-75C6-47C6-AE45-D6FD41D460CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E0C5AF-75C6-47C6-AE45-D6FD41D460CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E0C5AF-75C6-47C6-AE45-D6FD41D460CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
