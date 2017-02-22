@@ -1,4 +1,5 @@
 ﻿using MyMemory.BLL;
+using MyMemory.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,25 @@ namespace MyMemory.MVC.Controllers
         {
             var list = _mng.GetItems();
             return View();
+        }
+
+        public JsonResult FirstQuestion()
+        {
+            var data = new StudyData
+            {
+                CurrentQuestion = new StudyQuestion { Text = "Кто написал Обломова?" }
+            };
+            return Json(data);
+        }
+
+        public JsonResult NextQuestion(string answer)
+        {
+            var data = new StudyData
+            {
+                CurrentQuestion = new StudyQuestion { Text = "Имя Обломова?" },
+                PrevAnswer = new StudyAnswer {  CorrectAnswer = "Гончаров", IsCorrectAnswer = true }
+            };
+            return Json(data);
         }
 
         public ActionResult About()

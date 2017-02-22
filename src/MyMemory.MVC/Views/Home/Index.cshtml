@@ -14,7 +14,42 @@
 
 <div id="question-block" class="center">
     <div>верхняя панель</div>
-    <div class="text">Вопрос</div>
-    <div><input type="text" class="form-control" /></div>
-    <div><button class="btn btn-primary center">Проверить</button></div>
+    <div id="txtQuestion" class="text">Вопрос</div>
+    <div><input id="inpAnswer" type="text" class="form-control" /></div>
+    <div><button id="btnSubmit" class="btn btn-primary center">Проверить</button></div>
 </div>
+
+@section scripts {
+<script type="text/javascript">
+    function FirstQuestion() {
+        var url = "@Url.Action("FirstQuestion")";
+        $.ajax({ type: "POST", url: url,
+            success: function (response) {
+                console.log(response);
+                $("#txtQuestion").text(response.CurrentQuestion.Text);
+            }
+        });
+    }
+
+    function NextQuestion() {
+        var url = "@Url.Action("NextQuestion")";
+        $.ajax({ type: "POST", url: url, data: { answer: $("#inpAnswer").val() },
+            success: function (response) {
+                console.log(response);
+                $("#txtQuestion").text(response.CurrentQuestion.Text);
+                //if (response.Type == "word")
+                  //  lernWord.showQuestion(response);
+            }
+        });
+    }
+
+    $(function () {
+
+        $("#btnSubmit").click(function () {
+            NextQuestion();
+        });
+
+        FirstQuestion();
+    });
+</script>
+}
