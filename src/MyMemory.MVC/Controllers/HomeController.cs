@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyMemory.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,16 @@ namespace MyMemory.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly MemoryManager _mng;
+
+        public HomeController()
+        {
+            _mng = new MemoryManager();
+        }
+
         public ActionResult Index()
         {
+            var list = _mng.GetItems();
             return View();
         }
 

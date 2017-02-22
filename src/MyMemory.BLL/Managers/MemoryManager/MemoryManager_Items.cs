@@ -8,6 +8,12 @@ namespace MyMemory.BLL
 {
     public partial class MemoryManager
     {
+        public MemoryItem[] GetItems()
+        {
+            return _itemRepository.GetItems()
+                .ToArray();
+        }
+
         public MemoryItem[] GetItems(MemoryGroup group)
         {
             return _itemRepository.GetItems()
