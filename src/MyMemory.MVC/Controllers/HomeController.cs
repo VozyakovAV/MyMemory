@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyMemory.MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly MemoryManager _mng;
