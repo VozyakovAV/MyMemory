@@ -21,12 +21,12 @@
 
 @section scripts {
 <script type="text/javascript">
-    function FirstQuestion() {
-        var url = "@Url.Action("FirstQuestion")";
+    function NextStep() {
+        var url = "@Url.Action("NextStep")";
         $.ajax({ type: "POST", url: url,
             success: function (response) {
                 console.log(response);
-                $("#txtQuestion").text(response.CurrentQuestion.Text);
+                $("#txtQuestion").text(response.Question.Text);
             }
         });
     }
@@ -46,10 +46,10 @@
     $(function () {
 
         $("#btnSubmit").click(function () {
-            NextQuestion();
+            NextStep();
         });
 
-        FirstQuestion();
+        NextStep();
     });
 </script>
 }

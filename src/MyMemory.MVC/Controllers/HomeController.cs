@@ -11,37 +11,37 @@ namespace MyMemory.MVC.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private const string DATA_SESSION = "StudyData";
+
         private readonly MemoryManager _mng;
+        private readonly StudyManager _mngStudy;
 
         public HomeController()
         {
             _mng = new MemoryManager();
+            _mngStudy = new StudyManager();
         }
 
         public ActionResult Index()
         {
-            var list = _mng.GetItems();
             return View();
         }
 
-        public JsonResult FirstQuestion()
+        public JsonResult NextStep(string answer)
         {
-            var data = new StudyData
-            {
-                CurrentQuestion = new StudyQuestion { Text = "Кто написал Обломова?" }
-            };
+            var data = _mngStudy.NextStep(null, null);
+
             return Json(data);
         }
 
-        public JsonResult NextQuestion(string answer)
+        private StudyData LoadStudyData()
         {
-            var data = new StudyData
-            {
-                CurrentQuestion = new StudyQuestion { Text = "Имя Обломова?" },
-                PrevAnswer = new StudyAnswer {  CorrectAnswer = "Гончаров", IsCorrectAnswer = true }
-            };
-            return Json(data);
+            return Session[DATA_SESSION] as StudyData;
         }
 
+        private void SaveStudyData(StudyData data)
+        {
+            Session[DATA_SESSION] = data;
+        }
     }
 }

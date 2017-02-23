@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace MyMemory.MVC.Models
+namespace MyMemory.BLL
 {
     public class StudyData
     {
+        public int UserId { get; set; }
+        public int GroupId { get; set; }
         public StudyStatistic Statistic { get; set; }
-        public StudyQuestion CurrentQuestion { get; set; }
+        public StudyQuestion Question { get; set; }
         public StudyAnswer PrevAnswer { get; set; }
     }
 
@@ -20,6 +22,7 @@ namespace MyMemory.MVC.Models
 
     public class StudyQuestion
     {
+        public int Index { get; set; }
         public string Text { get; set; }
     }
 
