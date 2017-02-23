@@ -8,6 +8,11 @@ namespace MyMemory.BLL
 {
     public partial class MemoryManager
     {
+        public MemoryGroup FindGroup(int groupId)
+        {
+            return _groupRepository.GetItems().FirstOrDefault(x => x.Id == groupId);
+        }
+
         public MemoryGroup[] GetGroups()
         {
             return _groupRepository.GetItems().ToArray();

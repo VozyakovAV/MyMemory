@@ -27,11 +27,20 @@ namespace MyMemory.MVC.Controllers
             return View();
         }
 
+        public JsonResult StartStudy(int groupId)
+        {
+            var userName = this.User.Identity.Name;
+            var data = _mngStudy.Start(userName, groupId);
+            SaveStudyData(data);
+            return Json(data);
+        }
+
         public JsonResult NextStep(string answer)
         {
-            var data = _mngStudy.NextStep(null, null);
-
-            return Json(data);
+            var data = LoadStudyData();
+            var data2 = _mngStudy.NextStep(data, answer);
+            SaveStudyData(data2);
+            return Json(data2);
         }
 
         private StudyData LoadStudyData()

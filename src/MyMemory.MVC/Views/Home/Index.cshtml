@@ -21,9 +21,9 @@
 
 @section scripts {
 <script type="text/javascript">
-    function NextStep() {
-        var url = "@Url.Action("NextStep")";
-        $.ajax({ type: "POST", url: url,
+    function StartStudy() {
+        var url = "@Url.Action("StartStudy")";
+        $.ajax({ type: "POST", url: url, data: { groupId: 0},
             success: function (response) {
                 console.log(response);
                 $("#txtQuestion").text(response.Question.Text);
@@ -31,14 +31,12 @@
         });
     }
 
-    function NextQuestion() {
-        var url = "@Url.Action("NextQuestion")";
+    function NextStep() {
+        var url = "@Url.Action("NextStep")";
         $.ajax({ type: "POST", url: url, data: { answer: $("#inpAnswer").val() },
             success: function (response) {
                 console.log(response);
-                $("#txtQuestion").text(response.CurrentQuestion.Text);
-                //if (response.Type == "word")
-                  //  lernWord.showQuestion(response);
+                $("#txtQuestion").text(response.Question.Text);
             }
         });
     }
@@ -49,7 +47,7 @@
             NextStep();
         });
 
-        NextStep();
+        StartStudy();
     });
 </script>
 }

@@ -9,6 +9,7 @@ namespace MyMemory.BLL
     {
         public int UserId { get; set; }
         public int GroupId { get; set; }
+        public string Error { get; set; }
         public StudyStatistic Statistic { get; set; }
         public StudyQuestion Question { get; set; }
         public StudyAnswer PrevAnswer { get; set; }
