@@ -13,7 +13,11 @@ namespace MyMemory.Domain
             Database.SetInitializer<MemoryDbContext>(new MemoryDBInitializer());
         }
 
-        public MemoryDbContext() : base("MemoryDbContext") { }
+        public static string ConnectionString { get; set; }
+        
+        public MemoryDbContext()
+            : base(ConnectionString) 
+        { }
 
         public DbSet<MemoryGroup> Groups { get; set; }
         public DbSet<MemoryItem> Items { get; set; }
