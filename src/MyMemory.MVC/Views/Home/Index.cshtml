@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 <style>
-    #question-block div
+    /*#question-block div
     {
         margin: 10px 10px;
     }
@@ -10,19 +10,19 @@
     .center {
         width: 50%;
         margin: 0 auto;
-    }
+    }*/
 
     #inpCorrectAnswer {
         display: none;
     }
 </style>
 
-<div id="question-block" class="center">
-    <div id="statusBar"></div>
-    <div id="txtQuestion" class="text">&nbsp;</div>
-    <div><input id="inpAnswer" type="text" class="form-control" /></div>
-    <div><input id="inpCorrectAnswer" type="text" class="form-control" /></div>
-    <div><button id="btnSubmit" class="btn btn-primary center">Проверить</button></div>
+<div class="form-horizontal">
+    <div class="form-group"><div id="statusBar">&nbsp;</div></div>
+    <div class="form-group"><div id="txtQuestion">&nbsp;</div></div>
+    <div class="form-group"><input id="inpAnswer" type="text" class="form-control" /></div>
+    <div class="form-group"><input id="inpCorrectAnswer" type="text" class="form-control" /></div>
+    <div class="form-group"><button id="btnSubmit" class="btn btn-primary center">Проверить</button></div>
     <div id="txtMessage"></div>
 </div>
 
