@@ -8,12 +8,18 @@ namespace MyMemory.Domain
 {
     public class MemoryDbContext : DbContext
     {
+        static MemoryDbContext()
+        {
+            Database.SetInitializer<MemoryDbContext>(new MemoryDBInitializer());
+        }
+
         public MemoryDbContext() : base("MemoryDbContext") { }
 
         public DbSet<MemoryGroup> Groups { get; set; }
         public DbSet<MemoryItem> Items { get; set; }
         public DbSet<MemoryUser> Users { get; set; }
         public DbSet<MemoryTask> Tasks { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,7 +36,7 @@ namespace MyMemory.Domain
             entityMemoryGroup.Property(x => x.Name).HasColumnName("name").HasMaxLength(256).IsRequired();
             entityMemoryGroup.HasOptional(x => x.Parent)
                 .WithMany(x => x.Childs)
-                .Map(x => x.MapKey("groupID"))
+                .Map(x => x.MapKey("parentID"))
                 .WillCascadeOnDelete(false); // если поставить каскадность, то будет ошибка при создании базы ?? TODO: надо проверить
 
             entityMemoryItem.ToTable("mem_items");

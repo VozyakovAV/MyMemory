@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\MemoryDBInitializer.cs" />
     <Compile Include="DB\UnitOfWork.cs" />
     <Compile Include="Entities\BaseObject.cs" />
     <Compile Include="Entities\MemoryTask.cs" />
