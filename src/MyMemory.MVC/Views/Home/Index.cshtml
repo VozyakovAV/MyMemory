@@ -6,15 +6,20 @@
     {
         margin: 10px 10px;
     }
+
     .center {
-    width: 50%;
-    margin: 0 auto; 
-}
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #inpCorrectAnswer {
+        display: none;
+    }
 </style>
 
 <div id="question-block" class="center">
-    <div>верхняя панель</div>
-    <div id="txtQuestion" class="text">Вопрос</div>
+    <div id="statusBar"></div>
+    <div id="txtQuestion" class="text">&nbsp;</div>
     <div><input id="inpAnswer" type="text" class="form-control" /></div>
     <div><input id="inpCorrectAnswer" type="text" class="form-control" /></div>
     <div><button id="btnSubmit" class="btn btn-primary center">Проверить</button></div>

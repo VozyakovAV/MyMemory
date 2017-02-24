@@ -12,8 +12,10 @@
         $.ajax({
             type: "POST", url: _urlStartStudy, data: { groupId: _groupId },
             success: function (response) {
-                console.log(response);
-                ShowQuestion(response.Question.Text);
+                var next = ShowResult(response);
+                if (next) {
+                    ShowQuestion(response);
+                }
             }
         });
     }
@@ -22,23 +24,27 @@
         $.ajax({
             type: "POST", url: _urlNextStep, data: { answer: _inpAnswer.val() },
             success: function (response) {
-                console.log(response);
-                ShowResult(response);
-                setTimeout(function () {
-                    ShowQuestion(response.Question.Text);
-                }, 2000)
+                var next = ShowResult(response);
+                if (next) {
+                    setTimeout(function () {
+                        ShowQuestion(response);
+                    }, 2000)
+                }
             }
         });
     }
 
-    function ShowQuestion(question) {
-        _inpCorrectAnswer.hide();
-        _inpAnswer.val("");
-        _txtMessage.html("");
-        _txtQuestion.text(question);
-    }
-
     function ShowResult(response) {
+        console.log(response);
+
+        if (response.Message != null) {
+            _txtMessage.html(response.Message).css("color", "black");
+            _btnSubmit.hide();
+            _inpAnswer.hide();
+            _inpCorrectAnswer.hide();
+            return false;
+        }
+
         if (response.PrevAnswer != null) {
             if (response.PrevAnswer.IsCorrectAnswer) {
                 ShowSuccessResult();
@@ -46,6 +52,21 @@
             else {
                 ShowErrorResult(response.PrevAnswer.CorrectAnswer)
             }
+        }
+
+        return true;
+    }
+
+    function ShowQuestion(response) {
+        _inpCorrectAnswer.hide();
+        _inpAnswer.val("");
+        _txtMessage.html("");
+        if (response.Message == null) {
+            _txtQuestion.text(response.Question.Text);
+        }
+        else {
+            _txtMessage.html(response.Message).css("color", "black");
+            _btnSubmit.hide();
         }
     }
 
@@ -60,6 +81,7 @@
     };
 
     this.Start = function () {
+        _inpCorrectAnswer.prop("disabled", true);
         StartStudy();
     }
 

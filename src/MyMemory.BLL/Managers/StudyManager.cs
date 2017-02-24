@@ -24,7 +24,7 @@ namespace MyMemory.BLL
 
             if (user == null)
             {
-                data.Error = string.Format("Не найден пользователь: {0}", userName);
+                data.Message = string.Format("Не найден пользователь: {0}", userName);
                 return data;
             }
 
