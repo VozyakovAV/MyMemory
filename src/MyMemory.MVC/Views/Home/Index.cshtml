@@ -20,34 +20,14 @@
 </div>
 
 @section scripts {
+<script src="~/JS/Study/study.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    function StartStudy() {
-        var url = "@Url.Action("StartStudy")";
-        $.ajax({ type: "POST", url: url, data: { groupId: 0},
-            success: function (response) {
-                console.log(response);
-                $("#txtQuestion").text(response.Question.Text);
-            }
-        });
-    }
-
-    function NextStep() {
-        var url = "@Url.Action("NextStep")";
-        $.ajax({ type: "POST", url: url, data: { answer: $("#inpAnswer").val() },
-            success: function (response) {
-                console.log(response);
-                $("#txtQuestion").text(response.Question.Text);
-            }
-        });
-    }
+    var urlStartStudy = "@Url.Action("StartStudy")";
+    var urlNextStep = "@Url.Action("NextStep")";
 
     $(function () {
-
-        $("#btnSubmit").click(function () {
-            NextStep();
-        });
-
-        StartStudy();
+        var studyTest = new StudyTest(urlStartStudy, urlNextStep);
+        studyTest.Start();
     });
 </script>
 }
