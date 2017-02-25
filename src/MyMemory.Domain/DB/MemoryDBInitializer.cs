@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using System.Web.Helpers;
 
 namespace MyMemory.Domain
 {
@@ -13,7 +14,7 @@ namespace MyMemory.Domain
             var user = new MemoryUser()
             {
                 Name = "Andrew",
-                Password = "1237"
+                Password = Crypto.HashPassword("123")
             };
             db.Users.Add(user);
 

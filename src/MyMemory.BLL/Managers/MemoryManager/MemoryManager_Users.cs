@@ -15,7 +15,8 @@ namespace MyMemory.BLL
 
         public MemoryUser FindUser(string name)
         {
-            return _userRepository.GetItems().FirstOrDefault(x => x.Name == name);
+            return _userRepository.GetItems()
+                .FirstOrDefault(x => String.Compare(x.Name, name.Trim(), true) == 0);
         }
 
         public void SaveUser(MemoryUser user)

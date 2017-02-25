@@ -57,7 +57,7 @@ namespace MyMemory.Domain
             entityMemoryUser.HasKey(x => x.Id);
             entityMemoryUser.Property(x => x.Id).HasColumnName("id");
             entityMemoryUser.Property(x => x.Name).HasColumnName("name").HasMaxLength(20).IsRequired();
-            entityMemoryUser.Property(x => x.Password).HasColumnName("password").HasMaxLength(20).IsRequired();
+            entityMemoryUser.Property(x => x.Password).HasColumnName("password").HasMaxLength(128).IsRequired();
 
             entityMemoryTask.ToTable("mem_tasks");
             entityMemoryTask.HasKey(x => x.Id);

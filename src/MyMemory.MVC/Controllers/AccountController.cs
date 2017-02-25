@@ -7,6 +7,7 @@ using MyMemory.MVC.Models;
 using MyMemory.Domain;
 using MyMemory.BLL;
 using System.Web.Security;
+using System.Web.Helpers;
 
 namespace MyMemory.MVC.Controllers
 {
@@ -35,7 +36,7 @@ namespace MyMemory.MVC.Controllers
                 {
                     ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
                 }
-                else if (user.Password != model.Password)
+                else if (!Crypto.VerifyHashedPassword(user.Password, model.Password))
                 {
                     ModelState.AddModelError("", "Не верный пароль");
                 }
@@ -69,8 +70,8 @@ namespace MyMemory.MVC.Controllers
                 {
                     user = new MemoryUser()
                     {
-                        Name = model.Name,
-                        Password = model.Password
+                        Name = model.Name.Trim(),
+                        Password = Crypto.HashPassword(model.Password)
                     };
                     _mng.SaveUser(user);
 
