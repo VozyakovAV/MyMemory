@@ -48,9 +48,11 @@
         if (response.PrevAnswer != null) {
             if (response.PrevAnswer.IsCorrectAnswer) {
                 ShowSuccessResult();
+                return true;
             }
             else {
                 ShowErrorResult(response.PrevAnswer.CorrectAnswer)
+                return false;
             }
         }
 
@@ -63,6 +65,12 @@
         _txtMessage.html("");
         if (response.Message == null) {
             _txtQuestion.text(response.Question.Text);
+            _inpAnswer.focus();
+            _inpAnswer.keyup(function (e) {
+                if (e.keyCode == 13) {
+                    NextStep();
+                }
+            });
         }
         else {
             _txtMessage.html(response.Message).css("color", "black");
