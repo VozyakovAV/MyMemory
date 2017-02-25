@@ -1,0 +1,14 @@
+¬ключить миграцию
+Enable-Migrations -ProjectName MyMemory.Domain
+
+откатить в ноль
+Update-Database -TargetMigration:0
+
+обновить базу
+Update-Database
+Update-Database -ProjectName MyMemory.Domain
+
+—оздать скрипт обновлени€
+add-migration <название> -ProjectName MyMemory.Domain
+
+-ProjectName - можно не использовать

@@ -11,10 +11,15 @@ namespace MyMemory.Domain
     {
         protected override void Seed(MemoryDbContext db)
         {
+            CreateDB(db); 
+        }
+
+        public static void CreateDB(MemoryDbContext db)
+        {
             var user = new MemoryUser()
             {
                 Name = "Andrew",
-                Password = Crypto.HashPassword("123")
+                Password = "AOY9alcCW6gapSAIJ4rzvaaHh159btM6Pj3a29a9JgIj17V8SkntZAGzwl8ljs9TJA=="
             };
             db.Users.Add(user);
 

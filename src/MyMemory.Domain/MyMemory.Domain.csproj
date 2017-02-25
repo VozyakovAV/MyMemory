@@ -57,6 +57,11 @@
     <Compile Include="Entities\MemoryItem.cs" />
     <Compile Include="DB\MemoryDbContext.cs" />
     <Compile Include="Entities\MemoryGroup.cs" />
+    <Compile Include="Migrations\201702250738569_UpdatePassword.cs" />
+    <Compile Include="Migrations\201702250738569_UpdatePassword.Designer.cs">
+      <DependentUpon>201702250738569_UpdatePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
@@ -74,6 +79,11 @@
       <Project>{f4935348-17b7-44da-9315-301bc06c2585}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702250738569_UpdatePassword.resx">
+      <DependentUpon>201702250738569_UpdatePassword.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
