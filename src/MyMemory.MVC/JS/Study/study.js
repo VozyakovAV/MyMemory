@@ -62,44 +62,50 @@
     });
 
     function ShowViewMessage(responce) {
-        _txtQuestion.hide();
-        _inpCorrectAnswer.hide();
-        _inpAnswer.hide();
-        _btnSubmit.hide();
+        ResetStylesControls();
         _txtMessage.html(response.Message).css("color", "black").show();
     }
 
     function ShowViewQuestion(response) {
-        _txtQuestion.text(response.Question.Text);
-        _inpCorrectAnswer.hide();
-        _txtMessage.hide();
-        _inpAnswer.prop("disabled", false).val("").focus();
-        _btnSubmit.prop("disabled", false).html("Проверить").unbind().click(function () {
+        ResetStylesControls();
+        _txtQuestion.text(response.Question.Text).show();
+        _inpAnswer.val("").show().focus();
+        _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
         });
     }
 
     function ShowViewCorrectAnswer(response) {
-        _txtQuestion.prop("disabled", true);
-        _inpCorrectAnswer.hide();
+        ResetStylesControls();
+        _txtQuestion.show();
+        _inpAnswer.prop("disabled", true).show();
+        _inpAnswer.parent().addClass("has-success");
         _txtMessage.html("Верно!").css("color", "green").show();
-        _inpAnswer.prop("disabled", true);
-        //_inpAnswer.parent().addClass("has-success");
-        _btnSubmit.prop("disabled", true);
-        /*_btnSubmit.html("Дальше").unbind().click(function () {
-            ShowViewQuestion(response);
-        });*/
+        _btnSubmit.prop("disabled", true).show();
         setTimeout(function () {
             ShowViewQuestion(response);
         }, 2000)
     }
 
     function ShowViewIncorrectAnswer(response) {
-        _inpAnswer.prop("disabled", true);
+        ResetStylesControls();
+        _inpAnswer.prop("disabled", true).show();
+        _inpAnswer.parent().addClass("has-error");
         _inpCorrectAnswer.prop("disabled", true).val(response.PrevAnswer.CorrectAnswer).show();
+        _inpCorrectAnswer.parent().addClass("has-success");
         _txtMessage.html("Упс!").css("color", "red").show();
-        _btnSubmit.prop("disabled", false).html("Дальше").unbind().click(function () {
+        _btnSubmit.html("Дальше").show().click(function () {
             ShowViewQuestion(response);
         });
+    }
+
+    function ResetStylesControls() {
+        _txtQuestion.prop("disabled", false).hide();
+        _inpAnswer.prop("disabled", false).hide();
+        _inpCorrectAnswer.prop("disabled", false).hide();
+        _txtMessage.prop("disabled", false).css("color", "black").hide();
+        _btnSubmit.prop("disabled", false).unbind().hide();
+        _inpAnswer.parent().removeClass("has-success").removeClass("has-error");
+        _inpCorrectAnswer.parent().removeClass("has-success").removeClass("has-error");
     }
 }
