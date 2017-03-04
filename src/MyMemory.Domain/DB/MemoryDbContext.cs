@@ -10,7 +10,7 @@ namespace MyMemory.Domain
     {
         static MemoryDbContext()
         {
-            //ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
+            ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
             Database.SetInitializer<MemoryDbContext>(new MemoryDBInitializer());
         }
 
@@ -54,7 +54,7 @@ namespace MyMemory.Domain
             entityMemoryItem.HasRequired(x => x.Group)
                 .WithMany(x => x.Items)
                 .Map(x => x.MapKey("groupID"))
-                .WillCascadeOnDelete(false); // если поставить каскадность, то будет ошибка при создании базы ?? TODO: надо проверить
+                .WillCascadeOnDelete(true);
 
             entityMemoryUser.ToTable("mem_users");
             entityMemoryUser.HasKey(x => x.Id);
@@ -70,11 +70,11 @@ namespace MyMemory.Domain
             entityMemoryTask.HasRequired(x => x.Item)
                 .WithOptional()
                 .Map(x => x.MapKey("itemID"))
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             entityMemoryTask.HasRequired(x => x.User)
                 .WithOptional()
                 .Map(x => x.MapKey("userID"))
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             entityMemoryStepsStudy.ToTable("mem_stepsStudy");
             entityMemoryStepsStudy.HasKey(x => x.Id);

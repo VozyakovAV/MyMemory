@@ -18,10 +18,11 @@ namespace MyMemory.BLL
             return _groupRepository.GetItems().ToArray();
         }
 
-        public void SaveGroup(MemoryGroup group)
+        public MemoryGroup SaveGroup(MemoryGroup group)
         {
-            _groupRepository.Save(group);
+            var group2 = _groupRepository.Save(group);
             _uow.Commit();
+            return group2;
         }
 
         public void DeleteGroup(MemoryGroup group)

@@ -21,10 +21,11 @@ namespace MyMemory.BLL
                 .ToArray();
         }
 
-        public void SaveItem(MemoryItem item)
+        public MemoryItem SaveItem(MemoryItem item)
         {
-            _itemRepository.Save(item);
+            var item2 = _itemRepository.Save(item);
             _uow.Commit();
+            return item2;
         }
 
         public void DeleteItem(MemoryItem item)

@@ -11,7 +11,7 @@ namespace MyMemory.Domain
     {
         protected override void Seed(MemoryDbContext db)
         {
-            CreateDB(db); 
+            //CreateDB(db); 
         }
 
         public static void CreateDB(MemoryDbContext db)

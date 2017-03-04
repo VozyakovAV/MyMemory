@@ -19,10 +19,11 @@ namespace MyMemory.BLL
                 .FirstOrDefault(x => String.Compare(x.Name, name.Trim(), true) == 0);
         }
 
-        public void SaveUser(MemoryUser user)
+        public MemoryUser SaveUser(MemoryUser user)
         {
-            _userRepository.Save(user);
+            var user2 = _userRepository.Save(user);
             _uow.Commit();
+            return user2;
         }
 
         public void DeleteUser(MemoryUser user)

@@ -22,7 +22,7 @@ namespace MyMemory.Domain
             return _list;
         }
 
-        public int Save(T item)
+        public T Save(T item)
         {
             if (item.Id == 0)
             {
@@ -33,7 +33,7 @@ namespace MyMemory.Domain
                 _uow.Entry(item).State = EntityState.Modified;
             }
 
-            return item.Id;
+            return item;
         }
 
         public bool Delete(T item)

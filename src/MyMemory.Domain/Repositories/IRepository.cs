@@ -8,7 +8,7 @@ namespace MyMemory.Domain
     public interface IRepository<T> where T : class
     {
         IQueryable<T> GetItems();
-        int Save(T item);
+        T Save(T item);
         bool Delete(T item);
     }
 }

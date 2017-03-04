@@ -13,10 +13,11 @@ namespace MyMemory.BLL
             return _taskRepository.GetItems().ToArray();
         }
 
-        public void SaveTask(MemoryTask task)
+        public MemoryTask SaveTask(MemoryTask task)
         {
-            _taskRepository.Save(task);
+            var task2 = _taskRepository.Save(task);
             _uow.Commit();
+            return task2;
         }
 
         public void DeleteTask(MemoryTask task)
