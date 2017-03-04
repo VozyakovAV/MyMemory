@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\StudyData.cs" />
+    <Compile Include="Managers\MemoryManager\MemoryManager_StepsStudy.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Tasks.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Users.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Items.cs" />

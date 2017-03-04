@@ -10,7 +10,7 @@ namespace MyMemory.Domain
     {
         static MemoryDbContext()
         {
-            ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
+            //ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
             Database.SetInitializer<MemoryDbContext>(new MemoryDBInitializer());
         }
 

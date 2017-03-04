@@ -41,6 +41,11 @@ namespace MyMemory.Domain
             return _context.Tasks;
         }
 
+        public IDbSet<MemoryStepsStudy> GetStepsStudy()
+        {
+            return _context.StepsStudy;
+        }
+
         public void Commit()
         {
              _context.SaveChanges();

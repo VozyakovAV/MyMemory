@@ -8,21 +8,21 @@ namespace MyMemory.BLL
 {
     public partial class MemoryManager
     {
-        /*public MemoryUser[] GetUsers()
+        public MemoryTask[] GetTasks()
         {
-            return _userRepository.GetItems().ToArray();
+            return _taskRepository.GetItems().ToArray();
         }
 
-        public void SaveUser(MemoryUser user)
+        public void SaveTask(MemoryTask task)
         {
-            _userRepository.Save(user);
+            _taskRepository.Save(task);
             _uow.Commit();
         }
 
-        public void DeleteUser(MemoryUser user)
+        public void DeleteTask(MemoryTask task)
         {
-            _userRepository.Delete(user);
+            _taskRepository.Delete(task);
             _uow.Commit();
-        }*/
+        }
     }
 }
