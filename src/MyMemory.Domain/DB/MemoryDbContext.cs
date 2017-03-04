@@ -10,7 +10,7 @@ namespace MyMemory.Domain
     {
         static MemoryDbContext()
         {
-            //ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
+            ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=MemoryDbContext;Integrated Security=True";
             Database.SetInitializer<MemoryDbContext>(new MemoryDBInitializer());
         }
 
@@ -24,6 +24,7 @@ namespace MyMemory.Domain
         public DbSet<MemoryItem> Items { get; set; }
         public DbSet<MemoryUser> Users { get; set; }
         public DbSet<MemoryTask> Tasks { get; set; }
+        public DbSet<MemoryStepsStudy> StepsStudy { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -34,6 +35,7 @@ namespace MyMemory.Domain
             var entityMemoryItem = modelBuilder.Entity<MemoryItem>();
             var entityMemoryUser = modelBuilder.Entity<MemoryUser>();
             var entityMemoryTask = modelBuilder.Entity<MemoryTask>();
+            var entityMemoryStepsStudy = modelBuilder.Entity<MemoryStepsStudy>();
 
             entityMemoryGroup.ToTable("mem_groups");
             entityMemoryGroup.HasKey(x => x.Id);
@@ -74,6 +76,13 @@ namespace MyMemory.Domain
                 .WithOptional()
                 .Map(x => x.MapKey("userID"))
                 .WillCascadeOnDelete(false);
+
+            entityMemoryStepsStudy.ToTable("mem_steps_study");
+            entityMemoryStepsStudy.HasKey(x => x.Id);
+            entityMemoryStepsStudy.Property(x => x.Id).HasColumnName("id");
+            entityMemoryStepsStudy.Property(x => x.Number).HasColumnName("number").IsRequired();
+            entityMemoryStepsStudy.Property(x => x.Format).HasColumnName("format").IsRequired();
+            entityMemoryStepsStudy.Property(x => x.Period).HasColumnName("period").IsRequired();
         }
     }
 }

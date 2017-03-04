@@ -52,6 +52,7 @@
     <Compile Include="DB\MemoryDBInitializer.cs" />
     <Compile Include="DB\UnitOfWork.cs" />
     <Compile Include="Entities\BaseObject.cs" />
+    <Compile Include="Entities\MemoryStepsStudy.cs" />
     <Compile Include="Entities\MemoryTask.cs" />
     <Compile Include="Entities\MemoryUser.cs" />
     <Compile Include="Entities\MemoryItem.cs" />
@@ -60,6 +61,10 @@
     <Compile Include="Migrations\201702250738569_UpdatePassword.cs" />
     <Compile Include="Migrations\201702250738569_UpdatePassword.Designer.cs">
       <DependentUpon>201702250738569_UpdatePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703040558221_add_steps_study.cs" />
+    <Compile Include="Migrations\201703040558221_add_steps_study.Designer.cs">
+      <DependentUpon>201703040558221_add_steps_study.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702250738569_UpdatePassword.resx">
       <DependentUpon>201702250738569_UpdatePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703040558221_add_steps_study.resx">
+      <DependentUpon>201703040558221_add_steps_study.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
