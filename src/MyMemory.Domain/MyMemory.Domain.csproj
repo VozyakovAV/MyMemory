@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201703040558221_add_steps_study.Designer.cs">
       <DependentUpon>201703040558221_add_steps_study.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703040608438_upd_tasks.cs" />
+    <Compile Include="Migrations\201703040608438_upd_tasks.Designer.cs">
+      <DependentUpon>201703040608438_upd_tasks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703040611014_upd_steps.cs" />
+    <Compile Include="Migrations\201703040611014_upd_steps.Designer.cs">
+      <DependentUpon>201703040611014_upd_steps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />
@@ -91,6 +99,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703040558221_add_steps_study.resx">
       <DependentUpon>201703040558221_add_steps_study.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703040608438_upd_tasks.resx">
+      <DependentUpon>201703040608438_upd_tasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703040611014_upd_steps.resx">
+      <DependentUpon>201703040611014_upd_steps.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

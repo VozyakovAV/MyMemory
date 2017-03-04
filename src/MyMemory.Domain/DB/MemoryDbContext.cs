@@ -65,9 +65,8 @@ namespace MyMemory.Domain
             entityMemoryTask.ToTable("mem_tasks");
             entityMemoryTask.HasKey(x => x.Id);
             entityMemoryTask.Property(x => x.Id).HasColumnName("id");
-            entityMemoryTask.Property(x => x.Number).HasColumnName("number").IsRequired();
+            entityMemoryTask.Property(x => x.StepNumber).HasColumnName("stepNumber").IsRequired();
             entityMemoryTask.Property(x => x.Deadline).HasColumnName("deadline").IsRequired();
-            entityMemoryTask.Property(x => x.Status).HasColumnName("status").IsRequired();
             entityMemoryTask.HasRequired(x => x.Item)
                 .WithOptional()
                 .Map(x => x.MapKey("itemID"))
@@ -77,7 +76,7 @@ namespace MyMemory.Domain
                 .Map(x => x.MapKey("userID"))
                 .WillCascadeOnDelete(false);
 
-            entityMemoryStepsStudy.ToTable("mem_steps_study");
+            entityMemoryStepsStudy.ToTable("mem_stepsStudy");
             entityMemoryStepsStudy.HasKey(x => x.Id);
             entityMemoryStepsStudy.Property(x => x.Id).HasColumnName("id");
             entityMemoryStepsStudy.Property(x => x.Number).HasColumnName("number").IsRequired();
