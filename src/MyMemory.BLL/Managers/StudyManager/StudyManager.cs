@@ -10,10 +10,12 @@ namespace MyMemory.BLL
     public class StudyManager
     {
         private readonly MemoryManager _mng;
+        private readonly TaskDbManager _mngTasksDb;
 
         public StudyManager()
         {
             _mng = new MemoryManager();
+            _mngTasksDb = new TaskDbManager();
         }
 
         public StudyData Start(string userName, int groupId)
@@ -38,6 +40,11 @@ namespace MyMemory.BLL
             data.Statistic = new StudyStatistic();
             data.Question = GetNextQuestion(groupId);
 
+            if (data.Question == null)
+            {
+                data.Message = "Нет вопросов";
+            }
+
             return data;
         }
 
@@ -46,30 +53,44 @@ namespace MyMemory.BLL
             var items = _mng.GetItems();
             var data = new StudyData();
 
-            var prevItem = items.FirstOrDefault(x => x.Id == currentData.Question.Index);
-            var nextItem = items.GetRandom();
+            var prevTask = _mng.FindTask(currentData.Question.TaskId);
+            var prevItem = prevTask.Item;
+            var isPrevCorrect = prevItem.Answer == answer;
+
+            _mngTasksDb.WriteAnswer(prevTask, isPrevCorrect);
+
             data.Statistic = new StudyStatistic();
             data.PrevAnswer = new StudyAnswer()
             {
                 CorrectAnswer = prevItem.Answer,
-                IsCorrectAnswer = prevItem.Answer == answer
+                IsCorrectAnswer = isPrevCorrect
             };
 
             data.Question = GetNextQuestion(currentData.GroupId);
+
+            if (data.Question == null)
+            {
+                data.Message = "Нет вопросов";
+            }
 
             return data;
         }
 
         private StudyQuestion GetNextQuestion(int groupId)
         {
-            var items = _mng.GetItems();
-            var item = items.GetRandom();
-            var res = new StudyQuestion()
+            var task = _mngTasksDb.GetNextItem();
+
+            if (task != null)
             {
-                Index = item.Id,
-                Text = item.Question
-            };
-            return res;
+                return new StudyQuestion()
+                {
+                    TaskId = task.Id,
+                    ItemId = task.Item.Id,
+                    Text = task.Item.Question
+                };
+            }
+
+            return null;
         }
     }
 }

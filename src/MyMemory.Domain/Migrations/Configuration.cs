@@ -15,13 +15,7 @@ namespace MyMemory.Domain.Migrations
 
         protected override void Seed(MyMemory.Domain.MemoryDbContext context)
         {
-            /*context.StepsStudy.Add(new MemoryStepsStudy(1, PeriodFormat.Min, 20));
-            context.StepsStudy.Add(new MemoryStepsStudy(2, PeriodFormat.Hour, 4));
-            context.StepsStudy.Add(new MemoryStepsStudy(3, PeriodFormat.Hour, 8));
-            context.StepsStudy.Add(new MemoryStepsStudy(4, PeriodFormat.Day, 1));
-            context.StepsStudy.Add(new MemoryStepsStudy(5, PeriodFormat.Day, 2));*/
-
-            context.SaveChanges();
+            //MemoryDBInitializer.CreateDB(context);
         }
     }
 }

@@ -12,14 +12,14 @@ namespace MyMemory.BLL
         void WriteAnswer(T item, bool isCorrect);
     }
 
-    public class ItemManager : IItemManager<MemoryTask>
+    public class TaskDbManager : IItemManager<MemoryTask>
     {
         private readonly UnitOfWork _uow;
         private readonly TaskRepository _taskRepository;
         private readonly StepsStudyRepository _stepsStudyRepository;
         private readonly MemoryManager _mng;
 
-        public ItemManager()
+        public TaskDbManager()
         {
             this._uow = new UnitOfWork();
             this._taskRepository = new TaskRepository(_uow);

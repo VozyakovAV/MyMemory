@@ -23,7 +23,8 @@ namespace MyMemory.BLL
 
     public class StudyQuestion
     {
-        public int Index { get; set; }
+        public int ItemId { get; set; }
+        public int TaskId { get; set; }
         public string Text { get; set; }
     }
 

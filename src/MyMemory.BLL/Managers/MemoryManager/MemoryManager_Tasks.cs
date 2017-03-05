@@ -8,6 +8,11 @@ namespace MyMemory.BLL
 {
     public partial class MemoryManager
     {
+        public MemoryTask FindTask(int taskId)
+        {
+            return _taskRepository.GetItems().FirstOrDefault(x => x.Id == taskId);
+        }
+
         public MemoryTask[] GetTasks()
         {
             return _taskRepository.GetItems().ToArray();

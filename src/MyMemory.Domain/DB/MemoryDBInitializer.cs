@@ -11,7 +11,7 @@ namespace MyMemory.Domain
     {
         protected override void Seed(MemoryDbContext db)
         {
-            //CreateDB(db); 
+            CreateDB(db); 
         }
 
         public static void CreateDB(MemoryDbContext db)
@@ -41,6 +41,14 @@ namespace MyMemory.Domain
 
                 db.Items.Add(item);
             }
+
+            db.StepsStudy.Add(new MemoryStepsStudy(1, PeriodFormat.Min, 20));
+            db.StepsStudy.Add(new MemoryStepsStudy(2, PeriodFormat.Hour, 4));
+            db.StepsStudy.Add(new MemoryStepsStudy(3, PeriodFormat.Hour, 8));
+            db.StepsStudy.Add(new MemoryStepsStudy(4, PeriodFormat.Day, 1));
+            db.StepsStudy.Add(new MemoryStepsStudy(5, PeriodFormat.Day, 2));
+            db.StepsStudy.Add(new MemoryStepsStudy(6, PeriodFormat.Day, 4));
+            db.StepsStudy.Add(new MemoryStepsStudy(7, PeriodFormat.Day, 8));
 
             db.SaveChanges();
         }
