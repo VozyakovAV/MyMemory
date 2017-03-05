@@ -10,7 +10,7 @@ namespace MyMemory.BLL
     {
         public MemoryStepsStudy[] GetSteps()
         {
-            return _stepsStudyRepository.GetItems().ToArray();
+            return _stepsStudyRepository.GetItems().OrderBy(x => x.Number).ToArray();
         }
 
         public void SaveStep(MemoryStepsStudy step)

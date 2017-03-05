@@ -68,11 +68,11 @@ namespace MyMemory.Domain
             entityMemoryTask.Property(x => x.StepNumber).HasColumnName("stepNumber").IsRequired();
             entityMemoryTask.Property(x => x.Deadline).HasColumnName("deadline").IsRequired();
             entityMemoryTask.HasRequired(x => x.Item)
-                .WithOptional()
+                .WithMany()
                 .Map(x => x.MapKey("itemID"))
                 .WillCascadeOnDelete(true);
             entityMemoryTask.HasRequired(x => x.User)
-                .WithOptional()
+                .WithMany()
                 .Map(x => x.MapKey("userID"))
                 .WillCascadeOnDelete(true);
 

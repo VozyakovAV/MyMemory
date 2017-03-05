@@ -13,6 +13,11 @@ namespace MyMemory.BLL
             return _userRepository.GetItems().ToArray();
         }
 
+        public MemoryUser FindUser(int userId)
+        {
+            return _userRepository.GetItems().FirstOrDefault(x => x.Id == userId);
+        }
+
         public MemoryUser FindUser(string name)
         {
             return _userRepository.GetItems()

@@ -14,5 +14,13 @@ namespace MyMemory.Domain
 
         public MemoryTask()
         { }
+
+        public MemoryTask(MemoryUser user, MemoryItem item, int stepNumber, DateTime deadline)
+        {
+            this.User = user;
+            this.Item = item;
+            this.StepNumber = stepNumber;
+            this.Deadline = deadline;
+        }
     }
 }

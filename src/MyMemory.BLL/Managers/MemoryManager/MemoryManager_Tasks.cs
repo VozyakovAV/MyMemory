@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using MyMemory.Domain;
 
 namespace MyMemory.BLL
@@ -29,6 +30,11 @@ namespace MyMemory.BLL
         {
             _taskRepository.Delete(task);
             _uow.Commit();
+        }
+
+        public void Attach(MemoryTask task)
+        {
+            _uow.GetTasks().Attach(task);
         }
     }
 }

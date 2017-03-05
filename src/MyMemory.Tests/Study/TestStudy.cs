@@ -24,7 +24,7 @@ namespace MyMemory.Tests
         [TestMethod]
         public void TestCascades()
         {
-            var mngItem = new TaskDbManager();
+            var mngItem = new RepeatTasksManager();
             var item = mngItem.GetNextItem();
             Assert.IsNull(item);
 

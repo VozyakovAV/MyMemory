@@ -33,5 +33,10 @@ namespace MyMemory.BLL
             _itemRepository.Delete(item);
             _uow.Commit();
         }
+
+        public void Attach(MemoryItem item)
+        {
+            _uow.GetItems().Attach(item);
+        }
     }
 }

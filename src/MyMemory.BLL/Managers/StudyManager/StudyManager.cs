@@ -10,12 +10,14 @@ namespace MyMemory.BLL
     public class StudyManager
     {
         private readonly MemoryManager _mng;
-        private readonly TaskDbManager _mngTasksDb;
+        private readonly RepeatTasksManager _mngRepeatTasks;
+        private StudyNewTasksManager _mngStudyNewTasks;
 
         public StudyManager()
         {
             _mng = new MemoryManager();
-            _mngTasksDb = new TaskDbManager();
+            _mngRepeatTasks = new RepeatTasksManager();
+            
         }
 
         public StudyData Start(string userName, int groupId)
@@ -37,6 +39,8 @@ namespace MyMemory.BLL
                 return data;
             }*/
 
+            data.UserId = user.Id;
+            _mngStudyNewTasks = new StudyNewTasksManager(data.UserId);
             data.Statistic = new StudyStatistic();
             data.Question = GetNextQuestion(groupId);
 
@@ -57,7 +61,7 @@ namespace MyMemory.BLL
             var prevItem = prevTask.Item;
             var isPrevCorrect = prevItem.Answer == answer;
 
-            _mngTasksDb.WriteAnswer(prevTask, isPrevCorrect);
+            _mngRepeatTasks.WriteAnswer(prevTask, isPrevCorrect);
 
             data.Statistic = new StudyStatistic();
             data.PrevAnswer = new StudyAnswer()
@@ -66,6 +70,7 @@ namespace MyMemory.BLL
                 IsCorrectAnswer = isPrevCorrect
             };
 
+            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
             data.Question = GetNextQuestion(currentData.GroupId);
 
             if (data.Question == null)
@@ -78,19 +83,30 @@ namespace MyMemory.BLL
 
         private StudyQuestion GetNextQuestion(int groupId)
         {
-            var task = _mngTasksDb.GetNextItem();
+            var task = _mngRepeatTasks.GetNextItem();
 
             if (task != null)
             {
-                return new StudyQuestion()
-                {
-                    TaskId = task.Id,
-                    ItemId = task.Item.Id,
-                    Text = task.Item.Question
-                };
+                return CreateStudyQuestion(task);
+            }
+
+            task = _mngStudyNewTasks.GetNextItem();
+            if (task != null)
+            {
+                return CreateStudyQuestion(task);
             }
 
             return null;
+        }
+
+        private StudyQuestion CreateStudyQuestion(MemoryTask task)
+        {
+            return new StudyQuestion()
+            {
+                TaskId = task.Id,
+                ItemId = task.Item.Id,
+                Text = task.Item.Question
+            };
         }
     }
 }
