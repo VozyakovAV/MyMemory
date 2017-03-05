@@ -60,12 +60,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="TestEntities.cs" />
-    <Compile Include="TestTasks.cs" />
-    <Compile Include="TestUsers.cs" />
-    <Compile Include="TestItems.cs" />
-    <Compile Include="TestGroups.cs" />
+    <Compile Include="Entities\TestEntities.cs" />
+    <Compile Include="Entities\TestTasks.cs" />
+    <Compile Include="Entities\TestUsers.cs" />
+    <Compile Include="Entities\TestItems.cs" />
+    <Compile Include="Entities\TestGroups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Study\TestStudy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyMemory.BLL\MyMemory.BLL.csproj">
@@ -81,6 +82,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
