@@ -58,6 +58,7 @@
     <Compile Include="Entities\MemoryItem.cs" />
     <Compile Include="DB\MemoryDbContext.cs" />
     <Compile Include="Entities\MemoryGroup.cs" />
+    <Compile Include="Extensions\MemoryStepsStudyExtension.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\StepsStudyRepository.cs" />

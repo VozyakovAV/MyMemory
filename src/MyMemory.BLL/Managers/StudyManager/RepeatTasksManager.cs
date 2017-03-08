@@ -52,23 +52,9 @@ namespace MyMemory.BLL
                 nextStep = currentStep;
 
             task.StepNumber = nextStep.Number;
-            task.Deadline = AddPeriod(CustomDateTime.Now, nextStep);
+            task.Deadline = nextStep.NextDateTime();
 
             _mng.SaveTask(task);
-        }
-
-        private DateTime AddPeriod(DateTime date, MemoryStepsStudy step)
-        {
-            switch (step.Format)
-            {
-                case PeriodFormat.Min:      return date.AddMinutes(step.Period);
-                case PeriodFormat.Hour:     return date.AddHours(step.Period);
-                case PeriodFormat.Day:      return date.AddDays(step.Period);
-                case PeriodFormat.Month:    return date.AddMonths(step.Period);
-                case PeriodFormat.Year:     return date.AddYears(step.Period);
-            }
-
-            return date;
         }
     }
 }

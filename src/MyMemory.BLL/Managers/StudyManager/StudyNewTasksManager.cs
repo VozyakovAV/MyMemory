@@ -48,7 +48,7 @@ namespace MyMemory.BLL
             var step = _mng.GetSteps().First();
             var user = _mng.FindUser(_userId);
 
-            var newTask = new MemoryTask(user, item, step.Number, AddPeriod(CustomDateTime.Now, step));
+            var newTask = new MemoryTask(user, item, step.Number, step.NextDateTime());
             _mng.Attach(item);
             try
             {
@@ -64,19 +64,5 @@ namespace MyMemory.BLL
 
         public void WriteAnswer(MemoryTask task, bool isCorrect)
         { }
-
-        private DateTime AddPeriod(DateTime date, MemoryStepsStudy step)
-        {
-            switch (step.Format)
-            {
-                case PeriodFormat.Min:      return date.AddMinutes(step.Period);
-                case PeriodFormat.Hour:     return date.AddHours(step.Period);
-                case PeriodFormat.Day:      return date.AddDays(step.Period);
-                case PeriodFormat.Month:    return date.AddMonths(step.Period);
-                case PeriodFormat.Year:     return date.AddYears(step.Period);
-            }
-
-            return date;
-        }
     }
 }
