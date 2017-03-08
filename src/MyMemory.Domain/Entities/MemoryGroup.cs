@@ -19,6 +19,12 @@ namespace MyMemory.Domain
             this.Name = name;
         }
 
+        public MemoryGroup(string name, MemoryGroup parent)
+        {
+            this.Name = name;
+            this.Parent = parent;
+        }
+
         public override string ToString()
         {
             return Name;

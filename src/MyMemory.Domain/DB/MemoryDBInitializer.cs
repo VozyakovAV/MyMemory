@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.Helpers;
 
 namespace MyMemory.Domain
@@ -23,25 +26,6 @@ namespace MyMemory.Domain
             };
             db.Users.Add(user);
 
-            var group = new MemoryGroup("Группа");
-            db.Groups.Add(group);
-
-            var random = new Random();
-            for (int i = 0; i < 10; i++)
-            {
-                var a = random.Next(1, 10);
-                var b = random.Next(1, 10);
-
-                var item = new MemoryItem()
-                {
-                    Group = group,
-                    Question = string.Format("{0} + {1}", a, b),
-                    Answer = (a + b).ToString()
-                };
-
-                db.Items.Add(item);
-            }
-
             db.StepsStudy.Add(new MemoryStepsStudy(1, PeriodFormat.Min, 20));
             db.StepsStudy.Add(new MemoryStepsStudy(2, PeriodFormat.Hour, 4));
             db.StepsStudy.Add(new MemoryStepsStudy(3, PeriodFormat.Hour, 8));
@@ -50,7 +34,52 @@ namespace MyMemory.Domain
             db.StepsStudy.Add(new MemoryStepsStudy(6, PeriodFormat.Day, 4));
             db.StepsStudy.Add(new MemoryStepsStudy(7, PeriodFormat.Day, 8));
 
+            var group1 = new MemoryGroup("Английский");
+            db.Groups.Add(group1);
+            var group1_1 = new MemoryGroup("Глаголы (топ 100)", group1);
+            db.Groups.Add(group1_1);
+
+            AddEnglishWords(db, group1_1);
+
             db.SaveChanges();
         }
+
+        private static void AddEnglishWords(MemoryDbContext db, MemoryGroup group)
+        {
+            var items = ParseWords("MyMemory.Domain.Data.EnglishVerbs.txt");
+            items.ForEach(x => x.Group = group);
+
+            foreach (var item in items)
+            {
+                item.Group = group;
+                db.Items.Add(item);
+            }
+        }
+
+        public static List<MemoryItem> ParseWords(string resourceName)
+        {
+            var text = MemoryDBInitializer.ReadResource("MyMemory.Domain.Data.EnglishVerbs.txt");
+            var mc = Regex.Matches(text, @"(?<a>\w+)\s*—\s*(?<q>\w+)");
+
+            return mc.OfType<Match>()
+                .Select(x => new MemoryItem() 
+                { 
+                    Question = x.Groups["q"].Value.Trim(), 
+                    Answer = x.Groups["a"].Value.Trim() 
+                })
+                .ToList();
+        }
+
+        public static string ReadResource(string resourceName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1251)))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+            
     }
 }

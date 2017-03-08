@@ -11,9 +11,19 @@ namespace MyMemory.Domain
         public string Answer { get; set; }
         public MemoryGroup Group { get; set; }
 
+        public MemoryItem()
+        { }
+
+        public MemoryItem(MemoryGroup group, string question, string answer)
+        {
+            this.Group = group;
+            this.Question = question;
+            this.Answer = answer;
+        }
+
         public override string ToString()
         {
-            return Question;
+            return string.Format("{0} - {1}", Question, Answer);
         }
     }
 }
