@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using MyMemory.Domain;
+using Common;
 
 namespace MyMemory.BLL
 {
@@ -32,7 +33,7 @@ namespace MyMemory.BLL
         {
             var tasks = _taskRepository.GetItems()
                 .Include(x => x.Item)
-                .Where(x => x.Deadline <= DateTime.Now)
+                .Where(x => x.Deadline <= CustomDateTime.Now)
                 .OrderByDescending(x => x.StepNumber);
 
             return tasks.FirstOrDefault();
@@ -51,7 +52,7 @@ namespace MyMemory.BLL
                 nextStep = currentStep;
 
             task.StepNumber = nextStep.Number;
-            task.Deadline = AddPeriod(DateTime.Now, nextStep);
+            task.Deadline = AddPeriod(CustomDateTime.Now, nextStep);
 
             _mng.SaveTask(task);
         }

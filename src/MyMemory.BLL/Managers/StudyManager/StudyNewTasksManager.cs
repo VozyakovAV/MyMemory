@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using MyMemory.Domain;
+using Common;
 
 namespace MyMemory.BLL
 {
@@ -47,7 +48,7 @@ namespace MyMemory.BLL
             var step = _mng.GetSteps().First();
             var user = _mng.FindUser(_userId);
 
-            var newTask = new MemoryTask(user, item, step.Number, AddPeriod(DateTime.Now, step));
+            var newTask = new MemoryTask(user, item, step.Number, AddPeriod(CustomDateTime.Now, step));
             _mng.Attach(item);
             try
             {
