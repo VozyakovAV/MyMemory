@@ -70,6 +70,10 @@
     <Compile Include="Study\TestStudy.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f4935348-17b7-44da-9315-301bc06c2585}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyMemory.BLL\MyMemory.BLL.csproj">
       <Project>{c3169326-d64d-4c53-bd07-e15a19216b0a}</Project>
       <Name>MyMemory.BLL</Name>

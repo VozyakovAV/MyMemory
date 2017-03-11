@@ -10,7 +10,7 @@ namespace MyMemory.BLL
     public class StudyManager
     {
         private readonly MemoryManager _mng;
-        private RepeatTasksManager _mngRepeatTasks;
+        private RepeatTasksDbManager _mngRepeatTasks;
         private StudyNewTasksManager _mngStudyNewTasks;
 
         public StudyManager()
@@ -55,7 +55,15 @@ namespace MyMemory.BLL
 
             Init(currentData);
             data.PrevStep = GetPrevStep(currentData.Step.Question, answer);
-            data.Step = GetNextStep();
+
+            if (data.PrevStep.Answer.IsCorrect)
+            {
+                data.Step = GetNextStep();
+            }
+            else
+            {
+                data.Step = GetRepeatStep(data.PrevStep.Question);
+            }
 
             VerifyStudyData(data);
 
@@ -64,13 +72,13 @@ namespace MyMemory.BLL
 
         private void Init(StudyData currentData)
         {
-            _mngRepeatTasks = new RepeatTasksManager();
+            _mngRepeatTasks = new RepeatTasksDbManager();
             _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
         }
 
         private void VerifyStudyData(StudyData data)
         {
-            if (data.Step.Question == null)
+            if (data.Step == null || data.Step.Question == null)
             {
                 data.Message = "Нет вопросов";
             }
@@ -78,32 +86,36 @@ namespace MyMemory.BLL
 
         private StudyStep GetNextStep()
         {
-            return new StudyStep()
-            {
-                Question = GetNextQuestion()
-            };
-        }
-
-        private StudyQuestion GetNextQuestion()
-        {
             MemoryTask task = _mngRepeatTasks.GetNextItem();
 
             if (task == null)
-            {
                 task = _mngStudyNewTasks.GetNextItem();
-            }
 
-            if (task != null)
+            if (task == null)
+                return null;
+
+            return new StudyStep()
             {
-                return new StudyQuestion()
+                Question = new StudyQuestion()
                 {
                     ItemId = task.Item.Id,
                     TaskId = task.Id,
                     Text = task.Item.Question
-                };
-            }
+                }
+            };
+        }
 
-            return null;
+        private StudyStep GetRepeatStep(StudyQuestion question)
+        {
+            return new StudyStep()
+            {
+                Question = new StudyQuestion()
+                {
+                    ItemId = question.ItemId,
+                    TaskId = question.TaskId,
+                    Text = question.Text
+                }
+            };
         }
 
         private StudyStep GetPrevStep(StudyQuestion question, string answer)

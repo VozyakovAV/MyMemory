@@ -55,8 +55,8 @@
     <Compile Include="Managers\MemoryManager\MemoryManager_Items.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Groups.cs" />
     <Compile Include="Managers\MemoryManager\MemoryManager_Base.cs" />
+    <Compile Include="Managers\StudyManager\RepeatTasksDbManager.cs" />
     <Compile Include="Managers\StudyManager\StudyNewTasksManager.cs" />
-    <Compile Include="Managers\StudyManager\RepeatTasksManager.cs" />
     <Compile Include="Managers\StudyManager\StudyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
