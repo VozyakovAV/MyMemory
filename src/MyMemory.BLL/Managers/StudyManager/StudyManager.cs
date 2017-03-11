@@ -113,7 +113,8 @@ namespace MyMemory.BLL
                 {
                     ItemId = question.ItemId,
                     TaskId = question.TaskId,
-                    Text = question.Text
+                    Text = question.Text,
+                    IsRepeat = true
                 }
             };
         }
@@ -124,7 +125,10 @@ namespace MyMemory.BLL
             var prevItem = prevTask.Item;
             var isPrevCorrect = prevItem.Answer == answer;
 
-            _mngRepeatTasks.WriteAnswer(prevTask, isPrevCorrect);
+            if (!question.IsRepeat)
+            {
+                _mngRepeatTasks.WriteAnswer(prevTask, isPrevCorrect);
+            }
 
             var prevStep = new StudyStep()
             {

@@ -39,16 +39,7 @@ namespace MyMemory.BLL
         public int ItemId { get; set; }
         public int TaskId { get; set; }
         public string Text { get; set; }
-
-        public StudyQuestion()
-        { }
-
-        public StudyQuestion(int itemId, int taskId, string text)
-        {
-            this.ItemId = itemId;
-            this.TaskId = taskId;
-            this.Text = text;
-        }
+        public bool IsRepeat { get; set; }
     }
 
     public class StudyAnswer
