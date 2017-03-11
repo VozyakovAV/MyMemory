@@ -18,6 +18,12 @@ namespace MyMemory.Domain
             this.Name = name;
         }
 
+        public MemoryUser(string name, string password)
+        {
+            this.Name = name;
+            this.Password = password;
+        }
+
         public override string ToString()
         {
             return Name;

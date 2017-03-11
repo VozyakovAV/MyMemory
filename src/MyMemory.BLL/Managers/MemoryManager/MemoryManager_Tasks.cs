@@ -11,7 +11,9 @@ namespace MyMemory.BLL
     {
         public MemoryTask FindTask(int taskId)
         {
-            return _taskRepository.GetItems().FirstOrDefault(x => x.Id == taskId);
+            return _taskRepository.GetItems()
+                .Include(x => x.Item)
+                .FirstOrDefault(x => x.Id == taskId);
         }
 
         public MemoryTask[] GetTasks()

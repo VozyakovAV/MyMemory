@@ -23,7 +23,6 @@ namespace MyMemory.BLL
         public StudyData Start(string userName, int groupId)
         {
             var data = new StudyData();
-            data.Statistic = new StudyStatistic();
             var user = _mng.FindUser(userName);
 
             if (user == null)
@@ -40,73 +39,91 @@ namespace MyMemory.BLL
             }*/
 
             data.UserId = user.Id;
-            _mngStudyNewTasks = new StudyNewTasksManager(data.UserId);
-            data.Statistic = new StudyStatistic();
-            data.Question = GetNextQuestion(groupId);
 
-            if (data.Question == null)
-            {
-                data.Message = "Нет вопросов";
-            }
+            _mngStudyNewTasks = new StudyNewTasksManager(data.UserId);
+            data.Step = GetNextStep();
+
+            VerifyStudyData(data);
 
             return data;
         }
 
         public StudyData NextStep(StudyData currentData, string answer)
         {
-            var items = _mng.GetItems();
+            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
+
             var data = new StudyData();
 
-            var prevTask = _mng.FindTask(currentData.Question.TaskId);
-            var prevItem = prevTask.Item;
-            var isPrevCorrect = prevItem.Answer == answer;
+            data.PrevStep = GetPrevStep(currentData.Step.Question, answer);
+            data.Step = GetNextStep();
 
-            _mngRepeatTasks.WriteAnswer(prevTask, isPrevCorrect);
-
-            data.Statistic = new StudyStatistic();
-            data.PrevAnswer = new StudyAnswer()
-            {
-                CorrectAnswer = prevItem.Answer,
-                IsCorrectAnswer = isPrevCorrect
-            };
-
-            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
-            data.Question = GetNextQuestion(currentData.GroupId);
-
-            if (data.Question == null)
-            {
-                data.Message = "Нет вопросов";
-            }
+            VerifyStudyData(data);
 
             return data;
         }
 
-        private StudyQuestion GetNextQuestion(int groupId)
+        private void VerifyStudyData(StudyData data)
         {
-            var task = _mngRepeatTasks.GetNextItem();
-
-            if (task != null)
+            if (data.Step.Question == null)
             {
-                return CreateStudyQuestion(task);
+                data.Message = "Нет вопросов";
+            }
+        }
+
+        private StudyStep GetNextStep()
+        {
+            return new StudyStep()
+            {
+                Question = GetNextQuestion()
+            };
+        }
+
+        private StudyQuestion GetNextQuestion()
+        {
+            MemoryTask task = _mngRepeatTasks.GetNextItem();
+
+            if (task == null)
+            {
+                task = _mngStudyNewTasks.GetNextItem();
             }
 
-            task = _mngStudyNewTasks.GetNextItem();
             if (task != null)
             {
-                return CreateStudyQuestion(task);
+                return new StudyQuestion()
+                {
+                    ItemId = task.Item.Id,
+                    TaskId = task.Id,
+                    Text = task.Item.Question
+                };
             }
 
             return null;
         }
 
-        private StudyQuestion CreateStudyQuestion(MemoryTask task)
+        private StudyStep GetPrevStep(StudyQuestion question, string answer)
         {
-            return new StudyQuestion()
+            var prevTask = _mng.FindTask(question.TaskId);
+            var prevItem = prevTask.Item;
+            var isPrevCorrect = prevItem.Answer == answer;
+
+            _mngRepeatTasks.WriteAnswer(prevTask, isPrevCorrect);
+
+            var prevStep = new StudyStep()
             {
-                TaskId = task.Id,
-                ItemId = task.Item.Id,
-                Text = task.Item.Question
+                Question = new StudyQuestion()
+                {
+                    ItemId = question.ItemId,
+                    TaskId = question.TaskId,
+                    Text = question.Text
+                },
+                Answer = new StudyAnswer()
+                {
+                    CorrectAnswer = prevItem.Answer,
+                    IsCorrect = isPrevCorrect
+                }
             };
+
+            return prevStep;
         }
     }
 }

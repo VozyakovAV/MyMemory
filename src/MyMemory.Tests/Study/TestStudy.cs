@@ -9,8 +9,9 @@ namespace MyMemory.Tests
     [TestClass]
     public class TestStudy : BaseTest
     {
-        MemoryManager _mng;
-        StudyManager _mngStudy;
+        private MemoryManager _mng;
+        private StudyManager _mngStudy;
+        private string _userName = "Andrew";
 
         [TestInitialize]
         public void Init()
@@ -22,12 +23,27 @@ namespace MyMemory.Tests
         }
 
         [TestMethod]
-        public void TestCascades()
+        public void TestStudySimple()
         {
-            var mngItem = new RepeatTasksManager();
-            var item = mngItem.GetNextItem();
-            Assert.IsNull(item);
+            CreateTestDB(_mng);
 
+            var group = CreateGroup(_mng);
+            var item1 = CreateItem(_mng, group, "Вопрос 1", "Ответ 1");
+            var item2 = CreateItem(_mng, group, "Вопрос 2", "Ответ 2");
+
+
+            var data = _mngStudy.Start(_userName, 0);
+            Assert.AreEqual(item1.Id, data.Step.Question.ItemId);
+
+            data = _mngStudy.NextStep(data, item1.Answer);
+            Assert.IsTrue(data.PrevStep.Answer.IsCorrect);
+            Assert.AreEqual(item2.Id, data.Step.Question.ItemId);
+
+            data = _mngStudy.NextStep(data, item2.Answer);
+            Assert.IsTrue(data.PrevStep.Answer.IsCorrect);
+            Assert.IsNotNull(data.Message);
         }
+
+        
     }
 }

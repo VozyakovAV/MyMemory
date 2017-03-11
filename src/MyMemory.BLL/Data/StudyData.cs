@@ -11,8 +11,15 @@ namespace MyMemory.BLL
         public int GroupId { get; set; }
         public string Message { get; set; }
         public StudyStatistic Statistic { get; set; }
-        public StudyQuestion Question { get; set; }
-        public StudyAnswer PrevAnswer { get; set; }
+        public StudyStep Step { get; set; }
+        public StudyStep PrevStep { get; set; }
+
+        public StudyData()
+        {
+            this.Statistic = new StudyStatistic();
+            this.Step = new StudyStep();
+            this.PrevStep = new StudyStep();
+        }
     }
 
     public class StudyStatistic
@@ -21,16 +28,32 @@ namespace MyMemory.BLL
         public int CountCorrectAnswers { get; set; }
     }
 
+    public class StudyStep
+    {
+        public StudyQuestion Question { get; set; }
+        public StudyAnswer Answer { get; set; }
+    }
+
     public class StudyQuestion
     {
         public int ItemId { get; set; }
         public int TaskId { get; set; }
         public string Text { get; set; }
+
+        public StudyQuestion()
+        { }
+
+        public StudyQuestion(int itemId, int taskId, string text)
+        {
+            this.ItemId = itemId;
+            this.TaskId = taskId;
+            this.Text = text;
+        }
     }
 
     public class StudyAnswer
     {
-        public bool IsCorrectAnswer { get; set; }
+        public bool IsCorrect { get; set; }
         public string CorrectAnswer { get; set; }
     }
 }
