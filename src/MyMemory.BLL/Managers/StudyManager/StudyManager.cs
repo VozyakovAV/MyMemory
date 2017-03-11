@@ -10,14 +10,12 @@ namespace MyMemory.BLL
     public class StudyManager
     {
         private readonly MemoryManager _mng;
-        private readonly RepeatTasksManager _mngRepeatTasks;
+        private RepeatTasksManager _mngRepeatTasks;
         private StudyNewTasksManager _mngStudyNewTasks;
 
         public StudyManager()
         {
             _mng = new MemoryManager();
-            _mngRepeatTasks = new RepeatTasksManager();
-            
         }
 
         public StudyData Start(string userName, int groupId)
@@ -39,8 +37,24 @@ namespace MyMemory.BLL
             }*/
 
             data.UserId = user.Id;
+            data.GroupId = groupId;
 
-            _mngStudyNewTasks = new StudyNewTasksManager(data.UserId);
+            Init(data);
+            data.Step = GetNextStep();
+
+            VerifyStudyData(data);
+
+            return data;
+        }
+        
+        public StudyData NextStep(StudyData currentData, string answer)
+        {
+            var data = new StudyData();
+            data.UserId = currentData.UserId;
+            data.GroupId = currentData.GroupId;
+
+            Init(currentData);
+            data.PrevStep = GetPrevStep(currentData.Step.Question, answer);
             data.Step = GetNextStep();
 
             VerifyStudyData(data);
@@ -48,18 +62,10 @@ namespace MyMemory.BLL
             return data;
         }
 
-        public StudyData NextStep(StudyData currentData, string answer)
+        private void Init(StudyData currentData)
         {
+            _mngRepeatTasks = new RepeatTasksManager();
             _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
-
-            var data = new StudyData();
-
-            data.PrevStep = GetPrevStep(currentData.Step.Question, answer);
-            data.Step = GetNextStep();
-
-            VerifyStudyData(data);
-
-            return data;
         }
 
         private void VerifyStudyData(StudyData data)

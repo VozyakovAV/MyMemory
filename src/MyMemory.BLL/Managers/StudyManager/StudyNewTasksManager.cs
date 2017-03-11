@@ -45,19 +45,17 @@ namespace MyMemory.BLL
 
             var item = items.FirstOrDefault();
 
+            if (item == null)
+            {
+                return null;
+            }
+
             var step = _mng.GetSteps().First();
             var user = _mng.FindUser(_userId);
 
             var newTask = new MemoryTask(user, item, step.Number, step.NextDateTime());
             _mng.Attach(item);
-            try
-            {
-                _mng.SaveTask(newTask);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            _mng.SaveTask(newTask);
 
             return newTask;
         }
