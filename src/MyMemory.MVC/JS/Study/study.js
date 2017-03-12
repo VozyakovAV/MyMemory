@@ -32,8 +32,8 @@
         if (response.Message != null) {
             ShowViewMessage(response);
         }
-        else if (response.PrevAnswer != null) {
-            if (response.PrevAnswer.IsCorrectAnswer) {
+        else if (response.PrevStep.Answer != null) {
+            if (response.PrevStep.Answer.IsCorrect) {
                 ShowViewCorrectAnswer(response);
             }
             else {
@@ -68,7 +68,7 @@
 
     function ShowViewQuestion(response) {
         ResetStylesControls();
-        _txtQuestion.text(response.Question.Text).show();
+        _txtQuestion.text(response.Step.Question.Text).show();
         _inpAnswer.val("").show().focus();
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
@@ -91,7 +91,7 @@
         ResetStylesControls();
         _inpAnswer.prop("disabled", true).show();
         _inpAnswer.parent().addClass("has-error");
-        _inpCorrectAnswer.prop("disabled", true).val(response.PrevAnswer.CorrectAnswer).show();
+        _inpCorrectAnswer.prop("disabled", true).val(response.PrevStep.Answer.CorrectAnswer).show();
         _inpCorrectAnswer.parent().addClass("has-success");
         _txtMessage.html("Упс!").css("color", "red").show();
         _btnSubmit.html("Дальше").show().click(function () {
