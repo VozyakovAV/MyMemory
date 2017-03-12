@@ -79,12 +79,13 @@ namespace MyMemory.Tests
 
             var data1 = _mngStudy.Start(_userName, 0);
             var data2 = _mngStudy.NextStep(data1, "none");
-            Assert.AreEqual(item1.Question, data1.Step.Question.Text);
+            var data3 = _mngStudy.NextStep(data2, item1.Answer);
+            var data4 = _mngStudy.NextStep(data3, "none");
+            Assert.AreEqual(item2.Question, data3.Step.Question.Text);
 
             CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
 
             data1 = _mngStudy.Start(_userName, 0);
-            data2 = _mngStudy.NextStep(data1, "none");
             Assert.AreEqual(item1.Question, data1.Step.Question.Text);
         }
     }

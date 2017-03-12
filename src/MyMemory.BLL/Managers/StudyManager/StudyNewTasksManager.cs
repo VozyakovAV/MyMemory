@@ -32,12 +32,9 @@ namespace MyMemory.BLL
 
         public MemoryTask GetNextItem()
         {
-            // TODO: убрать ToList
-
             var itemIds = _taskRepository.GetItems()
                 .Where(x => x.User.Id == _userId)
-                .Select(x => x.Item.Id)
-                .ToList();
+                .Select(x => x.Item.Id);
 
             var query = _itemRepository.GetItems()
                 .Include(x => x.Group)

@@ -21,22 +21,36 @@ namespace MyMemory.BLL
         private readonly StepsStudyRepository _stepsStudyRepository;
         private readonly MemoryManager _mng;
 
-        public RepeatTasksDbManager()
+        private readonly int _userId;
+        private readonly bool _isRandom;
+
+        public RepeatTasksDbManager(int userId, bool isRandom)
         {
             this._uow = new UnitOfWork();
             this._taskRepository = new TaskRepository(_uow);
             this._stepsStudyRepository = new StepsStudyRepository(_uow);
             this._mng = new MemoryManager();
+            this._userId = userId;
+            this._isRandom = isRandom;
         }
 
         public MemoryTask GetNextItem()
         {
-            var tasks = _taskRepository.GetItems()
-                .Include(x => x.Item)
-                .Where(x => x.Deadline <= CustomDateTime.Now)
-                .OrderByDescending(x => x.StepNumber);
+            var queryBase = _taskRepository.GetItems()
+                .Where(x => x.User.Id == _userId && x.Deadline <= CustomDateTime.Now);
 
-            return tasks.FirstOrDefault();
+            var maxStepNumber = queryBase
+                .Select(x => x.StepNumber)
+                .DefaultIfEmpty(0)
+                .Max();
+
+            var query = queryBase
+                .Include(x => x.Item)
+                .Where(x => x.StepNumber == maxStepNumber);
+
+            return _isRandom
+                ? query.OrderBy(x => Guid.NewGuid()).FirstOrDefault()
+                : query.OrderBy(x => x.Id).FirstOrDefault();
         }
 
         public void WriteAnswer(MemoryTask task, bool isCorrect)
