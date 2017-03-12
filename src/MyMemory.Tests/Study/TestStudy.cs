@@ -19,7 +19,10 @@ namespace MyMemory.Tests
         {
             MemoryDbContext.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=_test_MyMemory;Integrated Security=True";
             _mng = new MemoryManager();
-            _mngStudy = new StudyManager();
+            _mngStudy = new StudyManager()
+            {
+                IsRandom = false
+            };
             DeleteItemsInDB();
         }
 

@@ -17,8 +17,9 @@ namespace MyMemory.BLL
         private readonly MemoryManager _mng;
 
         private readonly int _userId;
+        private readonly bool _isRandom;
 
-        public StudyNewTasksManager(int userId)
+        public StudyNewTasksManager(int userId, bool isRandom)
         {
             this._uow = new UnitOfWork();
             this._itemRepository = new ItemRepository(_uow);
@@ -26,6 +27,7 @@ namespace MyMemory.BLL
             this._stepsStudyRepository = new StepsStudyRepository(_uow);
             this._mng = new MemoryManager();
             this._userId = userId;
+            this._isRandom = isRandom;
         }
 
         public MemoryTask GetNextItem()
@@ -37,13 +39,13 @@ namespace MyMemory.BLL
                 .Select(x => x.Item.Id)
                 .ToList();
 
-            var items = _itemRepository.GetItems()
+            var query = _itemRepository.GetItems()
                 .Include(x => x.Group)
-                .Where(x => !itemIds.Contains(x.Id))
-                .OrderBy(x => x.Id)
-                .ToList();
+                .Where(x => !itemIds.Contains(x.Id));
 
-            var item = items.FirstOrDefault();
+            MemoryItem item = _isRandom
+                ? query.OrderBy(x => Guid.NewGuid()).FirstOrDefault()
+                : query.OrderBy(x => x.Id).FirstOrDefault();
 
             if (item == null)
             {

@@ -13,6 +13,8 @@ namespace MyMemory.BLL
         private RepeatTasksDbManager _mngRepeatTasks;
         private StudyNewTasksManager _mngStudyNewTasks;
 
+        public bool IsRandom { get; set; }
+
         public StudyManager()
         {
             _mng = new MemoryManager();
@@ -73,7 +75,7 @@ namespace MyMemory.BLL
         private void Init(StudyData currentData)
         {
             _mngRepeatTasks = new RepeatTasksDbManager();
-            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId);
+            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId, IsRandom);
         }
 
         private void VerifyStudyData(StudyData data)

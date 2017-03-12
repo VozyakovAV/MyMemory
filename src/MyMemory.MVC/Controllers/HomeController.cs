@@ -19,7 +19,10 @@ namespace MyMemory.MVC.Controllers
         public HomeController()
         {
             _mng = new MemoryManager();
-            _mngStudy = new StudyManager();
+            _mngStudy = new StudyManager()
+            {
+                IsRandom = true
+            };
         }
 
         public ActionResult Index()
