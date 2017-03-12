@@ -125,7 +125,7 @@ namespace MyMemory.BLL
         {
             var prevTask = _mng.FindTask(question.TaskId);
             var prevItem = prevTask.Item;
-            var isPrevCorrect = prevItem.Answer == answer;
+            var isPrevCorrect = IsCorrectAnswer(answer, prevItem.Answer);
 
             if (!question.IsRepeat)
             {
@@ -148,6 +148,11 @@ namespace MyMemory.BLL
             };
 
             return prevStep;
+        }
+
+        private bool IsCorrectAnswer(string answer, string etalon)
+        {
+            return answer.Trim().ToLower() == etalon.Trim().ToLower();
         }
     }
 }
