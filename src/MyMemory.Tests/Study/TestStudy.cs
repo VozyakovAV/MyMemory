@@ -69,7 +69,7 @@ namespace MyMemory.Tests
         }
 
         [TestMethod]
-        public void TestStudyDelay()
+        public void TestStudyRepeat()
         {
             CreateTestDB(_mng);
 
@@ -108,10 +108,55 @@ namespace MyMemory.Tests
 
             VerifySequenceStudy(group1_2.Id, new MemoryItem[] { item1_2_1, item1_2_2 });
             DeleteTasksInDB();
+
             VerifySequenceStudy(group2.Id, new MemoryItem[] { item2_1, item2_2 });
             DeleteTasksInDB();
+
             VerifySequenceStudy(group1.Id, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2 });
             DeleteTasksInDB();
+
+            VerifySequenceStudy(0, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2, item2_1, item2_2 });
+            DeleteTasksInDB();
+        }
+
+        [TestMethod]
+        public void TestStudyGroupsRepeat()
+        {
+            CreateTestDB(_mng);
+
+            var group1 = CreateGroup(_mng, "Группа 1");
+            var group1_1 = CreateGroup(_mng, "Группа 1.1", group1);
+            var group1_2 = CreateGroup(_mng, "Группа 1.2", group1);
+            var group2 = CreateGroup(_mng, "Группа 2");
+
+            var item1_1_1 = CreateItem(_mng, group1_1, "Вопрос 1.1.1", "Ответ 1.1.1");
+            var item1_2_1 = CreateItem(_mng, group1_2, "Вопрос 1.2.1", "Ответ 1.2.1");
+            var item1_2_2 = CreateItem(_mng, group1_2, "Вопрос 1.2.2", "Ответ 1.2.2");
+
+            var item2_1 = CreateItem(_mng, group2, "Вопрос 2.1", "Ответ 2.1");
+            var item2_2 = CreateItem(_mng, group2, "Вопрос 2.2", "Ответ 2.2");
+
+            CustomDateTime.FakeDate = DateTime.Now;
+            VerifySequenceStudy(group1_2.Id, new MemoryItem[] { item1_2_1, item1_2_2 });
+            CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
+            VerifySequenceStudy(group1_2.Id, new MemoryItem[] { item1_2_1, item1_2_2 });
+            DeleteTasksInDB();
+
+            CustomDateTime.FakeDate = DateTime.Now;
+            VerifySequenceStudy(group2.Id, new MemoryItem[] { item2_1, item2_2 });
+            CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
+            VerifySequenceStudy(group2.Id, new MemoryItem[] { item2_1, item2_2 });
+            DeleteTasksInDB();
+
+            CustomDateTime.FakeDate = DateTime.Now;
+            VerifySequenceStudy(group1.Id, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2 });
+            CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
+            VerifySequenceStudy(group1.Id, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2 });
+            DeleteTasksInDB();
+
+            CustomDateTime.FakeDate = DateTime.Now;
+            VerifySequenceStudy(0, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2, item2_1, item2_2 });
+            CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
             VerifySequenceStudy(0, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2, item2_1, item2_2 });
             DeleteTasksInDB();
         }

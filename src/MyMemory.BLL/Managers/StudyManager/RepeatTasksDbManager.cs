@@ -38,11 +38,13 @@ namespace MyMemory.BLL
 
         public MemoryTask GetNextItem()
         {
+            var groupsIs = _mng.GetTreeId(_groupId);
+
             var queryBase = _taskRepository.GetItems()
                 .Include(x => x.Item)
                 .Include(x => x.Item.Group)
                 .Where(x => x.User.Id == _userId 
-                    && x.Item.Group.Id == _groupId
+                    && groupsIs.Contains(x.Item.Group.Id)
                     && x.Deadline <= CustomDateTime.Now);
 
             var maxStepNumber = queryBase
