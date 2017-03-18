@@ -74,8 +74,8 @@ namespace MyMemory.BLL
 
         private void Init(StudyData currentData)
         {
-            _mngRepeatTasks = new RepeatTasksDbManager(currentData.UserId, IsRandom);
-            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId, IsRandom);
+            _mngRepeatTasks = new RepeatTasksDbManager(currentData.UserId, currentData.GroupId, IsRandom);
+            _mngStudyNewTasks = new StudyNewTasksManager(currentData.UserId, currentData.GroupId, IsRandom);
         }
 
         private void VerifyStudyData(StudyData data)

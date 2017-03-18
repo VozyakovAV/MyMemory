@@ -22,22 +22,28 @@ namespace MyMemory.BLL
         private readonly MemoryManager _mng;
 
         private readonly int _userId;
+        private readonly int _groupId;
         private readonly bool _isRandom;
 
-        public RepeatTasksDbManager(int userId, bool isRandom)
+        public RepeatTasksDbManager(int userId, int groupId, bool isRandom)
         {
             this._uow = new UnitOfWork();
             this._taskRepository = new TaskRepository(_uow);
             this._stepsStudyRepository = new StepsStudyRepository(_uow);
             this._mng = new MemoryManager();
             this._userId = userId;
+            this._groupId = groupId;
             this._isRandom = isRandom;
         }
 
         public MemoryTask GetNextItem()
         {
             var queryBase = _taskRepository.GetItems()
-                .Where(x => x.User.Id == _userId && x.Deadline <= CustomDateTime.Now);
+                .Include(x => x.Item)
+                .Include(x => x.Item.Group)
+                .Where(x => x.User.Id == _userId 
+                    && x.Item.Group.Id == _groupId
+                    && x.Deadline <= CustomDateTime.Now);
 
             var maxStepNumber = queryBase
                 .Select(x => x.StepNumber)

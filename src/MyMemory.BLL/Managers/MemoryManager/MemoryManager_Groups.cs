@@ -18,6 +18,18 @@ namespace MyMemory.BLL
             return _groupRepository.GetItems().ToArray();
         }
 
+        public int[] GetTreeId(int groupId)
+        {
+            var groups = _groupRepository.GetItems()
+                .Select(x => new ParentChild() { Id = x.Id, ParentId = x.Parent.Id })
+                .ToList();
+
+            var list = new List<int>() { groupId };
+            list.AddRange(SelectChilds(groupId, groups));
+
+            return list.ToArray();
+        }
+
         public MemoryGroup SaveGroup(MemoryGroup group)
         {
             var group2 = _groupRepository.Save(group);
@@ -29,6 +41,28 @@ namespace MyMemory.BLL
         {
             _groupRepository.Delete(group);
             _uow.Commit();
+        }
+
+        // -------------------------
+
+        private List<int> SelectChilds(int parentId, List<ParentChild> list)
+        {
+            var result = new List<int>();
+            var childs = list.Where(x => x.ParentId == parentId).ToList();
+
+            foreach (var child in childs)
+                result.Add(child.Id);
+
+            foreach (var child in childs)
+                result.AddRange(SelectChilds(child.Id, list));
+
+            return result;
+        }
+
+        private class ParentChild
+        {
+            public int Id { get; set; }
+            public int? ParentId { get; set; }
         }
     }
 }

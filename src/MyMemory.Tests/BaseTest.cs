@@ -34,7 +34,19 @@ namespace MyMemory.Tests
                     DeleteTableIfExist("mem_users", list, db);
                 }
             }
-            
+        }
+
+        public void DeleteTasksInDB()
+        {
+            using (var db = new MemoryDbContext())
+            {
+                if (db.Database.Exists())
+                {
+                    var sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES";
+                    var list = db.Database.SqlQuery<string>(sql).ToList();
+                    DeleteTableIfExist("mem_tasks", list, db);
+                }
+            }
         }
 
         private void DeleteTableIfExist(string tableName, List<string> tables, MemoryDbContext db)
@@ -49,6 +61,16 @@ namespace MyMemory.Tests
         protected MemoryGroup CreateGroup(MemoryManager mng)
         {
             return mng.SaveGroup(NewGroup());
+        }
+
+        protected MemoryGroup CreateGroup(MemoryManager mng, string name)
+        {
+            return mng.SaveGroup(new MemoryGroup(name));
+        }
+
+        protected MemoryGroup CreateGroup(MemoryManager mng, string name, MemoryGroup parent)
+        {
+            return mng.SaveGroup(new MemoryGroup(name, parent));
         }
 
         protected MemoryGroup NewGroup()

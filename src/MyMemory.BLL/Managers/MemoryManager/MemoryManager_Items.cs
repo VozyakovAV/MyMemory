@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using MyMemory.Domain;
 
 namespace MyMemory.BLL
@@ -16,8 +17,11 @@ namespace MyMemory.BLL
 
         public MemoryItem[] GetItems(MemoryGroup group)
         {
+            var groupsId = GetTreeId(group.Id);
+
             return _itemRepository.GetItems()
-                .Where(x => x.Group.Id == group.Id)
+                .Include(x => x.Group)
+                .Where(x => groupsId.Contains(x.Group.Id))
                 .ToArray();
         }
 
