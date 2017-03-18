@@ -112,6 +112,8 @@ namespace MyMemory.Tests
             DeleteTasksInDB();
             VerifySequenceStudy(group1.Id, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2 });
             DeleteTasksInDB();
+            VerifySequenceStudy(0, new MemoryItem[] { item1_1_1, item1_2_1, item1_2_2, item2_1, item2_2 });
+            DeleteTasksInDB();
         }
 
         private void VerifySequenceStudy(int groupId, params MemoryItem[] items)

@@ -24,8 +24,20 @@ namespace MyMemory.BLL
                 .Select(x => new ParentChild() { Id = x.Id, ParentId = x.Parent.Id })
                 .ToList();
 
-            var list = new List<int>() { groupId };
-            list.AddRange(SelectChilds(groupId, groups));
+            var list = new List<int>();
+            if (groups.Any(x => x.Id == groupId))
+            {
+                list.Add(groupId);
+            }
+
+            if (groupId == 0)
+            {
+                list.AddRange(groups.Select(x => x.Id));
+            }
+            else
+            {
+                list.AddRange(SelectChilds(groupId, groups));
+            }
 
             return list.ToArray();
         }
