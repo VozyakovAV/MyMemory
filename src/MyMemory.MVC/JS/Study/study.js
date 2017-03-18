@@ -61,7 +61,7 @@
         NextStep();
     });
 
-    function ShowViewMessage(responce) {
+    function ShowViewMessage(response) {
         ResetStylesControls();
         _txtMessage.html(response.Message).css("color", "black").show();
     }
