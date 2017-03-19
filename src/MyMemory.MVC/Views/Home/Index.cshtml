@@ -2,29 +2,46 @@
     ViewBag.Title = "Home Page";
 }
 <style>
-    /*#question-block div
-    {
-        margin: 10px 10px;
+    #btnSubmit {
+        height: 50px;
     }
-
-    .center {
-        width: 50%;
-        margin: 0 auto;
-    }*/
+    #statusBar {
+        margin: 5px 0;
+    }
+    #statusBar .panel-body {
+        padding: 5px;
+    }
 
     #inpCorrectAnswer {
         display: none;
     }
 </style>
 
-<div class="form-horizontal">
-    <div class="form-group"><div id="statusBar">&nbsp;</div></div>
-    <div class="form-group"><div id="txtQuestion">&nbsp;</div></div>
-    <div class="form-group"><input id="inpAnswer" type="text" class="form-control" /></div>
-    <div class="form-group"><input id="inpCorrectAnswer" type="text" class="form-control" /></div>
-    <div class="form-group"><button id="btnSubmit" class="btn btn-primary center">Проверить2</button></div>
+<div class="form">
+    <div class="form-group">
+        <div id="statusBar" class="panel panel-default">
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <span id="statCorrect"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span id="statIncorrect"></span>
+                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> <span id="statStepNumber"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div id="txtQuestion">&nbsp;</div>
+    </div>
+    <div class="form-group">
+        <input id="inpAnswer" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input id="inpCorrectAnswer" type="text" class="form-control" />
+    </div>
+    <div class="btn-group btn-group-justified">
+        <a href="#" id="btnSubmit" class="btn btn-primary">Проверить</a>
+    </div>
     <div id="txtMessage"></div>
 </div>
+
 
 @section scripts {
 <script src="~/JS/Study/study.js" type="text/javascript" charset="utf-8"></script>

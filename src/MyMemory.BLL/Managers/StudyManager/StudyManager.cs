@@ -51,9 +51,17 @@ namespace MyMemory.BLL
         
         public StudyData NextStep(StudyData currentData, string answer)
         {
-            var data = new StudyData();
-            data.UserId = currentData.UserId;
-            data.GroupId = currentData.GroupId;
+            var data = new StudyData()
+            {
+                UserId = currentData.UserId,
+                GroupId = currentData.GroupId,
+
+                Statistic = new StudyStatistic()
+                {
+                    NumberOfCorrect = currentData.Statistic.NumberOfCorrect,
+                    NumberOfIncorrect = currentData.Statistic.NumberOfIncorrect,
+                },
+            };
 
             Init(currentData);
             data.PrevStep = GetPrevStep(currentData.Step.Question, answer);
@@ -61,10 +69,12 @@ namespace MyMemory.BLL
             if (data.PrevStep.Answer.IsCorrect)
             {
                 data.Step = GetNextStep();
+                data.Statistic.NumberOfCorrect++;
             }
             else
             {
                 data.Step = GetRepeatStep(data.PrevStep.Question);
+                data.Statistic.NumberOfIncorrect++;
             }
 
             VerifyStudyData(data);
@@ -102,7 +112,8 @@ namespace MyMemory.BLL
                 {
                     ItemId = task.Item.Id,
                     TaskId = task.Id,
-                    Text = task.Item.Question
+                    Text = task.Item.Question,
+                    StepNumber = task.StepNumber,
                 }
             };
         }
@@ -116,6 +127,7 @@ namespace MyMemory.BLL
                     ItemId = question.ItemId,
                     TaskId = question.TaskId,
                     Text = question.Text,
+                    StepNumber = question.StepNumber,
                     IsRepeat = true
                 }
             };
@@ -138,6 +150,7 @@ namespace MyMemory.BLL
                 {
                     ItemId = question.ItemId,
                     TaskId = question.TaskId,
+                    StepNumber = question.StepNumber,
                     Text = question.Text
                 },
                 Answer = new StudyAnswer()

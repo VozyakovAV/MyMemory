@@ -24,8 +24,9 @@ namespace MyMemory.BLL
 
     public class StudyStatistic
     {
-        public int CountQuestions { get; set; }
-        public int CountCorrectAnswers { get; set; }
+        public int NumberOfCorrect { get; set; }
+        public int NumberOfIncorrect { get; set; }
+        
     }
 
     public class StudyStep
@@ -39,6 +40,7 @@ namespace MyMemory.BLL
         public int ItemId { get; set; }
         public int TaskId { get; set; }
         public string Text { get; set; }
+        public int StepNumber { get; set; }
         public bool IsRepeat { get; set; }
     }
 

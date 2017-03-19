@@ -6,6 +6,9 @@
     var _inpCorrectAnswer = $("#inpCorrectAnswer");
     var _txtMessage = $("#txtMessage");
     var _btnSubmit = $("#btnSubmit");
+    var _statCorrect = $("#statCorrect");
+    var _statIncorrect = $("#statIncorrect");
+    var _statStepNumber = $("#statStepNumber");
     var _groupId = 0;
 
     function StartStudy() {
@@ -70,6 +73,9 @@
         ResetStylesControls();
         _txtQuestion.text(response.Step.Question.Text).show();
         _inpAnswer.val("").show().focus();
+        _statCorrect.html(response.Statistic.NumberOfCorrect);
+        _statIncorrect.html(response.Statistic.NumberOfIncorrect);
+        _statStepNumber.html(response.Step.Question.StepNumber);
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
         });
