@@ -49,8 +49,11 @@ namespace MyMemory.Domain
             var group = db.Groups.First(x => x.Name == "Английский");
             var group1 = new MemoryGroup("Прилагательные (топ 100)", group);
             db.Groups.Add(group1);
-
             AddEnglishWords(db, group1, "MyMemory.Domain.Data.EnglishAdjectives.txt");
+
+            var group2 = new MemoryGroup("Существительные (топ 100)", group);
+            db.Groups.Add(group2);
+            AddEnglishWords(db, group2, "MyMemory.Domain.Data.EnglishNouns.txt");
 
             db.SaveChanges();
         }
@@ -69,7 +72,7 @@ namespace MyMemory.Domain
 
         public static List<MemoryItem> ParseWords(string resourceName)
         {
-            var text = MemoryDBInitializer.ReadResource("MyMemory.Domain.Data.EnglishVerbs.txt");
+            var text = MemoryDBInitializer.ReadResource(resourceName);
             var mc = Regex.Matches(text, @"(?<a>\w+)\s*—\s*(?<q>\w+)");
 
             return mc.OfType<Match>()

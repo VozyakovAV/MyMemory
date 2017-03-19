@@ -47,3 +47,153 @@ dry  Ч  сухой
 early  Ч  ранний
 
 easy  Ч  лЄгкий
+
+effective  Ч  эффективный
+
+empty  Ч  пустой
+
+entire  Ч  целый
+
+equal  Ч  равный
+
+expensive  Ч  дорогой
+
+far  Ч  далЄкий
+
+fast  Ч  быстрый
+
+fine  Ч  прекрасный
+
+free  Ч  свободный
+
+full  Ч  полный
+
+good  Ч  хороший
+
+great  Ч  великолепный
+
+green  Ч  зелЄный
+
+happy  Ч  счастливый
+
+hard  Ч  трудный
+
+heavy  Ч  т€жЄлый
+
+high  Ч  высокий
+
+hot  Ч  гор€чий
+
+important  Ч  важный
+
+interesting  Ч  интересный
+
+kind  Ч  добрый
+
+large  Ч  крупный
+
+last  Ч  последний
+
+late  Ч  поздний
+
+light  Ч  светлый
+
+little  Ч  маленький
+
+long  Ч  длинный
+
+loud  Ч  громкий
+
+low  Ч  низкий
+
+main  Ч  основной
+
+narrow  Ч  узкий
+
+near  Ч  ближний
+
+new  Ч  новый
+
+next  Ч  следующий
+
+old  Ч  старый
+
+open  Ч  открытый
+
+poor  Ч  бедный
+
+popular  Ч  попул€рный
+
+possible  Ч  веро€тный
+
+private  Ч  личный
+
+quick  Ч  быстрый
+
+ready  Ч  готовый
+
+real  Ч  реальный
+
+recent  Ч  недавний
+
+red  Ч  красный
+
+responsible  Ч  ответственный
+
+rich  Ч  богатый
+
+right  Ч  правильный
+
+safe  Ч  безопасный
+
+same  Ч  одинаковый
+
+serious  Ч  серьЄзный
+
+short  Ч  короткий
+
+similar  Ч  похожий
+
+simple  Ч  простой
+
+single  Ч  единственный
+
+slow  Ч  медленный
+
+small  Ч  маленький
+
+social  Ч  общественный
+
+special  Ч  особый
+
+strange  Ч  странный
+
+strong  Ч  сильный
+
+successful  Ч  успешный
+
+suitable  Ч  подход€щий
+
+sure  Ч  уверенный
+
+sweet  Ч  сладкий
+
+tasty  Ч  вкусный
+
+useful  Ч  полезный
+
+usual  Ч  обычный
+
+various  Ч  различный
+
+warm  Ч  теплый
+
+white  Ч  белый
+
+whole  Ч  весь
+
+wide  Ч  широкий
+
+wonderful  Ч  чудесный
+
+young  Ч  молодой

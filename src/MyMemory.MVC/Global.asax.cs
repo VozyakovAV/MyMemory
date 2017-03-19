@@ -13,12 +13,12 @@ namespace MyMemory.MVC
     {
         protected void Application_Start()
         {
+            //MemoryDbContext.ConnectionString = Settings.Instance.GetSettings("DBConnection");
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            MemoryDbContext.ConnectionString = Settings.Instance.GetSettings("DBConnection");
         }
     }
 }

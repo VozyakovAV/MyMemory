@@ -30,6 +30,12 @@ namespace MyMemory.MVC.Controllers
             return View();
         }
 
+        public ActionResult Info()
+        {
+            ViewBag.NumberOfTasks = _mng.GetTasks().Length;
+            return View();
+        }
+
         public JsonResult StartStudy(int groupId)
         {
             var userName = this.User.Identity.Name;
