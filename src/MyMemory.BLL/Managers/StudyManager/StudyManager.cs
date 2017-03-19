@@ -69,12 +69,20 @@ namespace MyMemory.BLL
             if (data.PrevStep.Answer.IsCorrect)
             {
                 data.Step = GetNextStep();
-                data.Statistic.NumberOfCorrect++;
+
+                if (!currentData.Step.Question.IsRepeat)
+                {
+                    data.Statistic.NumberOfCorrect++;
+                }
             }
             else
             {
                 data.Step = GetRepeatStep(data.PrevStep.Question);
-                data.Statistic.NumberOfIncorrect++;
+
+                if (!currentData.Step.Question.IsRepeat)
+                {
+                    data.Statistic.NumberOfIncorrect++;
+                }
             }
 
             VerifyStudyData(data);
