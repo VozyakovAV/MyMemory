@@ -1,0 +1,49 @@
+alone  Ч  одинокий
+
+another  Ч  другой
+
+available  Ч  доступный
+
+awful  Ч  ужасный
+
+basic  Ч  базовый
+
+big  Ч  большой
+
+black  Ч  чЄрный
+
+blue  Ч  голубой
+
+brown  Ч  коричневый
+
+busy  Ч  зан€той
+
+certain  Ч  точный
+
+cheap  Ч  дешЄвый
+
+clear  Ч  €сный
+
+cold  Ч  холодный
+
+common  Ч  общий
+
+complete  Ч  полный
+
+correct  Ч  правильный
+
+dangerous  Ч  опасный
+
+dark  Ч  тЄмный
+
+deep  Ч  глубокий
+
+different  Ч  разный
+
+direct  Ч  пр€мой
+
+dry  Ч  сухой
+
+early  Ч  ранний
+
+easy  Ч  лЄгкий

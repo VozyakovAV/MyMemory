@@ -1,0 +1,199 @@
+head  Ч  голова
+
+world  Ч  мир
+
+advice  Ч  совет
+
+afternoon  Ч  дневное врем€
+
+age  Ч  возраст
+
+air  Ч  воздух
+
+animal  Ч  животное
+
+answer  Ч  ответ
+
+birthday  Ч  день рождени€
+
+body  Ч  тело
+
+book  Ч  книга
+
+boy  Ч  мальчик
+
+bread  Ч  хлеб
+
+break  Ч  перерыв
+
+building  Ч  здание
+
+bus  Ч  автобус
+
+business  Ч  дело
+
+call  Ч  звонок
+
+camp  Ч  лагерь
+
+car  Ч  автомобиль
+
+ceiling  Ч  потолок
+
+chance  Ч  шанс
+
+change  Ч  изменение
+
+child  Ч  ребЄнок
+
+city  Ч  город
+
+country  Ч  страна
+
+day  Ч  день
+
+door  Ч  дверь
+
+education  Ч  образование
+
+evening  Ч  вечер
+
+eye  Ч  глаз
+
+face  Ч  лицо
+
+fact  Ч  факт
+
+family  Ч  семь€
+
+father  Ч  отец
+
+food  Ч  еда
+
+foot  Ч  ступн€
+
+friend  Ч  друг
+
+gate  Ч  ворота
+
+girl  Ч  девочка
+
+group  Ч  группа
+
+guy  Ч  парень
+
+hair  Ч  волосы
+
+hand  Ч  рука
+
+heart  Ч  сердце
+
+help  Ч  помощь
+
+holiday  Ч  отпуск
+
+hope  Ч  надежда
+
+hour  Ч  час
+
+house  Ч  дом
+
+husband  Ч  муж
+
+idea  Ч  иде€
+
+information  Ч  информаци€
+
+job  Ч  работа
+
+life  Ч  жизнь
+
+light  Ч  свет
+
+love  Ч  любовь
+
+man  Ч  мужчина
+
+minute  Ч  минута
+
+moment  Ч  момент
+
+money  Ч  деньги
+
+month  Ч  мес€ц
+
+morning  Ч  утро
+
+mother  Ч  мать
+
+name  Ч  им€
+
+night  Ч  ночь
+
+part  Ч  часть
+
+partner  Ч  компаньон
+
+party  Ч  вечеринка
+
+people  Ч  люди
+
+person  Ч  человек
+
+place  Ч  место
+
+problem  Ч  проблема
+
+question  Ч  вопрос
+
+reason  Ч  причина
+
+right  Ч  право
+
+school  Ч  школа
+
+side  Ч  сторона
+
+smile  Ч  улыбка
+
+son  Ч  сын
+
+story  Ч  истори€
+
+street  Ч  улица
+
+sun  Ч  солнце
+
+table  Ч  стол
+
+team  Ч  команда
+
+thing  Ч  вещь
+
+thought  Ч  мысль
+
+time  Ч  врем€
+
+tree  Ч  дерево
+
+wall  Ч  стена
+
+water  Ч  вода
+
+way  Ч  способ
+
+weather  Ч  погода
+
+week  Ч  недел€
+
+wife  Ч  жена
+
+window  Ч  окно
+
+woman  Ч  женщина
+
+word  Ч  слово
+
+work  Ч  работа
+
+year  Ч  год

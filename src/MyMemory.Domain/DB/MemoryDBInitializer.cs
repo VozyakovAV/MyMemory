@@ -39,14 +39,25 @@ namespace MyMemory.Domain
             var group1_1 = new MemoryGroup("Глаголы (топ 100)", group1);
             db.Groups.Add(group1_1);
 
-            AddEnglishWords(db, group1_1);
+            AddEnglishWords(db, group1_1, "MyMemory.Domain.Data.EnglishVerbs.txt");
 
             db.SaveChanges();
         }
 
-        private static void AddEnglishWords(MemoryDbContext db, MemoryGroup group)
+        public static void AddGroup(MemoryDbContext db)
         {
-            var items = ParseWords("MyMemory.Domain.Data.EnglishVerbs.txt");
+            var group = db.Groups.First(x => x.Name == "Английский");
+            var group1 = new MemoryGroup("Прилагательные (топ 100)", group);
+            db.Groups.Add(group1);
+
+            AddEnglishWords(db, group1, "MyMemory.Domain.Data.EnglishAdjectives.txt");
+
+            db.SaveChanges();
+        }
+
+        private static void AddEnglishWords(MemoryDbContext db, MemoryGroup group, string resourceName)
+        {
+            var items = ParseWords(resourceName);
             items.ForEach(x => x.Group = group);
 
             foreach (var item in items)

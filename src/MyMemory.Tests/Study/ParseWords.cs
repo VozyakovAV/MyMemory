@@ -12,7 +12,9 @@ namespace MyMemory.Tests
         [TestMethod]
         public void ParseWordsStart()
         {
-            var t = MemoryDBInitializer.ReadResource("MyMemory.Domain.Data.EnglishVerbs.txt");
+            //var ctx = new MemoryDbContext();
+            //MemoryDBInitializer.AddGroup(ctx);
+            //var t = MemoryDBInitializer.ReadResource("MyMemory.Domain.Data.EnglishVerbs.txt");
         }
     }
 }
