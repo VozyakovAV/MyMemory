@@ -42,7 +42,7 @@ namespace MyMemory.BLL
         public string Text { get; set; }
         public int StepNumber { get; set; }
         public bool IsRepeat { get; set; }
-        public StudyAnswerVariant[] Variants { get; set; }
+        public StudyGroupVariants[] GroupVariants { get; set; }
     }
 
     public class StudyAnswer
@@ -51,7 +51,7 @@ namespace MyMemory.BLL
         public string CorrectAnswer { get; set; }
     }
 
-    public class StudyAnswerVariant
+    public class StudyGroupVariants
     {
         public string[] Variants { get; set; }
     }

@@ -9,7 +9,11 @@
     var _statCorrect = $("#statCorrect");
     var _statIncorrect = $("#statIncorrect");
     var _statStepNumber = $("#statStepNumber");
+    var _groupVariants = $("#groupVariants");
+    var _btnRemove = $("#btnRemove");
     var _groupId = 0;
+    var _variantItems = [];
+    var _variantItemsAll;
 
     function StartStudy() {
         $.ajax({
@@ -57,6 +61,10 @@
             }
         });
 
+        _btnRemove.on("click", function () {
+            RemoveLastVariantItem();
+        });
+
         StartStudy();
     }
 
@@ -72,14 +80,60 @@
     function ShowViewQuestion(response) {
         ResetStylesControls();
         _txtQuestion.text(response.Step.Question.Text).show();
-        _inpAnswer.val("").show().focus();
+        _inpAnswer.val("").show().prop("disabled", true).focus();
         _statCorrect.html(response.Statistic.NumberOfCorrect);
         _statIncorrect.html(response.Statistic.NumberOfIncorrect);
         _statStepNumber.html(response.Step.Question.StepNumber);
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
         });
+        _variantItemsAll = response.Step.Question.GroupVariants;
+        ShowVariants();
+        
     }
+
+    function ShowVariants() {
+        _groupVariants.empty();
+        var num = _variantItems.length;
+
+        if (_variantItemsAll.length > num) {
+
+            $.each(_variantItemsAll[num].Variants, function (key, value) {
+                var link = $("<a href='#' class='linkVariant btn btn-primary'>" + value.trim() + "</a>");
+                link.data("variantData", value);
+                var div = $("<div class='col-xs-6'></div>");
+                div.append(link);
+                _groupVariants.append(div);
+            });
+
+            $(".linkVariant").on("click", function () {
+                AddVariantItem($(this).data("variantData"));
+            });
+        }
+    }
+
+    function AddVariantItem(variantItem) {
+        _variantItems.push(variantItem);
+        ShowVariantText();
+        ShowVariants();
+    }
+
+    function RemoveLastVariantItem() {
+        if (_variantItems.length > 0) {
+            _variantItems.splice(_variantItems.length - 1, 1);
+            ShowVariantText();
+            ShowVariants();
+        }
+    }
+
+    function ShowVariantText() {
+        var st = "";
+        $.each(_variantItems, function (key, value) {
+            st += value;
+        });
+        _inpAnswer.val(st);
+    }
+
 
     function ShowViewCorrectAnswer(response) {
         ResetStylesControls();

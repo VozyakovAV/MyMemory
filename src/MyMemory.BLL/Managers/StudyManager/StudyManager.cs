@@ -117,10 +117,11 @@ namespace MyMemory.BLL
             if (task == null)
                 return null;
 
-            var variants = new List<StudyAnswerVariant>();
-            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "1", "11", "111", "1111"} });
-            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "2", "22", "222", "222"} });
-            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "3", "33", "333", "333" } });
+
+            var variants = new List<StudyGroupVariants>();
+            variants.Add(new StudyGroupVariants() { Variants = new string[] { "1 ", " 11 ", " 111 ", " 1111"} });
+            variants.Add(new StudyGroupVariants() { Variants = new string[] { "2 ", " 22 ", " 222 ", " 222"} });
+            variants.Add(new StudyGroupVariants() { Variants = new string[] { "3 ", " 33 ", " 333 ", " 333" } });
 
             return new StudyStep()
             {
@@ -130,7 +131,7 @@ namespace MyMemory.BLL
                     TaskId = task.Id,
                     Text = task.Item.Question,
                     StepNumber = task.StepNumber,
-                    Variants = variants.ToArray(),
+                    GroupVariants = variants.ToArray(),
                 }
             };
         }
