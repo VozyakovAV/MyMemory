@@ -30,6 +30,11 @@ namespace MyMemory.MVC.Controllers
             return View();
         }
 
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
         public ActionResult Info()
         {
             ViewBag.NumberOfTasks = _mng.GetTasks().Length;

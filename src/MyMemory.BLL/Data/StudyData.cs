@@ -42,11 +42,17 @@ namespace MyMemory.BLL
         public string Text { get; set; }
         public int StepNumber { get; set; }
         public bool IsRepeat { get; set; }
+        public StudyAnswerVariant[] Variants { get; set; }
     }
 
     public class StudyAnswer
     {
         public bool IsCorrect { get; set; }
         public string CorrectAnswer { get; set; }
+    }
+
+    public class StudyAnswerVariant
+    {
+        public string[] Variants { get; set; }
     }
 }

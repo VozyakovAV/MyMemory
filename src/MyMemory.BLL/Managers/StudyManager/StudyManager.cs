@@ -31,12 +31,15 @@ namespace MyMemory.BLL
                 return data;
             }
 
-            /*var group = _mng.FindGroup(groupId);
-            if (group == null)
+            if (groupId != 0)
             {
-                data.Error = string.Format("Не найдена группа: {0}", groupId);
-                return data;
-            }*/
+                var group = _mng.FindGroup(groupId);
+                if (group == null)
+                {
+                    data.Message = string.Format("Не найдена группа: {0}", groupId);
+                    return data;
+                }
+            }
 
             data.UserId = user.Id;
             data.GroupId = groupId;
@@ -114,6 +117,11 @@ namespace MyMemory.BLL
             if (task == null)
                 return null;
 
+            var variants = new List<StudyAnswerVariant>();
+            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "1", "11", "111", "1111"} });
+            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "2", "22", "222", "222"} });
+            variants.Add(new StudyAnswerVariant() { Variants = new string[] { "3", "33", "333", "333" } });
+
             return new StudyStep()
             {
                 Question = new StudyQuestion()
@@ -122,6 +130,7 @@ namespace MyMemory.BLL
                     TaskId = task.Id,
                     Text = task.Item.Question,
                     StepNumber = task.StepNumber,
+                    Variants = variants.ToArray(),
                 }
             };
         }
