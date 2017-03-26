@@ -65,6 +65,7 @@
     <Compile Include="Entities\TestUsers.cs" />
     <Compile Include="Entities\TestItems.cs" />
     <Compile Include="Entities\TestGroups.cs" />
+    <Compile Include="FastTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Study\ParseWords.cs" />
     <Compile Include="Study\TestStudy.cs" />

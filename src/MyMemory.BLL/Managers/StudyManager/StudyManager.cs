@@ -194,12 +194,12 @@ namespace MyMemory.BLL
         {
             var correctVariants = correctItem.Answer.Split(' ');
             var otherVariants = _mng.GetItems(correctItem.Group)
-                .Where(x => x.Id != correctItem.Id && x.Question != correctItem.Question)
+                .Where(x => x.Id != correctItem.Id)
                 .Take(20)
-                .SelectMany(x => x.Question.Split(' '))
+                .SelectMany(x => x.Answer.Split(' '))
+                .Except(correctVariants)
+                .Distinct()
                 .ToArray();
-
-            otherVariants = otherVariants.Except(correctVariants).ToArray();
 
             var variants = new List<StudyGroupVariants>();
             foreach (var t in correctVariants)
