@@ -87,6 +87,8 @@
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
         });
+
+        _variantItems = [];
         _variantItemsAll = response.Step.Question.GroupVariants;
         ShowVariants();
         

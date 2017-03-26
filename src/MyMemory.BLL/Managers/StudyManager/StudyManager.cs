@@ -117,11 +117,13 @@ namespace MyMemory.BLL
             if (task == null)
                 return null;
 
-
-            var variants = new List<StudyGroupVariants>();
-            variants.Add(new StudyGroupVariants() { Variants = new string[] { "1 ", " 11 ", " 111 ", " 1111"} });
+            //var variants = new List<StudyGroupVariants>();
+            //variants.Add(new StudyGroupVariants() { Variants = new string[] { task.Item.Answer } });
+            /*variants.Add(new StudyGroupVariants() { Variants = new string[] { "1 ", " 11 ", " 111 ", " 1111"} });
             variants.Add(new StudyGroupVariants() { Variants = new string[] { "2 ", " 22 ", " 222 ", " 222"} });
-            variants.Add(new StudyGroupVariants() { Variants = new string[] { "3 ", " 33 ", " 333 ", " 333" } });
+            variants.Add(new StudyGroupVariants() { Variants = new string[] { "3 ", " 33 ", " 333 ", " 333" } });*/
+
+            var variants = GenerateVariants(task.Item).ToArray();
 
             return new StudyStep()
             {
@@ -131,7 +133,7 @@ namespace MyMemory.BLL
                     TaskId = task.Id,
                     Text = task.Item.Question,
                     StepNumber = task.StepNumber,
-                    GroupVariants = variants.ToArray(),
+                    GroupVariants = variants,
                 }
             };
         }
@@ -146,6 +148,7 @@ namespace MyMemory.BLL
                     TaskId = question.TaskId,
                     Text = question.Text,
                     StepNumber = question.StepNumber,
+                    GroupVariants = question.GroupVariants, // TODO: надо скопировать
                     IsRepeat = true
                 }
             };
@@ -169,7 +172,8 @@ namespace MyMemory.BLL
                     ItemId = question.ItemId,
                     TaskId = question.TaskId,
                     StepNumber = question.StepNumber,
-                    Text = question.Text
+                    Text = question.Text,
+                    GroupVariants = question.GroupVariants
                 },
                 Answer = new StudyAnswer()
                 {
@@ -184,6 +188,40 @@ namespace MyMemory.BLL
         private bool IsCorrectAnswer(string answer, string etalon)
         {
             return answer.Trim().ToLower() == etalon.Trim().ToLower();
+        }
+
+        private List<StudyGroupVariants> GenerateVariants(MemoryItem correctItem)
+        {
+            var correctVariants = correctItem.Answer.Split(' ');
+            var otherVariants = _mng.GetItems(correctItem.Group)
+                .Where(x => x.Id != correctItem.Id && x.Question != correctItem.Question)
+                .Take(20)
+                .SelectMany(x => x.Question.Split(' '))
+                .ToArray();
+
+            otherVariants = otherVariants.Except(correctVariants).ToArray();
+
+            var variants = new List<StudyGroupVariants>();
+            foreach (var t in correctVariants)
+            {
+                var group = GenerateVariantItem(t, otherVariants);
+                variants.Add(group);
+            }
+
+            return variants;
+        }
+
+        private StudyGroupVariants GenerateVariantItem(string correctItem, params string[] otherItems)
+        {
+            var items = new List<string>();
+            items.Add(correctItem);
+            items.AddRange(otherItems.GetRandomizeList().Take(5));
+            items = items.GetRandomizeList();
+
+            return new StudyGroupVariants()
+            {
+                Variants = items.ToArray()
+            };
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Common
             return list.ToList()[index];
         }
 
-        public static void Shuffle<T>(this IList<T> list)
+        public static void Randomize<T>(this IList<T> list)
         {
             int n = list.Count;
             while (n > 1)
@@ -25,6 +25,13 @@ namespace Common
                 list[k] = list[n];
                 list[n] = value;
             }
+        }
+
+        public static List<T> GetRandomizeList<T>(this IList<T> list)
+        {
+            var result = list.ToList();
+            Randomize(result);
+            return result;
         }
     }
 }
