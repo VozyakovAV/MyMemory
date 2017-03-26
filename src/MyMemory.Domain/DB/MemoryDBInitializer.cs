@@ -47,13 +47,21 @@ namespace MyMemory.Domain
         public static void AddGroup(MemoryDbContext db)
         {
             var group = db.Groups.First(x => x.Name == "Английский");
-            var group1 = new MemoryGroup("Прилагательные (топ 100)", group);
+            /*var group1 = new MemoryGroup("Прилагательные (топ 100)", group);
             db.Groups.Add(group1);
             AddEnglishWords(db, group1, "MyMemory.Domain.Data.EnglishAdjectives.txt");
 
             var group2 = new MemoryGroup("Существительные (топ 100)", group);
             db.Groups.Add(group2);
-            AddEnglishWords(db, group2, "MyMemory.Domain.Data.EnglishNouns.txt");
+            AddEnglishWords(db, group2, "MyMemory.Domain.Data.EnglishNouns.txt");*/
+
+            /*var group2 = new MemoryGroup("Наречия (топ 100)", group);
+            db.Groups.Add(group2);
+            AddEnglishWords(db, group2, "MyMemory.Domain.Data.EnglishAdverbs.txt");*/
+
+            var group2 = new MemoryGroup("Еда (топ 100)", group);
+            db.Groups.Add(group2);
+            AddEnglishWords(db, group2, "MyMemory.Domain.Data.EnglishFood.txt");
 
             db.SaveChanges();
         }
@@ -72,16 +80,24 @@ namespace MyMemory.Domain
 
         public static List<MemoryItem> ParseWords(string resourceName)
         {
+            var result = new List<MemoryItem>();
             var text = MemoryDBInitializer.ReadResource(resourceName);
-            var mc = Regex.Matches(text, @"(?<a>\w+)\s*—\s*(?<q>\w+)");
+            var lines = Regex.Split(text, "\r\n");
 
-            return mc.OfType<Match>()
-                .Select(x => new MemoryItem() 
-                { 
-                    Question = x.Groups["q"].Value.Trim(), 
-                    Answer = x.Groups["a"].Value.Trim() 
-                })
-                .ToList();
+            foreach (var line in lines)
+            {
+                var m = Regex.Match(line, @"(?<a>[\w\s]+)\s*—\s*(?<q>[\w\s]+)");
+                if (m.Success)
+                {
+                    var item = new MemoryItem() 
+                    {
+                        Question = m.Groups["q"].Value.Trim(),
+                        Answer = m.Groups["a"].Value.Trim()
+                    };
+                    result.Add(item);
+                }
+            }
+            return result;
         }
 
         public static string ReadResource(string resourceName)

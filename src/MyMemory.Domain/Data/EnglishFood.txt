@@ -1,0 +1,199 @@
+apple  Ч  €блоко
+
+bacon  Ч  бекон
+
+baguette  Ч  багет
+
+baked  Ч  печеный
+
+banana  Ч  банан
+
+bar  Ч  бар
+
+barbecue  Ч  барбекю
+
+bite  Ч  кусать
+
+bitter  Ч  горький
+
+bland  Ч  пресный
+
+boil  Ч  кипеть
+
+boiled eggs  Ч  вареные €йца
+
+cabbage  Ч  капуста
+
+cake  Ч  торт
+
+carrot  Ч  морковь
+
+chew  Ч  жевать
+
+cooked  Ч  вареный
+
+cooking  Ч  готовка
+
+cornflakes  Ч  хлопь€
+
+cream  Ч  сливки
+
+creamy  Ч  сливочный
+
+crisps  Ч  чипсы
+
+croissant  Ч  круассан
+
+dessert  Ч  десерт
+
+dinner  Ч  ужин
+
+doughnut  Ч  пончик
+
+for breakfast  Ч  на завтрак
+
+fresh  Ч  свежий
+
+fry  Ч  жарить
+
+grape  Ч  виноград
+
+grill  Ч  жарить на гриле
+
+ham  Ч  ветчина
+
+honey  Ч  мЄд
+
+hot  Ч  гор€чий
+
+ice  Ч  лед
+
+ketchup  Ч  кетчуп
+
+kiwi  Ч  киви
+
+lemon  Ч  лимон
+
+lemonade  Ч  лимонад
+
+liter  Ч  литр
+
+loaf  Ч  буханка
+
+lump  Ч  кусок
+
+lunch  Ч  обед
+
+marmalade  Ч  повидло
+
+mayonnaise  Ч  майонез
+
+meal  Ч  еда
+
+menu  Ч  меню
+
+milk  Ч  молоко
+
+mushroom  Ч  гриб
+
+napkin  Ч  салфетка
+
+nibble  Ч  откусывать
+
+orange  Ч  апельсин
+
+pasta  Ч  паста
+
+peach  Ч  персик
+
+pear  Ч  груша
+
+pizza  Ч  пицца
+
+plum  Ч  слива
+
+popcorn  Ч  попкорн
+
+pork  Ч  свинина
+
+potato  Ч  картофель
+
+prawn  Ч  креветка
+
+pub  Ч  паб
+
+pudding  Ч  пудинг
+
+rare  Ч  непрожаренный
+
+raw  Ч  сырой
+
+rice  Ч  рис
+
+ripe  Ч  спелый
+
+roast  Ч  запекать
+
+salad  Ч  салат
+
+salami  Ч  сал€ми
+
+salmon  Ч  лосось
+
+salt  Ч  соль
+
+salty  Ч  соленый
+
+sandwich  Ч  сэндвич
+
+sardine  Ч  сардина
+
+sauce  Ч  соус
+
+seafood  Ч  морепродукты
+
+slice  Ч  ломтик
+
+snack  Ч  лЄгка€ закуска
+
+soda  Ч  газированна€ вода
+
+sorbet  Ч  щербет
+
+soup  Ч  суп
+
+sour  Ч  кислый
+
+spicy  Ч  острый
+
+steak  Ч  стейк
+
+stew  Ч  рагу
+
+sweet  Ч  сладкий
+
+take a sip  Ч  прихлебнуть
+
+toast  Ч  гренки
+
+trout  Ч  форель
+
+tuna  Ч  тунец
+
+bean  Ч  фасоль
+
+biscuit  Ч  печенье
+
+cafe  Ч  кафе
+
+candy  Ч  конфета
+
+cereal  Ч  мюсли
+
+chocolate  Ч  шоколад
+
+have a bite  Ч  перекусить
+
+pancake  Ч  блин
+
+spice  Ч  пр€ность

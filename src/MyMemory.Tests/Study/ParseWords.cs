@@ -14,7 +14,6 @@ namespace MyMemory.Tests
         {
             //var ctx = new MemoryDbContext();
             //MemoryDBInitializer.AddGroup(ctx);
-            //var t = MemoryDBInitializer.ReadResource("MyMemory.Domain.Data.EnglishVerbs.txt");
         }
     }
 }
