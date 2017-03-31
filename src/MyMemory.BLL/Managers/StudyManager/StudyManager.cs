@@ -192,7 +192,8 @@ namespace MyMemory.BLL
 
         private List<StudyGroupVariants> GenerateVariants(MemoryItem correctItem)
         {
-            var correctVariants = correctItem.Answer.Split(' ');
+            var correctVariants = Split(correctItem.Answer, ' ');
+            
             var otherVariants = _mng.GetItems(correctItem.Group)
                 .Where(x => x.Id != correctItem.Id)
                 .Take(20)
@@ -209,6 +210,27 @@ namespace MyMemory.BLL
             }
 
             return variants;
+        }
+
+        private List<string> Split(string text, char ch)
+        {
+            var result = new List<string>();
+            /*while (true)
+            {
+                var n = text.IndexOf(ch, 1);
+                if (n == -1)
+                    break;
+
+                result.Add(text.Substring(0, n));
+                text = text.Substring(n, text.Length - n);
+            }*/
+
+            result = text.Split(ch).ToList();
+            for (int i = 1; i < result.Count; i++)
+            {
+                result[i] = ch + result[i];
+            }
+            return result;
         }
 
         private StudyGroupVariants GenerateVariantItem(string correctItem, params string[] otherItems)
