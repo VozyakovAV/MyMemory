@@ -5,6 +5,7 @@ using MyMemory.Domain;
 using MyMemory.BLL;
 using System.Text;
 using System.Security.Cryptography;
+using Common;
 
 namespace MyMemory.Tests
 {
@@ -14,7 +15,7 @@ namespace MyMemory.Tests
         [TestMethod]
         public void TestMD5()
         {
-            byte[] hash = Encoding.ASCII.GetBytes("194253766748fTanppCrNSeuYPbA4ENCo");
+            byte[] hash = Encoding.ASCII.GetBytes("test");
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] hashenc = md5.ComputeHash(hash);
             string result = "";
@@ -22,7 +23,8 @@ namespace MyMemory.Tests
             {
                 result += b.ToString("x2");
             }
-            
+
+            var tt = Crypto.MD5Hash("test");
         }
     }
 }

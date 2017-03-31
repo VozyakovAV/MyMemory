@@ -80,7 +80,7 @@ namespace MyMemory.BLL
             }
             else
             {
-                data.Step = GetRepeatStep(data.PrevStep.Question);
+                data.Step = GetRepeatStep(data.PrevStep);
 
                 if (!currentData.Step.Question.IsRepeat)
                 {
@@ -134,22 +134,30 @@ namespace MyMemory.BLL
                     Text = task.Item.Question,
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
+                },
+                Answer = new StudyAnswer()
+                {
+                    CorrectAnswerMD5 = Crypto.MD5Hash(task.Item.Answer),
                 }
             };
         }
 
-        private StudyStep GetRepeatStep(StudyQuestion question)
+        private StudyStep GetRepeatStep(StudyStep prevStep)
         {
             return new StudyStep()
             {
                 Question = new StudyQuestion()
                 {
-                    ItemId = question.ItemId,
-                    TaskId = question.TaskId,
-                    Text = question.Text,
-                    StepNumber = question.StepNumber,
-                    GroupVariants = question.GroupVariants, // TODO: надо скопировать
+                    ItemId = prevStep.Question.ItemId,
+                    TaskId = prevStep.Question.TaskId,
+                    Text = prevStep.Question.Text,
+                    StepNumber = prevStep.Question.StepNumber,
+                    GroupVariants = prevStep.Question.GroupVariants, // TODO: надо скопировать
                     IsRepeat = true
+                },
+                Answer = new StudyAnswer()
+                {
+                    CorrectAnswerMD5 = prevStep.Answer.CorrectAnswerMD5,
                 }
             };
         }
@@ -178,7 +186,8 @@ namespace MyMemory.BLL
                 Answer = new StudyAnswer()
                 {
                     CorrectAnswer = prevItem.Answer,
-                    IsCorrect = isPrevCorrect
+                    IsCorrect = isPrevCorrect,
+                    CorrectAnswerMD5 = Crypto.MD5Hash(prevItem.Answer),
                 }
             };
 

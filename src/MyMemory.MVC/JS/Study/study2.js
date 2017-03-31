@@ -14,6 +14,7 @@
     var _groupId = 0;
     var _variantItems = [];
     var _variantItemsAll;
+    var _currentAnswerMD5;
 
     function StartStudy() {
         $.ajax({
@@ -78,6 +79,7 @@
     }
 
     function ShowViewQuestion(response) {
+        _currentAnswerMD5 = response.Step.Answer.CorrectAnswerMD5;
         ResetStylesControls();
         _txtQuestion.text(response.Step.Question.Text).show();
         _inpAnswer.val("").show().prop("disabled", true).focus();
@@ -91,7 +93,6 @@
         _variantItems = [];
         _variantItemsAll = response.Step.Question.GroupVariants;
         ShowVariants();
-        
     }
 
     function ShowVariants() {
@@ -118,6 +119,7 @@
         _variantItems.push(variantItem);
         ShowVariantText();
         ShowVariants();
+        CheckAnswerHash();
     }
 
     function RemoveLastVariantItem() {
@@ -125,6 +127,15 @@
             _variantItems.splice(_variantItems.length - 1, 1);
             ShowVariantText();
             ShowVariants();
+        }
+    }
+
+    function CheckAnswerHash() {
+        var text = _inpAnswer.val();
+        var MD5 = CryptoJS.MD5(text).toString(CryptoJS.enc.Hex);
+
+        if (MD5 == _currentAnswerMD5) {
+            NextStep();
         }
     }
 

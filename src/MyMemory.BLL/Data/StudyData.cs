@@ -49,6 +49,7 @@ namespace MyMemory.BLL
     {
         public bool IsCorrect { get; set; }
         public string CorrectAnswer { get; set; }
+        public string CorrectAnswerMD5 { get; set; }
     }
 
     public class StudyGroupVariants
