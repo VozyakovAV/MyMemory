@@ -11,6 +11,7 @@
     var _statStepNumber = $("#statStepNumber");
     var _groupVariants = $("#groupVariants");
     var _btnRemove = $("#btnRemove");
+    var _divGroupName = $("#divGroupName");
     var _groupId = 0;
     var _variantItems = [];
     var _variantItemsAll;
@@ -86,6 +87,7 @@
         _statCorrect.html(response.Statistic.NumberOfCorrect);
         _statIncorrect.html(response.Statistic.NumberOfIncorrect);
         _statStepNumber.html(response.Step.Question.StepNumber);
+        _divGroupName.html(response.Step.Question.GroupName).show();
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
         });
@@ -155,6 +157,7 @@
         _inpAnswer.parent().addClass("has-success");
         _txtMessage.html("Верно!").css("color", "green").show();
         _btnSubmit.prop("disabled", true).show();
+        _divGroupName.show();
         setTimeout(function () {
             ShowViewQuestion(response);
         }, 1000)
@@ -167,6 +170,7 @@
         _inpCorrectAnswer.prop("disabled", true).val(response.PrevStep.Answer.CorrectAnswer).show();
         _inpCorrectAnswer.parent().addClass("has-success");
         _txtMessage.html("Упс!").css("color", "red").show();
+        _divGroupName.show();
         _btnSubmit.html("Дальше").show().click(function () {
             ShowViewQuestion(response);
         });
@@ -180,5 +184,6 @@
         _btnSubmit.prop("disabled", false).unbind().hide();
         _inpAnswer.parent().removeClass("has-success").removeClass("has-error");
         _inpCorrectAnswer.parent().removeClass("has-success").removeClass("has-error");
+        _divGroupName.hide();
     }
 }

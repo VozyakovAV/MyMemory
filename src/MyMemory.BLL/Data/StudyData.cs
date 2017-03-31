@@ -42,6 +42,7 @@ namespace MyMemory.BLL
         public string Text { get; set; }
         public int StepNumber { get; set; }
         public bool IsRepeat { get; set; }
+        public string GroupName { get; set; }
         public StudyGroupVariants[] GroupVariants { get; set; }
     }
 

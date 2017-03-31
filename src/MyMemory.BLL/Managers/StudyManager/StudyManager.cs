@@ -134,6 +134,7 @@ namespace MyMemory.BLL
                     Text = task.Item.Question,
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
+                    GroupName = task.Item.Group.Name,
                 },
                 Answer = new StudyAnswer()
                 {
@@ -153,6 +154,7 @@ namespace MyMemory.BLL
                     Text = prevStep.Question.Text,
                     StepNumber = prevStep.Question.StepNumber,
                     GroupVariants = prevStep.Question.GroupVariants, // TODO: надо скопировать
+                    GroupName = prevStep.Question.GroupName,
                     IsRepeat = true
                 },
                 Answer = new StudyAnswer()
@@ -181,7 +183,8 @@ namespace MyMemory.BLL
                     TaskId = question.TaskId,
                     StepNumber = question.StepNumber,
                     Text = question.Text,
-                    GroupVariants = question.GroupVariants
+                    GroupVariants = question.GroupVariants,
+                    GroupName = question.GroupName,
                 },
                 Answer = new StudyAnswer()
                 {
