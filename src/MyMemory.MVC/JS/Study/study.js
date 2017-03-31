@@ -10,6 +10,7 @@
     var _statIncorrect = $("#statIncorrect");
     var _statStepNumber = $("#statStepNumber");
     var _groupId = 0;
+    var _currentAnswerMD5;
 
     function StartStudy() {
         $.ajax({
@@ -56,6 +57,9 @@
                 _btnSubmit.click();
             }
         });
+        _inpAnswer.on('input', function () {
+            CheckAnswerHash();
+        });
 
         StartStudy();
     }
@@ -70,6 +74,7 @@
     }
 
     function ShowViewQuestion(response) {
+        _currentAnswerMD5 = response.Step.Answer.CorrectAnswerMD5;
         ResetStylesControls();
         _txtQuestion.text(response.Step.Question.Text).show();
         _inpAnswer.val("").show().focus();
@@ -113,5 +118,14 @@
         _btnSubmit.prop("disabled", false).unbind().hide();
         _inpAnswer.parent().removeClass("has-success").removeClass("has-error");
         _inpCorrectAnswer.parent().removeClass("has-success").removeClass("has-error");
+    }
+
+    function CheckAnswerHash() {
+        var text = _inpAnswer.val();
+        var MD5 = CryptoJS.MD5(text).toString(CryptoJS.enc.Hex);
+
+        if (MD5 == _currentAnswerMD5) {
+            NextStep();
+        }
     }
 }
