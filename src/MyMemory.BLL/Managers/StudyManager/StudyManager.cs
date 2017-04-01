@@ -133,7 +133,7 @@ namespace MyMemory.BLL
                 },
                 Answer = new StudyAnswer()
                 {
-                    CorrectAnswerMD5 = Crypto.MD5Hash(task.Item.Answer),
+                    CorrectAnswerMD5 = Crypto.MD5Hash(task.Item.Answer.Trim().ToLower()),
                 }
             };
         }

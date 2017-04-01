@@ -101,7 +101,7 @@
     }
 
     function CheckAnswerHash() {
-        var text = _inpAnswer.val();
+        var text = _inpAnswer.val().toString().trim().toLowerCase();
         var MD5 = CryptoJS.MD5(text).toString(CryptoJS.enc.Hex);
 
         if (MD5 == _currentAnswerMD5) {

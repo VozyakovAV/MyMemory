@@ -77,6 +77,7 @@
     function HideBlocks() {
         _blockMessage.hide();
         _blockTestWords.hide();
+        _blockTestLetters.hide();
     }
 
     function ShowBlockTestWords(response) {
