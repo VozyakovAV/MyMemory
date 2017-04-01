@@ -30,11 +30,6 @@ namespace MyMemory.MVC.Controllers
             return View("Study");
         }
 
-        public ActionResult Index2()
-        {
-            return View("Study");
-        }
-
         public ActionResult Study()
         {
             return View();

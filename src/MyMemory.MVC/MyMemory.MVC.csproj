@@ -143,8 +143,6 @@
     <Content Include="JS\Study\studyTestLetters.js" />
     <Content Include="JS\Study\studyTestWords.js" />
     <Content Include="JS\Study\studyManager.js" />
-    <Content Include="JS\Study\study2.js" />
-    <Content Include="JS\Study\study.js" />
     <Content Include="JS\Utils\md5.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -172,14 +170,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Logoff.cshtml" />
     <Content Include="settings.config" />
     <Content Include="Views\Home\Info.cshtml" />
-    <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Study.cshtml" />
   </ItemGroup>
   <ItemGroup>
