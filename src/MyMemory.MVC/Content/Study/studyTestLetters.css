@@ -1,0 +1,15 @@
+#blockTestLetters .divGroupName {
+    font-size: 12px;
+}
+
+#blockTestLetters .txtQuestion {
+    font-size: 16px;
+}
+
+#blockTestLetters .btnSubmit {
+    height: 40px;
+}
+    
+#blockTestLetters .inpCorrectAnswer {
+    display: none;
+}

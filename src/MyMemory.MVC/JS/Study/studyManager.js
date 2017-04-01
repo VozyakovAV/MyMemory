@@ -1,4 +1,5 @@
 ﻿function StudyManager(urlStartStudy, urlNextStep) {
+
     var _urlStartStudy = urlStartStudy;
     var _urlNextStep = urlNextStep;
     var _groupId = 0;
@@ -9,8 +10,10 @@
 
     var _blockMessage = $("#blockMessage");
     var _blockTestWords = $("#blockTestWords");
+    var _blockTestLetters = $("#blockTestLetter");
     
     var _studyTestWords;
+    var _studyTestLetters;
 
     // ----------------------------
 
@@ -19,7 +22,8 @@
             NextStep(e.detail);
         }, false);
 
-        _studyTestWords = new StudyTestWords(urlStartStudy, urlNextStep);
+        _studyTestWords = new StudyTestWords();
+        _studyTestLetters = new StudyTestLetters();
 
         StartStudy();
     }
@@ -52,6 +56,7 @@
         else {
             ShowStatistic(response);
             ShowBlockTestWords(response);
+            //ShowBlockTestLetters(response);
         }
     }
 
@@ -73,5 +78,10 @@
     function ShowBlockTestWords(response) {
         _blockTestWords.show();
         _studyTestWords.Show(response);
+    }
+
+    function ShowBlockTestLetters(response) {
+        _blockTestLetters.show();
+        _studyTestLetters.Show(response);
     }
 }
