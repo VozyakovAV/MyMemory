@@ -10,7 +10,7 @@
 
     var _blockMessage = $("#blockMessage");
     var _blockTestWords = $("#blockTestWords");
-    var _blockTestLetters = $("#blockTestLetter");
+    var _blockTestLetters = $("#blockTestLetters");
     
     var _studyTestWords;
     var _studyTestLetters;
@@ -55,8 +55,12 @@
         }
         else {
             ShowStatistic(response);
-            ShowBlockTestWords(response);
-            //ShowBlockTestLetters(response);
+
+            if (response.Step.Question.Type == 1) {
+                ShowBlockTestLetters(response);
+            } else {
+                ShowBlockTestWords(response);
+            }
         }
     }
 

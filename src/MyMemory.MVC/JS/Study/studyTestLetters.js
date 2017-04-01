@@ -30,8 +30,6 @@
     }
 
     function ShowResult(response) {
-        console.log(response);
-
         if (response.PrevStep.Answer != null) {
             if (response.PrevStep.Answer.IsCorrect) {
                 ShowViewCorrectAnswer(response);

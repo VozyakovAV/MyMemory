@@ -117,12 +117,6 @@ namespace MyMemory.BLL
             if (task == null)
                 return null;
 
-            //var variants = new List<StudyGroupVariants>();
-            //variants.Add(new StudyGroupVariants() { Variants = new string[] { task.Item.Answer } });
-            /*variants.Add(new StudyGroupVariants() { Variants = new string[] { "1 ", " 11 ", " 111 ", " 1111"} });
-            variants.Add(new StudyGroupVariants() { Variants = new string[] { "2 ", " 22 ", " 222 ", " 222"} });
-            variants.Add(new StudyGroupVariants() { Variants = new string[] { "3 ", " 33 ", " 333 ", " 333" } });*/
-
             var variants = GenerateVariants(task.Item).ToArray();
 
             return new StudyStep()
@@ -135,6 +129,7 @@ namespace MyMemory.BLL
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
                     GroupName = task.Item.Group.Name,
+                    Type = task.StepNumber < 5 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
                 },
                 Answer = new StudyAnswer()
                 {
@@ -155,6 +150,7 @@ namespace MyMemory.BLL
                     StepNumber = prevStep.Question.StepNumber,
                     GroupVariants = prevStep.Question.GroupVariants, // TODO: надо скопировать
                     GroupName = prevStep.Question.GroupName,
+                    Type = prevStep.Question.Type,
                     IsRepeat = true
                 },
                 Answer = new StudyAnswer()
@@ -185,6 +181,7 @@ namespace MyMemory.BLL
                     Text = question.Text,
                     GroupVariants = question.GroupVariants,
                     GroupName = question.GroupName,
+                    Type = question.Type,
                 },
                 Answer = new StudyAnswer()
                 {

@@ -44,6 +44,13 @@ namespace MyMemory.BLL
         public bool IsRepeat { get; set; }
         public string GroupName { get; set; }
         public StudyGroupVariants[] GroupVariants { get; set; }
+        public StudyQuestionType Type { get; set; }
+    }
+
+    public enum StudyQuestionType
+    {
+        TestWords,
+        TestLetters
     }
 
     public class StudyAnswer
