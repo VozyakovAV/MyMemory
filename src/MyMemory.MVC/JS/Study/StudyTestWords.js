@@ -1,47 +1,40 @@
 ﻿function StudyTestWords(urlStartStudy, urlNextStep) {
-    var _urlStartStudy = urlStartStudy;
-    var _urlNextStep = urlNextStep;
-    var _txtQuestion = $("#txtQuestion");
-    var _inpAnswer = $("#inpAnswer");
-    var _inpCorrectAnswer = $("#inpCorrectAnswer");
-    var _txtMessage = $("#txtMessage");
-    var _btnSubmit = $("#btnSubmit");
-    var _statCorrect = $("#statCorrect");
-    var _statIncorrect = $("#statIncorrect");
-    var _statStepNumber = $("#statStepNumber");
-    var _groupVariants = $("#groupVariants");
-    var _btnRemove = $("#btnRemove");
-    var _divGroupName = $("#divGroupName");
+    var _content = $("#blockTestWords");
+    var _txtQuestion = _content.find(".txtQuestion");
+    var _inpAnswer = _content.find(".inpAnswer");
+    var _inpCorrectAnswer = _content.find(".inpCorrectAnswer");
+    var _btnSubmit = _content.find(".btnSubmit");
+    var _groupVariants = _content.find(".groupVariants");
+    var _btnRemove = _content.find(".btnRemove");
+    var _divGroupName = _content.find(".divGroupName");
+    var _txtMessage = _content.find(".txtMessage");
     var _groupId = 0;
     var _variantItems = [];
     var _variantItemsAll;
     var _currentAnswerMD5;
 
-    function StartStudy() {
-        $.ajax({
-            type: "POST", url: _urlStartStudy, data: { groupId: _groupId },
-            success: function (response) {
-                ShowResult(response);
-            }
-        });
-    }
+    _inpAnswer.keyup(function (e) {
+        if (e.keyCode == 13) {
+            _btnSubmit.click();
+        }
+    });
 
-    function NextStep() {
-        $.ajax({
-            type: "POST", url: _urlNextStep, data: { answer: _inpAnswer.val() },
-            success: function (response) {
-                ShowResult(response);
-            }
-        });
+    _btnRemove.on("click", function () {
+        RemoveLastVariantItem();
+    });
+
+    _btnSubmit.on("click", function () {
+        NextStep();
+    });
+
+    this.Show = function (response) {
+        ShowResult(response);
     }
 
     function ShowResult(response) {
         console.log(response);
 
-        if (response.Message != null) {
-            ShowViewMessage(response);
-        }
-        else if (response.PrevStep.Answer != null) {
+        if (response.PrevStep.Answer != null) {
             if (response.PrevStep.Answer.IsCorrect) {
                 ShowViewCorrectAnswer(response);
             }
@@ -54,29 +47,9 @@
         }
     }
 
-    this.Start = function () {
-        //ShowViewQuestion();
-        //_inpCorrectAnswer.prop("disabled", true);
-        _inpAnswer.keyup(function (e) {
-            if (e.keyCode == 13) {
-                _btnSubmit.click();
-            }
-        });
-
-        _btnRemove.on("click", function () {
-            RemoveLastVariantItem();
-        });
-
-        StartStudy();
-    }
-
-    _btnSubmit.click(function () {
-        NextStep();
-    });
-
-    function ShowViewMessage(response) {
-        ResetStylesControls();
-        _txtMessage.html(response.Message).css("color", "black").show();
+    function NextStep() {
+        var event = new CustomEvent('answerEvent', { 'detail': _inpAnswer.val() });
+        document.dispatchEvent(event);
     }
 
     function ShowViewQuestion(response) {
@@ -84,9 +57,6 @@
         ResetStylesControls();
         _txtQuestion.text(response.Step.Question.Text).show();
         _inpAnswer.val("").show().prop("disabled", true).focus();
-        _statCorrect.html(response.Statistic.NumberOfCorrect);
-        _statIncorrect.html(response.Statistic.NumberOfIncorrect);
-        _statStepNumber.html(response.Step.Question.StepNumber);
         _divGroupName.html(response.Step.Question.GroupName).show();
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();

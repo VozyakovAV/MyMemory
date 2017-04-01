@@ -1,0 +1,29 @@
+#blockTestWords .divGroupName {
+    font-size: 12px;
+}
+
+#blockTestWords .txtQuestion {
+    font-size: 16px;
+}
+
+#blockTestWords .btnSubmit {
+    height: 40px;
+}
+    
+#blockTestWords .inpCorrectAnswer {
+    display: none;
+}
+
+#blockTestWords .groupVariants {
+    margin: 20px -10px 0 -10px;
+}
+
+#blockTestWords .groupVariants div {
+    padding: 10px;
+}
+
+#blockTestWords .linkVariant {
+    width: 100%;
+    padding-top: 8px;
+    height: 40px;
+}

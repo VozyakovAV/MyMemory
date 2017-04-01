@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "MyMemory";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Study/study.css">
+<link rel="stylesheet" type="text/css" href="~/Content/Study/studyTestWords.css">
+
+<div id="blockMessage" class="blockContent form">
+</div>
+
+<div id="blockTestWords" class="blockContent form">
+    <div class="form-group">
+        <div class="divGroupName label label-info"></div>
+    </div>
+    <div class="form-group">
+        <div class="txtQuestion">&nbsp;</div>
+    </div>
+    <div class="form-group input-group">
+        <input type="text" class="inpAnswer form-control" />
+        <div class="input-group-btn">
+            <button type="button" class="btnRemove btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" class="inpCorrectAnswer form-control" />
+    </div>
+    <div class="btn-group btn-group-justified">
+        <a href="#" class="btnSubmit btn btn-primary">Проверить</a>
+    </div>
+    <div class="txtMessage"></div>
+    <div class="groupVariants form-group row"></div>
+</div>
+
+
+@section scripts {
+<script src="~/JS/Study/studyManager.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/JS/Study/studyTestWords.js" type="text/javascript" charset="utf-8"></script>
+<script src="~/JS/Utils/md5.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+    var urlStartStudy = "@Url.Action("StartStudy")";
+    var urlNextStep = "@Url.Action("NextStep")";
+
+    $(function () {
+        var studyManager = new StudyManager(urlStartStudy, urlNextStep);
+        studyManager.Start();
+        $("#inpAnswer").prop("disabled", true);
+    });
+</script>
+}
+@section status {
+    <div id="statusBar">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <span id="statCorrect"></span>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span id="statIncorrect"></span>
+        <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> <span id="statStepNumber"></span>
+    </div>
+}

@@ -131,10 +131,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Study\study.css" />
+    <Content Include="Content\Study\studyTestWords.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="JS\Study\studyTestWords.js" />
+    <Content Include="JS\Study\studyManager.js" />
     <Content Include="JS\Study\study2.js" />
     <Content Include="JS\Study\study.js" />
     <Content Include="JS\Utils\md5.js" />
@@ -172,6 +176,7 @@
     <Content Include="settings.config" />
     <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\Study.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
