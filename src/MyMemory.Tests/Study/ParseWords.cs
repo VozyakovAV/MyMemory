@@ -12,8 +12,8 @@ namespace MyMemory.Tests
         [TestMethod]
         public void ParseWordsStart()
         {
-            //var ctx = new MemoryDbContext();
-            //MemoryDBInitializer.AddGroup(ctx);
+            /*var ctx = new MemoryDbContext();
+            MemoryDBInitializer.AddGroup(ctx);*/
         }
     }
 }
