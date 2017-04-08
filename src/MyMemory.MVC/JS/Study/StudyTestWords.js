@@ -19,14 +19,6 @@
         }
     });
 
-    _btnRemove.on("click", function () {
-        RemoveLastVariantItem();
-    });
-
-    _btnSubmit.on("click", function () {
-        NextStep();
-    });
-
     this.Show = function (response) {
         ShowResult(response);
     }
@@ -46,6 +38,7 @@
     }
 
     function NextStep() {
+        StylesForNextStep();
         var event = new CustomEvent('answerEvent', { 'detail': _inpAnswer.val() });
         document.dispatchEvent(event);
     }
@@ -58,6 +51,9 @@
         _divGroupName.html(response.Step.Question.GroupName).show();
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
+        });
+        _btnRemove.show().click(function () {
+            RemoveLastVariantItem();
         });
 
         _variantItems = [];
@@ -144,12 +140,21 @@
         });
     }
 
+    function StylesForNextStep() {
+        _txtQuestion.prop("disabled", true);
+        _inpAnswer.prop("disabled", true);
+        _inpCorrectAnswer.prop("disabled", true);
+        _btnSubmit.prop("disabled", true).unbind();
+        _btnRemove.unbind();
+    }
+
     function ResetStylesControls() {
         _txtQuestion.prop("disabled", false).hide();
         _inpAnswer.prop("disabled", false).hide();
         _inpCorrectAnswer.prop("disabled", false).hide();
         _txtMessage.prop("disabled", false).css("color", "black").hide();
         _btnSubmit.prop("disabled", false).unbind().hide();
+        _btnRemove.unbind();
         _inpAnswer.parent().removeClass("has-success").removeClass("has-error");
         _inpCorrectAnswer.parent().removeClass("has-success").removeClass("has-error");
         _divGroupName.hide();

@@ -17,14 +17,6 @@
         }
     });
 
-    _inpAnswer.on('input', function () {
-        CheckAnswerHash();
-    });
-
-    _btnSubmit.on("click", function () {
-        NextStep();
-    });
-
     this.Show = function (response) {
         ShowResult(response);
     }
@@ -44,6 +36,7 @@
     }
 
     function NextStep() {
+        StylesForNextStep();
         var event = new CustomEvent('answerEvent', { 'detail': _inpAnswer.val() });
         document.dispatchEvent(event);
     }
@@ -61,6 +54,9 @@
         _divGroupName.html(response.Step.Question.GroupName).show();
         _btnSubmit.html("Проверить").show().click(function () {
             NextStep();
+        });
+        _inpAnswer.on('input', function () {
+            CheckAnswerHash();
         });
     }
 
@@ -88,13 +84,20 @@
         });
     }
 
+    function StylesForNextStep() {
+        _txtQuestion.prop("disabled", true);
+        _inpAnswer.prop("disabled", true).unbind();
+        _inpCorrectAnswer.prop("disabled", true);
+        _btnSubmit.prop("disabled", true).unbind();
+    }
+
     function ResetStylesControls() {
         _txtQuestion.prop("disabled", false).hide();
         _inpAnswer.prop("disabled", false).hide();
         _inpCorrectAnswer.prop("disabled", false).hide();
         _txtMessage.prop("disabled", false).css("color", "black").hide();
         _btnSubmit.prop("disabled", false).unbind().hide();
-        _inpAnswer.parent().removeClass("has-success").removeClass("has-error");
+        _inpAnswer.parent().removeClass("has-success").removeClass("has-error").unbind();
         _inpCorrectAnswer.parent().removeClass("has-success").removeClass("has-error");
     }
 

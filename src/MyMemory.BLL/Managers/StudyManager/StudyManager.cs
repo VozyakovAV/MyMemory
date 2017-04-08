@@ -203,7 +203,7 @@ namespace MyMemory.BLL
         {
             var correctVariants = Split(correctItem.Answer, ' ');
             
-            var otherVariants = _mng.GetItems(correctItem.Group, 20)
+            var otherVariants = _mng.GetItemsRandom(correctItem.Group, 20)
                 .Where(x => x.Id != correctItem.Id)
                 .SelectMany(x => x.Answer.Split(' '))
                 .Except(correctVariants)

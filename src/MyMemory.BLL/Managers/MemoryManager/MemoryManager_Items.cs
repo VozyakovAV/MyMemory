@@ -25,13 +25,14 @@ namespace MyMemory.BLL
                 .ToArray();
         }
 
-        public MemoryItem[] GetItems(MemoryGroup group, int count)
+        public MemoryItem[] GetItemsRandom(MemoryGroup group, int count)
         {
             var groupsId = GetTreeId(group.Id);
 
             return _itemRepository.GetItems()
                 .Include(x => x.Group)
                 .Where(x => groupsId.Contains(x.Group.Id))
+                .OrderBy(x => Guid.NewGuid())
                 .Take(count)
                 .ToArray();
         }
