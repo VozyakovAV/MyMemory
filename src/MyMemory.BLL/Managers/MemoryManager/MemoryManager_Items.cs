@@ -25,6 +25,17 @@ namespace MyMemory.BLL
                 .ToArray();
         }
 
+        public MemoryItem[] GetItems(MemoryGroup group, int count)
+        {
+            var groupsId = GetTreeId(group.Id);
+
+            return _itemRepository.GetItems()
+                .Include(x => x.Group)
+                .Where(x => groupsId.Contains(x.Group.Id))
+                .Take(count)
+                .ToArray();
+        }
+
         public MemoryItem SaveItem(MemoryItem item)
         {
             var item2 = _itemRepository.Save(item);

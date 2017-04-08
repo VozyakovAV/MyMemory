@@ -23,7 +23,7 @@ namespace MyMemory.Domain
 
         public override string ToString()
         {
-            return string.Format("{0} - {1}", Question, Answer);
+            return string.Format("{0} -- {1}", Question, Answer);
         }
     }
 }

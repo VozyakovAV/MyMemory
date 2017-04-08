@@ -129,7 +129,7 @@ namespace MyMemory.BLL
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
                     GroupName = task.Item.Group.Name,
-                    Type = task.StepNumber < 5 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
+                    Type = task.StepNumber <= 3 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
                 },
                 Answer = new StudyAnswer()
                 {
@@ -203,9 +203,8 @@ namespace MyMemory.BLL
         {
             var correctVariants = Split(correctItem.Answer, ' ');
             
-            var otherVariants = _mng.GetItems(correctItem.Group)
+            var otherVariants = _mng.GetItems(correctItem.Group, 20)
                 .Where(x => x.Id != correctItem.Id)
-                .Take(20)
                 .SelectMany(x => x.Answer.Split(' '))
                 .Except(correctVariants)
                 .Distinct()

@@ -65,14 +65,14 @@ namespace MyMemory.Domain
 
             var group2 = new MemoryGroup("Топ 5000", group);
             db.Groups.Add(group2);
-            AddEnglishWords(db, group2, "MyMemory.Domain.Data.English5000.txt");
+            AddEnglishWords(db, group2, "MyMemory.Domain.Data.English5000_2.txt");
 
             db.SaveChanges();
         }
 
         private static void AddEnglishWords(MemoryDbContext db, MemoryGroup group, string resourceName)
         {
-            var items = ParseWords(resourceName);
+            var items = ParseWords2(resourceName);
             items.ForEach(x => x.Group = group);
             db.Items.AddRange(items);
         }
@@ -94,6 +94,34 @@ namespace MyMemory.Domain
                         Answer = m.Groups["a"].Value.Trim()
                     };
                     result.Add(item);
+                }
+            }
+            var t1 = result.Where(x => x.Answer.Contains("-")).ToList();
+            var t2 = result.Where(x => x.Question.Contains("-")).ToList();
+            return result;
+        }
+
+        public static List<MemoryItem> ParseWords2(string resourceName)
+        {
+            var result = new List<MemoryItem>();
+            var text = MemoryDBInitializer.ReadResource(resourceName);
+            var lines = Regex.Split(text, "\r\n");
+
+            foreach (var line in lines)
+            {
+                var m = Regex.Match(line, @"<b>(?<a>.+)</b>\s*-\s*(?<q>.+)<br>");
+                if (m.Success)
+                {
+                    var item = new MemoryItem()
+                    {
+                        Question = m.Groups["q"].Value.Trim(),
+                        Answer = m.Groups["a"].Value.Trim()
+                    };
+                    result.Add(item);
+                }
+                else
+                {
+
                 }
             }
             var t1 = result.Where(x => x.Answer.Contains("-")).ToList();
