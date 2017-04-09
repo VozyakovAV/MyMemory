@@ -129,7 +129,8 @@ namespace MyMemory.BLL
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
                     GroupName = task.Item.Group.Name,
-                    Type = task.StepNumber <= 3 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
+                    //Type = task.StepNumber <= 3 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
+                    Type = StudyQuestionType.TestLetters,
                 },
                 Answer = new StudyAnswer()
                 {
