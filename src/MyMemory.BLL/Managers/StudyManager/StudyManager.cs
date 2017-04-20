@@ -1,8 +1,8 @@
-﻿using MyMemory.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MyMemory.Domain;
 using Common;
 
 namespace MyMemory.BLL
@@ -117,7 +117,9 @@ namespace MyMemory.BLL
             if (task == null)
                 return null;
 
-            var variants = GenerateVariants(task.Item).ToArray();
+            //var isVariants = task.StepNumber <= 3;
+            var isVariants = false;
+            var variants = isVariants ? GenerateVariants(task.Item).ToArray() : null;
 
             return new StudyStep()
             {
@@ -129,8 +131,7 @@ namespace MyMemory.BLL
                     StepNumber = task.StepNumber,
                     GroupVariants = variants,
                     GroupName = task.Item.Group.Name,
-                    //Type = task.StepNumber <= 3 ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
-                    Type = StudyQuestionType.TestLetters,
+                    Type = isVariants ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
                 },
                 Answer = new StudyAnswer()
                 {
@@ -141,23 +142,14 @@ namespace MyMemory.BLL
 
         private StudyStep GetRepeatStep(StudyStep prevStep)
         {
+            var answer = prevStep.Answer.DeepClone();
+            var question = prevStep.Question.DeepClone();
+            question.IsRepeat = true;
+
             return new StudyStep()
             {
-                Question = new StudyQuestion()
-                {
-                    ItemId = prevStep.Question.ItemId,
-                    TaskId = prevStep.Question.TaskId,
-                    Text = prevStep.Question.Text,
-                    StepNumber = prevStep.Question.StepNumber,
-                    GroupVariants = prevStep.Question.GroupVariants, // TODO: надо скопировать
-                    GroupName = prevStep.Question.GroupName,
-                    Type = prevStep.Question.Type,
-                    IsRepeat = true
-                },
-                Answer = new StudyAnswer()
-                {
-                    CorrectAnswerMD5 = prevStep.Answer.CorrectAnswerMD5,
-                }
+                Question = question,
+                Answer = answer,
             };
         }
 
@@ -174,16 +166,7 @@ namespace MyMemory.BLL
 
             var prevStep = new StudyStep()
             {
-                Question = new StudyQuestion()
-                {
-                    ItemId = question.ItemId,
-                    TaskId = question.TaskId,
-                    StepNumber = question.StepNumber,
-                    Text = question.Text,
-                    GroupVariants = question.GroupVariants,
-                    GroupName = question.GroupName,
-                    Type = question.Type,
-                },
+                Question = question.DeepClone(),
                 Answer = new StudyAnswer()
                 {
                     CorrectAnswer = prevItem.Answer,

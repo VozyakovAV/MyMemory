@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MyMemory.BLL
 {
+    [Serializable]
     public class StudyData
     {
         public int UserId { get; set; }
@@ -22,6 +23,7 @@ namespace MyMemory.BLL
         }
     }
 
+    [Serializable]
     public class StudyStatistic
     {
         public int NumberOfCorrect { get; set; }
@@ -29,12 +31,14 @@ namespace MyMemory.BLL
         
     }
 
+    [Serializable]
     public class StudyStep
     {
         public StudyQuestion Question { get; set; }
         public StudyAnswer Answer { get; set; }
     }
 
+    [Serializable]
     public class StudyQuestion
     {
         public int ItemId { get; set; }
@@ -47,12 +51,14 @@ namespace MyMemory.BLL
         public StudyQuestionType Type { get; set; }
     }
 
+    [Serializable]
     public enum StudyQuestionType
     {
         TestWords,
         TestLetters
     }
 
+    [Serializable]
     public class StudyAnswer
     {
         public bool IsCorrect { get; set; }
@@ -60,6 +66,7 @@ namespace MyMemory.BLL
         public string CorrectAnswerMD5 { get; set; }
     }
 
+    [Serializable]
     public class StudyGroupVariants
     {
         public string[] Variants { get; set; }
