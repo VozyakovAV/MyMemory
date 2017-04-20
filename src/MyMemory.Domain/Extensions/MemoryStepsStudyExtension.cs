@@ -14,6 +14,7 @@ namespace MyMemory.Domain
 
             switch (step.Format)
             {
+                case PeriodFormat.Sec:      return date.AddSeconds(step.Period);
                 case PeriodFormat.Min:      return date.AddMinutes(step.Period);
                 case PeriodFormat.Hour:     return date.AddHours(step.Period);
                 case PeriodFormat.Day:      return date.AddDays(step.Period);

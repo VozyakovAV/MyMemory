@@ -24,10 +24,11 @@ namespace MyMemory.Domain
 
     public enum PeriodFormat
     {
-        Min,
-        Hour,
-        Day,
-        Month,
-        Year
+        Sec = 0,
+        Min = 1,
+        Hour = 2,
+        Day = 3,
+        Month = 4,
+        Year = 5
     }
 }
