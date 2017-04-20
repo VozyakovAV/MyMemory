@@ -18,7 +18,6 @@ namespace MyMemory.BLL
     {
         private readonly UnitOfWork _uow;
         private readonly TaskRepository _taskRepository;
-        private readonly StepsStudyRepository _stepsStudyRepository;
         private readonly MemoryManager _mng;
 
         private readonly int _userId;
@@ -29,7 +28,6 @@ namespace MyMemory.BLL
         {
             this._uow = new UnitOfWork();
             this._taskRepository = new TaskRepository(_uow);
-            this._stepsStudyRepository = new StepsStudyRepository(_uow);
             this._mng = new MemoryManager();
             this._userId = userId;
             this._groupId = groupId;
@@ -40,6 +38,7 @@ namespace MyMemory.BLL
         {
             var groupsIs = _mng.GetTreeId(_groupId);
 
+            // находим задачи пользователя у которых подошло время
             var queryBase = _taskRepository.GetItems()
                 .Include(x => x.Item)
                 .Include(x => x.Item.Group)
@@ -47,15 +46,18 @@ namespace MyMemory.BLL
                     && groupsIs.Contains(x.Item.Group.Id)
                     && x.Deadline <= CustomDateTime.Now);
 
+            // из найденных задач находим максимальный StepNumber
             var maxStepNumber = queryBase
                 .Select(x => x.StepNumber)
                 .DefaultIfEmpty(0)
                 .Max();
 
+            // отбираем задачи с максимальным StepNumber
             var query = queryBase
                 .Include(x => x.Item)
                 .Where(x => x.StepNumber == maxStepNumber);
 
+            // берем одно значение из выборки (с рандом или без)
             return _isRandom
                 ? query.OrderBy(x => Guid.NewGuid()).FirstOrDefault()
                 : query.OrderBy(x => x.Id).FirstOrDefault();
@@ -66,12 +68,17 @@ namespace MyMemory.BLL
             var steps = _mng.GetSteps();
             var currentStep = steps.Single(x => x.Number == task.StepNumber);
 
-            MemoryStepsStudy nextStep = isCorrect
-                ? steps.FirstOrDefault(x => x.Number == currentStep.Number + 1)
-                : steps.FirstOrDefault(x => x.Number == currentStep.Number - 1);
+            var nextStepNumber = isCorrect
+                ? currentStep.Number + 1
+                : currentStep.Number - 2;
 
-            if (nextStep == null)
-                nextStep = currentStep;
+            if (nextStepNumber <= 0)
+                nextStepNumber = steps.Min(x => x.Number);
+
+            if (nextStepNumber > steps.Max(x => x.Number))
+                nextStepNumber = steps.Max(x => x.Number);
+
+            var nextStep = steps.FirstOrDefault(x => x.Number == nextStepNumber);
 
             task.StepNumber = nextStep.Number;
             task.Deadline = nextStep.NextDateTime();
