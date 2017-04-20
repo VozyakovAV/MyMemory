@@ -38,7 +38,7 @@ namespace MyMemory.BLL
         {
             var groupsIs = _mng.GetTreeId(_groupId);
 
-            // находим задачи пользователя у которых подошло время
+            // находим задачи пользователя у которых подошло время в группе
             var queryBase = _taskRepository.GetItems()
                 .Include(x => x.Item)
                 .Include(x => x.Item.Group)

@@ -13,7 +13,6 @@ namespace MyMemory.BLL
         private readonly UnitOfWork _uow;
         private readonly ItemRepository _itemRepository;
         private readonly TaskRepository _taskRepository;
-        private readonly StepsStudyRepository _stepsStudyRepository;
         private readonly MemoryManager _mng;
 
         private readonly int _userId;
@@ -25,7 +24,6 @@ namespace MyMemory.BLL
             this._uow = new UnitOfWork();
             this._itemRepository = new ItemRepository(_uow);
             this._taskRepository = new TaskRepository(_uow);
-            this._stepsStudyRepository = new StepsStudyRepository(_uow);
             this._mng = new MemoryManager();
             this._userId = userId;
             this._groupId = groupId;
@@ -36,13 +34,14 @@ namespace MyMemory.BLL
         {
             var groupsIs = _mng.GetTreeId(_groupId);
 
+            // находим задачи пользователя в группе
             var itemIds = _taskRepository.GetItems()
                 .Include(x => x.Item)
                 .Include(x => x.Item.Group)
                 .Where(x => x.User.Id == _userId && groupsIs.Contains(x.Item.Group.Id))
-                .Select(x => x.Item.Id)
-                .ToList();
+                .Select(x => x.Item.Id);
 
+            // находим новые вопросы которых нет в задачах
             var query = _itemRepository.GetItems()
                 .Include(x => x.Group)
                 .Where(x => !itemIds.Contains(x.Id)
