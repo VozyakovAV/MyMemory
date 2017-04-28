@@ -13,6 +13,8 @@ namespace MyMemory.MVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("RouteStudyGroup", "Study/Index", new { controller = "Study", action = "Index" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

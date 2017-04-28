@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyMemory.BLL;
+using MyMemory.MVC.Models;
 
 namespace MyMemory.MVC.Controllers
 {
@@ -23,14 +24,14 @@ namespace MyMemory.MVC.Controllers
             };
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View("Study");
-        }
+            var model = new StudyVM() 
+            { 
+                GroupId = id 
+            };
 
-        public ActionResult Study()
-        {
-            return View();
+            return View(model);
         }
 
         public JsonResult StartStudy(int groupId)

@@ -1,7 +1,19 @@
-﻿
+﻿@using MyMemory.MVC.Models
+@model HomeVM
+
 @{
     ViewBag.Title = "MyMemory";
 }
 
-<h2>Index</h2>
+<h3>Группы</h3>
 
+<table>
+    @foreach (var group in Model.Groups)
+    {
+        <tr>
+            <td>
+                @Html.RouteLink(@group.Name, "RouteStudyGroup", new { id = @group.Id })
+            </td>
+        </tr>
+    }
+</table>

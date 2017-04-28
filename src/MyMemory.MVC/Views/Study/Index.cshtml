@@ -1,6 +1,9 @@
-﻿@{
+﻿@using MyMemory.MVC.Models
+@model StudyVM
+@{
     ViewBag.Title = "MyMemory";
 }
+
 <link rel="stylesheet" type="text/css" href="~/Content/Study/study.css">
 <link rel="stylesheet" type="text/css" href="~/Content/Study/studyTestWords.css">
 <link rel="stylesheet" type="text/css" href="~/Content/Study/studyTestLetters.css">
@@ -50,7 +53,6 @@
     <div class="txtMessage"></div>
 </div>
 
-
 @section scripts {
 <script src="~/JS/Study/studyManager.js" type="text/javascript" charset="utf-8"></script>
 <script src="~/JS/Study/studyTestWords.js" type="text/javascript" charset="utf-8"></script>
@@ -62,7 +64,7 @@
     var urlNextStep = "@Url.Action("NextStep")";
 
     $(function () {
-        var studyManager = new StudyManager(urlStartStudy, urlNextStep);
+        var studyManager = new StudyManager(urlStartStudy, urlNextStep, @Model.GroupId);
         studyManager.Start();
     });
 </script>

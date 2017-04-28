@@ -1,8 +1,8 @@
-﻿function StudyManager(urlStartStudy, urlNextStep) {
+﻿function StudyManager(urlStartStudy, urlNextStep, groupId) {
 
     var _urlStartStudy = urlStartStudy;
     var _urlNextStep = urlNextStep;
-    var _groupId = 0;
+    var _groupId = groupId;
 
     var _statCorrect = $("#statCorrect");
     var _statIncorrect = $("#statIncorrect");

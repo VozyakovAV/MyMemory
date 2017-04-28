@@ -22,7 +22,19 @@ namespace MyMemory.MVC.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var groups = _mng.GetGroups();
+            var model = new HomeVM();
+            
+            foreach (var group in groups)
+            {
+                model.Groups.Add(new GroupVM()
+                {
+                    Id = group.Id,
+                    Name = group.Name,
+                });
+            }
+
+            return View(model);
         }
 
         public ActionResult Info()
