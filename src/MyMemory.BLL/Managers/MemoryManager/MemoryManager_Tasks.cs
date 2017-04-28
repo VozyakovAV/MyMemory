@@ -16,6 +16,15 @@ namespace MyMemory.BLL
                 .FirstOrDefault(x => x.Id == taskId);
         }
 
+        public MemoryTask FindTask(int userId, int itemId)
+        {
+            return _taskRepository.GetItems()
+                .Include(x => x.User)
+                .Include(x => x.Item)
+                .Include(x => x.Item.Group)
+                .FirstOrDefault(x => x.User.Id == userId && x.Item.Id == itemId);
+        }
+
         public MemoryTask[] GetTasks()
         {
             return _taskRepository.GetItems().ToArray();

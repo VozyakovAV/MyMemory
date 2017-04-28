@@ -14,12 +14,14 @@ namespace MyMemory.BLL
         public StudyStatistic Statistic { get; set; }
         public StudyStep Step { get; set; }
         public StudyStep PrevStep { get; set; }
+        public List<int> FastRepeatItems { get; set; }
 
         public StudyData()
         {
             this.Statistic = new StudyStatistic();
             this.Step = new StudyStep();
             this.PrevStep = new StudyStep();
+            this.FastRepeatItems = new List<int>();
         }
     }
 

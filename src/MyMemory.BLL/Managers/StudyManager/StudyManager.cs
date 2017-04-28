@@ -64,6 +64,8 @@ namespace MyMemory.BLL
                     NumberOfCorrect = currentData.Statistic.NumberOfCorrect,
                     NumberOfIncorrect = currentData.Statistic.NumberOfIncorrect,
                 },
+
+                FastRepeatItems = currentData.FastRepeatItems,
             };
 
             Init(currentData);
@@ -71,7 +73,7 @@ namespace MyMemory.BLL
 
             if (data.PrevStep.Answer.IsCorrect)
             {
-                data.Step = GetNextStep();
+                data.Step = GetNextStep(currentData);
 
                 if (!currentData.Step.Question.IsRepeat)
                 {
@@ -80,6 +82,11 @@ namespace MyMemory.BLL
             }
             else
             {
+                if (!data.FastRepeatItems.Contains(currentData.Step.Question.TaskId))
+                {
+                    data.FastRepeatItems.Add(currentData.Step.Question.ItemId);
+                }
+
                 data.Step = GetRepeatStep(data.PrevStep);
 
                 if (!currentData.Step.Question.IsRepeat)
@@ -107,9 +114,24 @@ namespace MyMemory.BLL
             }
         }
 
-        private StudyStep GetNextStep()
+        private StudyStep GetNextStep(StudyData currentData = null)
         {
-            MemoryTask task = _mngRepeatTasks.GetNextItem();
+            MemoryTask task = null;
+            bool isRepiat = false;
+
+            if (currentData != null)
+            {
+                var fastItemId = currentData.FastRepeatItems.FirstOrDefault(x => x != currentData.Step.Question.ItemId);
+                if (fastItemId != default(int))
+                {
+                    task = _mng.FindTask(currentData.UserId, fastItemId);
+                    currentData.FastRepeatItems.Remove(fastItemId);
+                    isRepiat = true;
+                }
+            }
+
+            if (task == null)
+                task = _mngRepeatTasks.GetNextItem();
 
             if (task == null)
                 task = _mngStudyNewTasks.GetNextItem();
@@ -132,6 +154,7 @@ namespace MyMemory.BLL
                     GroupVariants = variants,
                     GroupName = task.Item.Group.Name,
                     Type = isVariants ? StudyQuestionType.TestWords : StudyQuestionType.TestLetters,
+                    IsRepeat  = isRepiat,
                 },
                 Answer = new StudyAnswer()
                 {

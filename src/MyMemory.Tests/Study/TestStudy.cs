@@ -79,14 +79,28 @@ namespace MyMemory.Tests
 
             var data1 = _mngStudy.Start(_userName, group.Id);
             var data2 = _mngStudy.NextStep(data1, "none");
-            var data3 = _mngStudy.NextStep(data2, item1.Answer);
-            var data4 = _mngStudy.NextStep(data3, "none");
-            Assert.AreEqual(item2.Question, data3.Step.Question.Text);
 
             CustomDateTime.FakeDate = DateTime.Now.AddDays(1);
 
             data1 = _mngStudy.Start(_userName, group.Id);
             Assert.AreEqual(item1.Question, data1.Step.Question.Text);
+        }
+
+        [TestMethod]
+        public void TestStudyFastRepeat()
+        {
+            CreateTestDB(_mng);
+
+            var group = CreateGroup(_mng);
+            var item1 = CreateItem(_mng, group, "Вопрос 1", "Ответ 1");
+            var item2 = CreateItem(_mng, group, "Вопрос 2", "Ответ 2");
+            var item3 = CreateItem(_mng, group, "Вопрос 3", "Ответ 3");
+
+            var data1 = _mngStudy.Start(_userName, group.Id);
+            var data2 = _mngStudy.NextStep(data1, "none");
+            var data3 = _mngStudy.NextStep(data2, item1.Answer);
+            var data4 = _mngStudy.NextStep(data3, item2.Answer);
+            Assert.AreEqual(item1.Question, data4.Step.Question.Text);
         }
 
         [TestMethod]
