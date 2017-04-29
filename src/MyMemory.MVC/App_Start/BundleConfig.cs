@@ -26,6 +26,9 @@ namespace MyMemory.MVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-slate.css",
                       "~/Content/site.css"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/commonJS").Include(
+                      //"~JS/as.sys.js"));
         }
     }
 }

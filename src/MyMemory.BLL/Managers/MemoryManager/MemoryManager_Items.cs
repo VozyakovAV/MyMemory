@@ -25,6 +25,11 @@ namespace MyMemory.BLL
                 .ToArray();
         }
 
+        public MemoryItem GetItem(int id)
+        {
+            return _itemRepository.GetItems().FirstOrDefault(x => x.Id == id);
+        }
+
         public MemoryItem[] GetItemsRandom(MemoryGroup group, int count)
         {
             var groupsId = GetTreeId(group.Id);

@@ -17,7 +17,7 @@
                 @item.Answer
             </td>
             <td>
-                Edit
+                @Html.ActionLink("Edit", "EditItem", "Home", new { }, new { @class = "dialog-edit", data_id = item.Id })
             </td>
         </tr>
     }

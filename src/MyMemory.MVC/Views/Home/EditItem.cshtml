@@ -1,0 +1,16 @@
+﻿@model MyMemory.MVC.Models.ItemVM
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.Id, new { Name = "id" })
+        <div>
+            @Html.LabelFor(x => x.Question)
+            <p>@Html.TextAreaFor(x => x.Question, new { Name = "question", @class = "form-control" })</p>
+        </div>
+        
+        <div>
+            @Html.LabelFor(x => x.Answer)
+            <p>@Html.TextAreaFor(x => x.Answer, new { Name = "answer", @class = "form-control" })</p>
+        </div>
+    }
+</div>

@@ -63,6 +63,30 @@ namespace MyMemory.MVC.Controllers
             return View(model);
         }
 
+        public ActionResult EditItem(int id)
+        {
+            var item = _mng.GetItem(id);
+            if (item != null)
+            {
+                var vm = new ItemVM()
+                {
+                    Id = item.Id,
+                    Question = item.Question,
+                    Answer = item.Answer
+                };
+                return PartialView(vm);
+            }
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult EditItem(ItemVM item)
+        {
+            //var project = mng.Projects.EditProject(projectPattern);
+            //return Json(project != null);
+            return null;
+        }
+
         public ActionResult Info()
         {
             ViewBag.NumberOfTasks = _mng.GetTasks().Length;

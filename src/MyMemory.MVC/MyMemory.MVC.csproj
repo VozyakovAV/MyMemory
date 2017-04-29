@@ -145,6 +145,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="JS\as.sys.js" />
+    <Content Include="JS\as.sys2.js" />
     <Content Include="JS\Study\studyTestLetters.js" />
     <Content Include="JS\Study\studyTestWords.js" />
     <Content Include="JS\Study\studyManager.js" />
@@ -184,6 +186,7 @@
     <Content Include="Views\Study\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\EditGroup.cshtml" />
+    <Content Include="Views\Home\EditItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
