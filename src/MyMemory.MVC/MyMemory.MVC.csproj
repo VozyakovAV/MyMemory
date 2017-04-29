@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupEditVM.cs" />
     <Compile Include="Models\GroupVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -182,6 +183,7 @@
     <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Study\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\EditGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

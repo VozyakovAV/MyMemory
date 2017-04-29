@@ -37,6 +37,32 @@ namespace MyMemory.MVC.Controllers
             return View(model);
         }
 
+        public ActionResult EditGroup(int id)
+        {
+            var list = new List<ItemVM>();
+
+            var group = _mng.GetGroup(id);
+
+            foreach (var item in group.Items)
+            {
+                list.Add(new ItemVM()
+                {
+                    Id = item.Id,
+                    Question = item.Question,
+                    Answer = item.Answer
+                });
+            }
+
+            var model = new GroupEditVM()
+            {
+                Id = id,
+                Name = group.Name,
+                Items = list.ToArray(),
+            };
+            
+            return View(model);
+        }
+
         public ActionResult Info()
         {
             ViewBag.NumberOfTasks = _mng.GetTasks().Length;

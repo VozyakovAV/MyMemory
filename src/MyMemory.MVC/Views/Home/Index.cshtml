@@ -5,14 +5,17 @@
     ViewBag.Title = "MyMemory";
 }
 
-<h3>Группы</h3>
+<h2>Группы</h2>
 
-<table>
+<table class="table">
     @foreach (var group in Model.Groups)
     {
         <tr>
             <td>
                 @Html.RouteLink(@group.Name, "RouteStudyGroup", new { id = @group.Id })
+            </td>
+            <td>
+                @Html.RouteLink("Edit", "RouteEditGroup", new { id = @group.Id })
             </td>
         </tr>
     }

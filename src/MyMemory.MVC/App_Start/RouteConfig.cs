@@ -14,6 +14,7 @@ namespace MyMemory.MVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("RouteStudyGroup", "Study/Index", new { controller = "Study", action = "Index" });
+            routes.MapRoute("RouteEditGroup", "Home/EditGroup", new { controller = "Home", action = "EditGroup" });
 
             routes.MapRoute(
                 name: "Default",

@@ -1,0 +1,24 @@
+﻿@model MyMemory.MVC.Models.GroupEditVM
+
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @item.Question
+            </td>
+            <td>
+                @item.Answer
+            </td>
+            <td>
+                Edit
+            </td>
+        </tr>
+    }
+</table>
