@@ -1,4 +1,5 @@
 ﻿using MyMemory.BLL;
+using MyMemory.Domain;
 using MyMemory.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -68,22 +69,63 @@ namespace MyMemory.MVC.Controllers
             var item = _mng.GetItem(id);
             if (item != null)
             {
-                var vm = new ItemVM()
+                var groups = _mng.GetTreeGroups();
+                var list = CreateTreeGroupsForSelection(groups);
+
+                var vm = new ItemEditVM()
                 {
                     Id = item.Id,
                     Question = item.Question,
-                    Answer = item.Answer
+                    Answer = item.Answer,
+                    GroupName = item.Group.Name,
+                    GroupId = item.Group.Id,
+                    ListGroups = new SelectList(list, "Id", "Name"),
                 };
                 return PartialView(vm);
             }
             return View("Index");
         }
 
-        [HttpPost]
-        public ActionResult EditItem(ItemVM item)
+        public List<object> CreateTreeGroupsForSelection(List<MemoryGroup> groups)
         {
-            //var project = mng.Projects.EditProject(projectPattern);
-            //return Json(project != null);
+            var list = new List<object>();
+
+            foreach (var group in groups)
+            {
+                GetTreeGroupsSimple(list, group, 0);
+            }
+
+            return list;
+        }
+
+        private void GetTreeGroupsSimple(List<object> listGroups, MemoryGroup group, int step = 0)
+        {
+            var name = (new String('–', step) + " " + group.Name).Trim();
+            var obj = new { Name = name, Id = group.Id };
+
+            listGroups.Add(obj);
+
+            foreach (var gr in group.Childs)
+            {
+                GetTreeGroupsSimple(listGroups, gr, step + 1);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditItem(ItemEditVM item)
+        {
+            var itemDb = _mng.GetItem(item.Id);
+            if (itemDb != null)
+            {
+                var group = _mng.GetGroup(item.GroupId);
+
+                itemDb.Question = item.Question;
+                itemDb.Answer = item.Answer;
+                itemDb.Group = group;
+
+                _mng.SaveItem(itemDb);
+            };
+
             return null;
         }
 

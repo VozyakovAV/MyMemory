@@ -1,8 +1,14 @@
-﻿@model MyMemory.MVC.Models.ItemVM
+﻿@model MyMemory.MVC.Models.ItemEditVM
 <div>
     @using (Html.BeginForm())
     {
         @Html.HiddenFor(x => x.Id, new { Name = "id" })
+
+        <div>
+            @Html.LabelFor(x => x.GroupName)
+            <p>@Html.DropDownListFor(x => x.GroupId, Model.ListGroups, new { Name = "groupID", @class = "form-control" })</p>
+        </div>
+        
         <div>
             @Html.LabelFor(x => x.Question)
             <p>@Html.TextAreaFor(x => x.Question, new { Name = "question", @class = "form-control" })</p>

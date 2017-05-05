@@ -128,6 +128,7 @@
     <Compile Include="Models\GroupEditVM.cs" />
     <Compile Include="Models\GroupVM.cs" />
     <Compile Include="Models\HomeVM.cs" />
+    <Compile Include="Models\ItemEditVM.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\StudyVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

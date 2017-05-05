@@ -50,6 +50,23 @@ namespace MyMemory.BLL
             return list.ToArray();
         }
 
+        public List<MemoryGroup> GetTreeGroups(int? groupID = null)
+        {
+            var res = _groupRepository.GetItems()
+                .Include("Childs.Childs.Childs.Childs.Childs.Childs.Childs");
+
+            if (groupID == null)
+            {
+                res = res.Where(x => x.Parent == null);
+            }
+            else
+            {
+                res = res.Where(x => x.Parent != null && x.Parent.Id == groupID);
+            }
+
+            return res.ToList();
+        }
+
         public MemoryGroup SaveGroup(MemoryGroup group)
         {
             var group2 = _groupRepository.Save(group);
